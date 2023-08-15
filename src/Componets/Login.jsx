@@ -1,8 +1,15 @@
 import '../Styles/Login.css'
 
+import Navbar from './Navbar'
+
 const Login = () => {
   return (
     <div>
+
+      <Navbar/>
+
+
+      
           <div className='main_div'>
 
 <div className='form-div'>

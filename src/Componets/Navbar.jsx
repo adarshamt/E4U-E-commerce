@@ -13,6 +13,16 @@ import { FiShoppingCart } from 'react-icons/fi';
 import { FaUserCircle } from 'react-icons/fa';
 
 
+import { useNavigate } from 'react-router-dom';
+
+
+import React from 'react'
+
+
+
+
+
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -57,6 +67,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+
+const Nav = useNavigate ()
+
+
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -92,7 +107,7 @@ export default function SearchAppBar() {
 
            <FiShoppingCart/>
            
-            <button style={{backgroundColor:'transparent',borderRadius:'20px',width:'120px',display:'flex',alignItems:'center',border:'none'}}>
+            <button onClick={Nav('/login')} style={{backgroundColor:'transparent',borderRadius:'20px',width:'120px',display:'flex',alignItems:'center',border:'none'}}>
            <FaUserCircle/>
            <h4>Sign In</h4>
 
@@ -109,3 +124,5 @@ export default function SearchAppBar() {
     </Box>
   );
 }
+
+
