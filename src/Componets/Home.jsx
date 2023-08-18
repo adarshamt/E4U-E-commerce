@@ -1,4 +1,4 @@
-import Navbar from'./Navbar'
+import Navbars from './Navbar'
 import '../Styles/Home.css'
 import Carousel from './Carousel'
 
@@ -7,7 +7,7 @@ const Home = () => {
     <div className='main_container'>
       <div className='navbar_div'>
 
-      <Navbar/>
+      <Navbars/>
       </div>
 
       <Carousel/>
