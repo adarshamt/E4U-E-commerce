@@ -14,7 +14,7 @@ function Navbars() {
   return (
     <Navbar bg='primary' expand="lg" className="bg-body-tertiary">
       <Container fluid>
-        <Navbar.Brand style={{color:'white'}} href="#">E4U</Navbar.Brand> 
+        <Navbar.Brand style={{color:'white'}} href="#">U4_ME</Navbar.Brand> 
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav

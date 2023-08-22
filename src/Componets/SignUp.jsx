@@ -1,110 +1,335 @@
-import React from 'react';
-import {
-  MDBBtn,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBInput,
-  MDBCheckbox,
-  MDBIcon,
-  MDBTextArea
-}
-from 'mdb-react-ui-kit';
-import Navbars from './Navbar';
 
-function Signup() {
-  return (
-    <>
-    <Navbars/>
+// import {
+//   MDBBtn,
+//   MDBContainer,
+//   MDBRow,
+//   MDBCol,
+//   MDBCard,
+//   MDBCardBody,
+//   MDBInput,
+ 
+//   MDBTextArea
+// }
+// from 'mdb-react-ui-kit';
+// import Navbars from './Navbar';
+
+// import { useRef } from 'react';
+
+// import axios from 'axios';
 
 
-    <MDBContainer fluid className='p-4 background-radial-gradient overflow-hidden'>
 
-      <MDBRow>
 
-        <MDBCol md='6' className='text-center text-md-start d-flex flex-column justify-content-center'>
+// function Signup() {
+ 
+//   const ipRef = useRef()
 
-          {/* <h1 className="my-5 display-3 fw-bold ls-tight px-3" style={{color: 'hsl(218, 81%, 95%)'}}>
-            The best offer <br />
-            <span style={{color: 'hsl(218, 81%, 75%)'}}>for your business</span>
-          </h1>
+//   const registerHandler = async() =>{
+    
+//     console.log("register handler function")
 
-          <p className='px-3' style={{color: 'hsl(218, 81%, 85%)'}}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Eveniet, itaque accusantium odio, soluta, corrupti aliquam
-            quibusdam tempora at cupiditate quis eum maiores libero
-            veritatis? Dicta facilis sint aliquid ipsum atque?
-          </p> */}
-          <img src="https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="" />
+//   //   const Name = ipRef.current.name.value
+//   //  console.log("name :", Name)
+//     const Name =ipRef.current.firstName.value
+//      const Email = ipRef.current.email.value
+//      const Username= ipRef.current.userName.value
+//      const PhoneNumber = ipRef.current.phoneNumber.value
+//      const Password = ipRef.current.password.value
+//      const Address = ipRef.current.address.value
 
-        </MDBCol>
 
-        <MDBCol md='6' className='position-relative'>
+//   const passItems = {
+//       name : Name ,
+//     email:Email,
+//     username:Username,
+//     phone :PhoneNumber,
+//     password: Password,
+//     address : Address
+//   }
+//   try {
+//         const response= await axios.post("http://localhost:4743/user/registraion",passItems)
+         
+//         console.log("response",response)
+//         const data = response
 
-          <div id="radius-shape-1" className="position-absolute rounded-circle shadow-5-strong"></div>
-          <div id="radius-shape-2" className="position-absolute shadow-5-strong"></div>
+//         console.log(
+//           "response",data
+//         )
+//   }
+//   catch(error){
+//     console.log("error",error)
+//   }
 
-          <MDBCard className='my-5 bg-glass'>
-            <MDBCardBody className='p-5'>
+//     }
+//   return (
+//     <>
+// {/* 
+//     <form onSubmit={(e)=>{e.preventDefault()}} action="" ref={ipRef}>
 
-              <MDBRow>
-                <MDBCol col='6'>
-                  <MDBInput wrapperClass='mb-4' label='First name' id='form1' type='text'/>
-                </MDBCol>
+//        <input type="text" name='name' placeholder='name' />
+//        <input type="text" name='password' placeholder='password' />
 
-                <MDBCol col='6'>
-                  <MDBInput wrapperClass='mb-4' label='Last name' id='form2' type='text'/>
-                </MDBCol>
-              </MDBRow>
+//        <button onClick={registerHandler} > Submit</button>
 
-              <MDBInput wrapperClass='mb-4' label='Email' id='form3' type='email'/>
-              <MDBInput wrapperClass='mb-4' label='username' id='form4' type='text'/>
-              <MDBInput wrapperClass='mb-4' label='phone number' id='form4' type='number'/>
+
+
+//     </form> */}
+//     <Navbars/>
+
+
+//     <MDBContainer fluid className='p-4 background-radial-gradient overflow-hidden'>
+
+//       <MDBRow>
+
+//         <MDBCol md='6' className='text-center text-md-start d-flex flex-column justify-content-center'>
+
+//           <img src="https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="" />
+
+//         </MDBCol>
+
+//         <MDBCol md='6' className='position-relative'>
+
+//           <div id="radius-shape-1" className="position-absolute rounded-circle shadow-5-strong"></div>
+//           <div id="radius-shape-2" className="position-absolute shadow-5-strong"></div>
+
+//           <MDBCard  className='my-5 bg-glass'>
+//             <MDBCardBody ref={ipRef} onSubmit={(e)=>{e.preventDefault()}} className='p-5'>
+
+//               <MDBRow>
+//                 <MDBCol col='6'>
+//                   <MDBInput ref={ipRef} wrapperClass='mb-4' name='firstName' label='First name' id='form1' type='text'/>
+//                 </MDBCol>
+
+//                 <MDBCol col='6'>
+//                   <MDBInput ref={ipRef} wrapperClass='mb-4' label='Last name' id='form2' type='text'/>
+//                 </MDBCol>
+//               </MDBRow>
+
+//               <MDBInput ref={ipRef} wrapperClass='mb-4' name='email' label='Email' id='form3' type='email'/>
+//               <MDBInput ref={ipRef} wrapperClass='mb-4' name='userName' label='username' id='form4' type='text'/>
+//               <MDBInput ref={ipRef} wrapperClass='mb-4' name='phoneNumber' label='phone number' id='form4' type='number'/>
               
-              <MDBInput wrapperClass='mb-4' label='Password' id='form4' type='password'/>
-              <MDBTextArea label='address' id='textAreaExample' rows={4} />
+//               <MDBInput ref={ipRef} wrapperClass='mb-4' name='password' label='Password' id='form5' type='password'/>
+//               <MDBTextArea ref={ipRef} label='address' name='address' id='textAreaExample' rows={4} />
 
-              {/* <div className='d-flex justify-content-center mb-4'>
-                <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Subscribe to our newsletter' />
-              </div> */}
+              
 
-              <MDBBtn className='w-100 mb-4' size='md'>sign up</MDBBtn>
+//               <MDBBtn onClick={registerHandler} className='w-100 mb-4' size='md'>Sign up</MDBBtn>
 
-              <div className="text-center">
-{/* 
-                <p>or sign up with:</p>
+//               <div className="text-center">
 
-                <MDBBtn tag='a' color='none' className='mx-3' style={{ color: '#1266f1' }}>
-                  <MDBIcon fab icon='facebook-f' size="sm"/>
-                </MDBBtn>
 
-                <MDBBtn tag='a' color='none' className='mx-3' style={{ color: '#1266f1' }}>
-                  <MDBIcon fab icon='twitter' size="sm"/>
-                </MDBBtn>
+//               </div>
 
-                <MDBBtn tag='a' color='none' className='mx-3' style={{ color: '#1266f1' }}>
-                  <MDBIcon fab icon='google' size="sm"/>
-                </MDBBtn>
+//             </MDBCardBody>
+//           </MDBCard>
+                   
+                
 
-                <MDBBtn tag='a' color='none' className='mx-3' style={{ color: '#1266f1' }}>
-                  <MDBIcon fab icon='github' size="sm"/>
-                </MDBBtn> */}
 
-              </div>
+//         </MDBCol>
 
-            </MDBCardBody>
-          </MDBCard>
+//       </MDBRow>
 
-        </MDBCol>
+//     </MDBContainer>
 
-      </MDBRow>
+//     </>
+//   );
+// }
 
-    </MDBContainer>
+// export default Signup;
 
-    </>
-  );
+
+
+// import React, { useRef } from 'react';
+// import {
+//   MDBBtn,
+//   MDBContainer,
+//   MDBRow,
+//   MDBCol,
+//   MDBCard,
+//   MDBCardBody,
+//   MDBCardImage,
+//   MDBInput,
+//   MDBIcon,
+ 
+// }
+// from 'mdb-react-ui-kit';
+
+// function Signup() {
+//   const ipRef= useRef()
+   
+//   const registerHandler = async() =>{
+
+    
+//         console.log("register handler function")
+    
+//         const Name = ipRef.current.name.value
+//        console.log("name :", Name)
+      
+//       }
+
+
+//   return (
+//     <MDBContainer fluid>
+
+//       <MDBCard ref={ipRef} className='text-black m-5' style={{borderRadius: '25px'}}>
+//         <MDBCardBody>
+//           <MDBRow>
+//             <MDBCol md='10' lg='6' className='order-2 order-lg-1 d-flex flex-column align-items-center'>
+
+//               <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+//               <div   className="d-flex flex-row align-items-center mb-4 ">
+//                 <MDBIcon fas icon="user me-3" size='lg'/>
+//                 <MDBInput  name='name' label='Your Name' id='form1' type='text' className='w-100'/>
+//               </div>
+
+//               <div className="d-flex flex-row align-items-center mb-4">
+//                 <MDBIcon fas icon="envelope me-3" size='lg'/>
+//                 <MDBInput label='Your Email' id='form2' type='email'/>
+//               </div>
+
+//               <div className="d-flex flex-row align-items-center mb-4">
+//                 <MDBIcon fas icon="lock me-3" size='lg'/>
+//                 <MDBInput label='Password' id='form3' type='password'/>
+//               </div>
+
+//               <div className="d-flex flex-row align-items-center mb-4">
+//                 <MDBIcon fas icon="key me-3" size='lg'/>
+//                 {/* <MDBInput label='Repeat your password' id='form4' type='password'/> */}
+//               </div>
+
+//               {/* <div className='mb-4'>
+//                 <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Subscribe to our newsletter' />
+//               </div> */}
+
+//               <MDBBtn onClick={registerHandler} className='mb-4' size='lg'>Register</MDBBtn>
+
+//             </MDBCol>
+
+//             <MDBCol md='10' lg='6' className='order-1 order-lg-2 d-flex align-items-center'>
+//               <MDBCardImage src='https://images.unsplash.com/photo-1584680226833-0d680d0a0794?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80' fluid/>
+//             </MDBCol>
+
+//           </MDBRow>
+//         </MDBCardBody>
+//       </MDBCard>
+
+//     </MDBContainer>
+//   );
+// }
+
+// export default Signup;
+
+
+
+
+
+
+import { useRef } from 'react'
+import '../Styles/Signup.css'
+import axios from 'axios'
+
+
+
+ const Signup = () => {
+
+  const ipref= useRef()
+   
+  const registerHandler = async() =>{
+
+    
+        console.log("register handler function")
+    
+        const Name = ipref.current.name.value
+       console.log("name :", Name)
+        const Email= ipref.current.email.value
+        console.log(Email)
+         
+
+        const Phone = ipref.current.phone_number.value
+        const Password = ipref.current.password.value
+       
+    //  const Email = ipref.current.email.value
+    //  const Username= ipref.current.userName.value
+    //  const PhoneNumber = ipref.current.phoneNumber.value
+    //  const Password = ipref.current.password.value
+    //  const Address = ipref.current.address.value
+      
+     const passItems = {
+            name : Name ,
+           email:Email,
+        //   username:Username,
+           phone :Phone,
+          password: Password,
+        //   address : Address
+         }
+
+        console.log(passItems)
+        try {
+              const response= await axios.post("http://localhost:4743/user/registraion",passItems)
+               
+              console.log("response",response)
+              const data = response
+      
+              console.log(
+                "response",data
+              )
+        }
+        catch(error){
+          console.log("error",error)
+        }
+      }
+
+ 
+  
+  return (
+    <div className='main_div'>
+
+      <div className='form-div'>
+
+     
+
+    <form  ref={ipref} className='registration_form'>
+
+         <label>Name </label>
+
+            <input name='name'   type='text' placeholder='name'/>
+
+
+            <label>Email </label>
+
+           <input  name='email'  type='Email' placeholder='Email'/>
+
+           <label>Phone Number </label>
+
+          <input name='phone_number'  type='number' placeholder='Phone Number'/>
+
+
+         <label>Password </label>
+
+       <input name='password'   type='text' placeholder='Password'/>
+
+         <label>Address </label>
+         <textarea name="address" id="" cols="30" rows="4"></textarea>
+
+     </form>
+
+    </div>
+
+    <div className='btn'>
+
+      <button onClick={registerHandler} className='signup'>Sign up</button>
+
+      <button  className='login'>Log in</button>
+
+
+    </div>
+
+
+
+</div>
+  )
 }
-
-export default Signup;
+export default Signup
