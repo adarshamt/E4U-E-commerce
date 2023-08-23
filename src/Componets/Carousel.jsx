@@ -6,6 +6,7 @@ import {
 
 export default function Carousel() {
   return (
+    <>
     <MDBCarousel showIndicators showControls fade>
       <MDBCarouselItem
         className='w-100 d-block'
@@ -31,8 +32,51 @@ export default function Carousel() {
         src='https://www.jiomart.com/images/cms/aw_rbslider/slides/1691935181_Freedom_From_High_Prices_Kitchenware_Range_.jpg?im=Resize=(1680,320)'
         alt='...'
       >
-       
+      </MDBCarouselItem>
+      <MDBCarouselItem
+        className='w-100 d-block'
+        itemId={4}
+        src='https://www.jiomart.com/images/cms/aw_rbslider/slides/1692640422_Oral_Care_Fest_Without_Logo_Desktop.jpg?im=Resize=(1680,320)'
+        alt='...'
+      >
       </MDBCarouselItem>
     </MDBCarousel>
+
+    
+    <MDBCarousel style={{marginTop:'2%'}} showIndicators showControls fade>
+    <MDBCarouselItem
+      className='w-100 d-block'
+      itemId={5}
+      src='https://www.jiomart.com/images/cms/aw_rbslider/slides/1691950286_Freedom_to_save_more_on_Beauty_and_Personalcare.jpg?im=Resize=(1680,320)'
+      alt='...'
+    >
+    
+    </MDBCarouselItem>
+
+    <MDBCarouselItem
+      className='w-100 d-block'
+      itemId={6}
+      src='https://www.jiomart.com/images/cms/aw_rbslider/slides/1692180619_Delicious_Deals_Savor_the_Savings_Desktop.jpg?im=Resize=(1680,320)'
+      alt='...'
+    >
+     
+    </MDBCarouselItem>
+
+    <MDBCarouselItem
+      className='w-100 d-block'
+      itemId={7}
+      src='https://www.jiomart.com/images/cms/aw_rbslider/slides/1690827231_Shop_For_Monthly_Essentials_Desktop.jpg?im=Resize=(1680,320)'
+      alt='...'
+    >
+    </MDBCarouselItem>
+    <MDBCarouselItem
+      className='w-100 d-block'
+      itemId={8}
+      src='https://www.jiomart.com/images/cms/aw_rbslider/slides/1692640422_Oral_Care_Fest_Without_Logo_Desktop.jpg?im=Resize=(1680,320)'
+      alt='...'
+    >
+    </MDBCarouselItem>
+  </MDBCarousel>
+  </>
   );
 }

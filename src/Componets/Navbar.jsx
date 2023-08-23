@@ -1,4 +1,4 @@
-import Button from 'react-bootstrap/Button';
+
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
@@ -11,6 +11,8 @@ import { useSelector } from 'react-redux';
 
 import { FcApproval } from 'react-icons/fc';
 
+import '../Styles/Navbar.css'
+
 
 function Navbars() {
 
@@ -18,6 +20,7 @@ function Navbars() {
 
   const data= useSelector(state=>state.E4U_slice)
   return (
+<>
     <Navbar bg='primary' expand="lg" className="bg-body-tertiary">
       <Container fluid>
         <Navbar.Brand style={{color:'white'}} href="#">U4_ME</Navbar.Brand> 
@@ -50,30 +53,39 @@ function Navbars() {
               placeholder="Search"
               className="me-2"
               aria-label="Search"
-            />
-            {/* <Button variant="outline-success">Search</Button> */}
-              <div style={{display:'flex',justifyContent:"center",alignItems:'center'}}>
-             <Button onClick={()=>nav('/login')} style={{display:'flex',textAlign:'center',width:'150px',height:'40px',justifyContent:'space-around',alignItems:'center'}} >
+              />
+              </Form>
+              </Navbar.Collapse>
+              </Container>
+  
+            
+              <div className='signin_container' >
+             <button className='signin_btn' onClick={()=>nav('/login')}  >
 
               <FaUserCircle style={{fontSize:'30px'}} />
-              {(data==false)?
-              <p>Sign In</p> : <p>Active<FcApproval/> </p> }
 
-             </Button>
+              {(data==false)?<p>Sign In</p> : <p>Active<FcApproval/> </p> }
+
+             </button>
 
               </div>
-
-          </Form>
+      
         
-        
-     
-         
-        
-        
-        </Navbar.Collapse>
-      </Container>
     </Navbar>
+
+    <div className="sub_navbar">
+
+      <h5>Groceries</h5>
+      <h5> Vegitables</h5>
+      <h5>Fruits</h5>
+      <h5>Fish</h5>
+      <h5>Meat</h5>
+
+    </div>
+    
+    </>
   );
 }
 
 export default Navbars;
+
