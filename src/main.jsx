@@ -12,10 +12,17 @@ import { BrowserRouter } from 'react-router-dom'
 
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 
+import store from './store/store.jsx';
+import { Provider } from 'react-redux';
+
 ReactDOM.createRoot(document.getElementById('root')).render(
+
   <BrowserRouter>
- 
+ <Provider store={store}>
+
   <App />
+
+ </Provider>
   
   </BrowserRouter>
 

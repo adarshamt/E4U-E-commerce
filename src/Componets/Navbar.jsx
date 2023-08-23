@@ -7,10 +7,16 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import { useNavigate } from 'react-router-dom';
 import { FaUserCircle } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
+
+import { FcApproval } from 'react-icons/fc';
+
 
 function Navbars() {
 
   const nav = useNavigate()
+
+  const data= useSelector(state=>state.E4U_slice)
   return (
     <Navbar bg='primary' expand="lg" className="bg-body-tertiary">
       <Container fluid>
@@ -46,12 +52,12 @@ function Navbars() {
               aria-label="Search"
             />
             {/* <Button variant="outline-success">Search</Button> */}
-              
               <div style={{display:'flex',justifyContent:"center",alignItems:'center'}}>
              <Button onClick={()=>nav('/login')} style={{display:'flex',textAlign:'center',width:'150px',height:'40px',justifyContent:'space-around',alignItems:'center'}} >
 
               <FaUserCircle style={{fontSize:'30px'}} />
-              <p>Sign In</p>
+              {(data==false)?
+              <p>Sign In</p> : <p>Active<FcApproval/> </p> }
 
              </Button>
 
