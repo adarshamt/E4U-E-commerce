@@ -2,6 +2,7 @@ import Navbars from './Navbar'
 import '../Styles/Home.css'
 import Carousel from './Carousel'
 import Footer from './footer'
+import Sidebar from './Sidebar'
 
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
 
       <Navbars/>
       </div>
+      <Sidebar/>
 
 
      <div style={{height:'100 vh', backgroundColor:'yellow'}} className='body_div'>
@@ -20,15 +22,9 @@ const Home = () => {
 
      </div>
      
-    
-
       <Footer/>
 
-
-
-
-        
-    </div>
+      </div>
   )
 }
 

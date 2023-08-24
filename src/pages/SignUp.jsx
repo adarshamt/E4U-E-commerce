@@ -230,6 +230,7 @@
 import { useRef } from 'react'
 import '../Styles/Signup.css'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -237,10 +238,10 @@ import axios from 'axios'
 
   const ipref= useRef()
    
+  const nav = useNavigate()
   const registerHandler = async() =>{
 
     
-        console.log("register handler function")
     
         const Name = ipref.current.name.value
        console.log("name :", Name)
@@ -276,6 +277,8 @@ import axios from 'axios'
               console.log(
                 "response",data
               )
+
+              nav('/login')
         }
         catch(error){
           console.log("error",error)

@@ -27,18 +27,18 @@ import { login } from '../store/ecommerse_slice'
 
       
       
-      const Email = ipRef.current.email.value
-      console.log("email",Email) 
-      const Password = ipRef.current.password.value
-      console.log(Password)
+      const email = ipRef.current.email.value
+      console.log("email",email) 
+      const password = ipRef.current.password.value
+      console.log(password)
 
 
-      const passitem ={
-        email: Email,
-        password:Password
+      const body ={
+         email,
+        password
       }
       try { 
-        const response= await axios.post("http://localhost:4743/user/login",passitem)
+        const response= await axios.post("http://localhost:4743/user/login",body)
         
         console.log("response",response)
         const data = response
@@ -46,11 +46,10 @@ import { login } from '../store/ecommerse_slice'
           
           dispatch(login())
 
-          console.log("store _data",store_data)
           
       
 
-       console.log("response",data)
+       console.log("response data email",store_data)
        nav('/')
 
        
