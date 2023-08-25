@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import { useNavigate } from 'react-router-dom';
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUserAlt,FaStore } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 
 import { FcApproval } from 'react-icons/fc';
@@ -60,11 +60,18 @@ function Navbars() {
   
             
               <div className='signin_container' >
+             <button className='signin_btn'>
+              <FaStore style={{fontSize:'30px'}} />
+             <p>Store </p>
+             </button> 
+
              <button className='signin_btn' onClick={()=>nav('/login')}  >
+              
 
-              <FaUserCircle style={{fontSize:'30px'}} />
+              <FaUserAlt style={{fontSize:'30px'}} />
 
-              {(data==false)?<p>Sign In</p> : <p>Active<FcApproval/> </p> }
+
+              {(data==false)?<p>Cutomer login</p> : <p>Active<FcApproval/> </p> }
 
              </button>
 
