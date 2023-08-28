@@ -14,7 +14,7 @@ const Home = () => {
        <Navbars/>
         </div>
     
-        <div style={{height:'100 vh'}} className='body_div'>
+        <div style={{height:'100 vh',marginTop:'2%'}} className='body_div'>
 
             <Carousel/>
         

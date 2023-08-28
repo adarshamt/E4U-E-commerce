@@ -3,21 +3,24 @@
 .form-div{
 
     display: flex;
-    justify-content: center;
+  
     flex-direction: column;
     align-items: center;
+    margin-top: 2%;
 
 }
 .registration_form{
 
-    width: 300px;
-    height: 400px;
-    background-color: rgba(41, 39, 39, 0.3);
-    box-shadow: 0 5px 30px black;
+    width: 400px;
+    height: 600px;
+    background-color: rgba(219, 197, 197, 0.1);
+   
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+
+    
+ 
 }
 input{
     width: 70%;
@@ -33,16 +36,18 @@ input{
 .main_div{
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: auto;
+
+    flex-direction: row;
+
     width: 100%;
-    height: 600px;
+    height: 100%;
 
-    padding-top: 20px;
 
-    background-image: url(giphy.gif);
+    background-color: rgb(163, 163, 46);
+    
+    background-image: url('https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80');
     background-position:center;
+
     background-size: cover;
 }
  

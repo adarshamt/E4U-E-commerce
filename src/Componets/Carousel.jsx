@@ -43,12 +43,11 @@ export default function Carousel() {
     </MDBCarousel>
 
      {/* *********************************** carousel break ************************** */}
-    <MDBCarousel  showIndicators showControls fade>
+    <MDBCarousel  style={{margin:"2%"}} showIndicators showControls fade>
     <MDBCarouselItem
       className='w-100 d-block'
       itemId={5}
-      src='https://www.jiomart.com/images/cms/aw_rbslider/slides/1691950286_Freedom_to_save_more_on_Beauty_and_Personalcare.jpg?im=Resize=(1680,320)'
-      alt='...'
+      src='https://www.jiomart.com/images/cms/aw_rbslider/slides/1692820219_Rakhi_special_delight_Desktop.jpg?im=Resize=(1680,320)'
     >
     
     </MDBCarouselItem>
@@ -72,7 +71,7 @@ export default function Carousel() {
     <MDBCarouselItem
       className='w-100 d-block'
       itemId={8}
-      src='https://www.jiomart.com/images/cms/aw_rbslider/slides/1692640422_Oral_Care_Fest_Without_Logo_Desktop.jpg?im=Resize=(1680,320)'
+      src='https://www.jiomart.com/images/cms/aw_rbslider/slides/1692821627_Shop_For_Monthly_Essentials_Desktop.jpg?im=Resize=(1680,320)'
       alt='...'
     >
     </MDBCarouselItem>

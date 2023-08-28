@@ -50,7 +50,7 @@ function Navbars() {
         <Button className='menu_btn' onClick={sidebarHandler}> <GiHamburgerMenu/></Button> 
         
       <Container fluid>
-        <Navbar.Brand style={{color:'white'}} href="#">E4U</Navbar.Brand> 
+        <Navbar.Brand onClick={()=>nav('/')} style={{color:'white'}} href="#">E4U</Navbar.Brand> 
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
