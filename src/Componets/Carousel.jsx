@@ -42,8 +42,8 @@ export default function Carousel() {
       </MDBCarouselItem>
     </MDBCarousel>
 
-    
-    <MDBCarousel style={{marginTop:'2%'}} showIndicators showControls fade>
+     {/* *********************************** carousel break ************************** */}
+    <MDBCarousel  showIndicators showControls fade>
     <MDBCarouselItem
       className='w-100 d-block'
       itemId={5}
