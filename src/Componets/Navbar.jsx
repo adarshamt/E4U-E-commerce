@@ -5,25 +5,52 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
+
+
+
+
 import { useNavigate } from 'react-router-dom';
 import { FaUserAlt,FaStore } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import {sidebar_show} from '../store/ecommerse_slice.jsx'
 
 import { FcApproval } from 'react-icons/fc';
 
+import { GiHamburgerMenu } from 'react-icons/gi';
+
+
 import '../Styles/Navbar.css'
+import { Button } from 'react-bootstrap';
+import Sidebar from './Sidebar';
+
 
 
 function Navbars() {
+  
+  const data= useSelector(state=>state.E4U_slice)
 
   const nav = useNavigate()
 
-  const data= useSelector(state=>state.E4U_slice)
+  const dispatch = useDispatch()
+
+  const sidebarHandler = ()=>{
+
+    dispatch( sidebar_show())
+  }
+  console.log("store data",data)
   return (
 <>
+
+{ (data.sidebar == true)?<Sidebar/>:null}     
+
+  
     <Navbar bg='primary' expand="lg" className="bg-body-tertiary">
+       
+        <Button className='menu_btn' onClick={sidebarHandler}> <GiHamburgerMenu/></Button> 
+        
       <Container fluid>
-        <Navbar.Brand style={{color:'white'}} href="#">U4_ME</Navbar.Brand> 
+        <Navbar.Brand style={{color:'white'}} href="#">E4U</Navbar.Brand> 
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -55,32 +82,51 @@ function Navbars() {
               aria-label="Search"
               />
               </Form>
+              <div className='signin_container' >
+             {/* <button className='signin_btn'>
+              <FaStore style={{fontSize:'30px'}} />
+             <p>Store </p>
+             </button>  */}
+
+             <Button className='store_signin_btn'>
+
+             <FaStore style={{fontSize:'20px'}} />
+              Store sign in
+             </Button>
+
+             <Button className='signin_btn' onClick={()=>nav('/login')}  >
+              
+
+              <FaUserAlt style={{fontSize:'20px'}} />
+
+
+              {(data.login == false)? <span>Cutomer login  </span>  : <span>Active <FcApproval/> </span>    }
+
+             </Button>
+
+              </div>
               </Navbar.Collapse>
+              
               </Container>
   
             
-              <div className='signin_container' >
-             <button className='signin_btn'>
-              <FaStore style={{fontSize:'30px'}} />
-             <p>Store </p>
-             </button> 
-
-             <button className='signin_btn' onClick={()=>nav('/login')}  >
-              
-
-              <FaUserAlt style={{fontSize:'30px'}} />
-
-
-              {(data==false)?<p>Cutomer login</p> : <p>Active<FcApproval/> </p> }
-
-             </button>
-
-              </div>
+            
       
         
     </Navbar>
-
-    <div className="sub_navbar">
+     
+    <Navbar bg="info" data-bs-theme="dark">
+        <Container>
+          {/* <Navbar.Brand href="#home">Navbar</Navbar.Brand> */}
+          <Nav className="me-auto">
+            <Nav.Link href="#home">Gerocery</Nav.Link>
+            <Nav.Link href="#features">vegitables</Nav.Link>
+            <Nav.Link href="#pricing">Meat</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+     
+    {/* <div className="sub_navbar">
 
       <h5>Groceries</h5>
       <h5> Vegitables</h5>
@@ -88,7 +134,7 @@ function Navbars() {
       <h5>Fish</h5>
       <h5>Meat</h5>
 
-    </div>
+    </div> */}
     
     </>
   );

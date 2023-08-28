@@ -32,11 +32,10 @@
     justify-content: center;
     flex-direction: row;
     height: auto;
-    width: 100%;
+    width: 100rem;
     height: 700px;
 
     padding-top: 20px;
-
     background-color: #fff6f1;
     
 }
@@ -47,11 +46,8 @@
     align-items: center;
     justify-content: center;
     width: 400px;
-    
     margin: 20px;
     
-
-   
 }
 
 .signup{

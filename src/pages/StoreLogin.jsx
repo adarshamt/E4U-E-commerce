@@ -12,12 +12,30 @@ import { useRef } from 'react'
 
 
 export const StoreLogin = () => {
+  
 const ipref = useRef()
 
 
   const link=useNavigate()
 
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const form = ipref.current;
+    const storeData = {
+      storename: form.storename.value,
+      email: form.email.value,
+      username: form.username.value,
+      password: form.password.value,
+      phone: form.phone.value,
+      address: form.address.value,
+    };
+    console.log("store data ",storeData)
+
+    link('/')
+
+}
 //   const Storename = ipref.current.storename.value
 //   const email = ipref.current.email.value
 //   const username = ipref.current.username.value 
@@ -62,7 +80,7 @@ const ipref = useRef()
      </form>
 
       <div className='btn_div'>
-      <button className='signup'>Sign up</button>
+      <button onClick={handleSubmit} className='signup'>Sign up</button>
       <button onClick={()=>link("/")} className='login'>Log in</button>
       </div>
 

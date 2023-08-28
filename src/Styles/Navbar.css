@@ -1,3 +1,18 @@
+
+.bg-body-tertiary{
+    width: 100%;
+}
+
+.bg-body-tertiary.navbar.navbar-expand-lg.navbar-light.bg-primary{
+    height: 75px;
+}
+.menu_btn.btn.btn-primary{
+    width: 20px;
+    font-size: 20px;
+    text-align: center;
+    padding: 0;
+}
+
 .signin_container{
     /* display:'flex',justifyContent:"center",alignItems:'center' */
    margin-right: 3%;
@@ -5,14 +20,23 @@
 flex-direction: row;
 justify-content: center;
 align-items: center;
+width: 200px;
+;
 
 
 }
-.signin_btn{
-    /* display:'flex',textAlign:'center',width:'150px',height:'40px',justifyContent:'space-around',alignItems:'center' */
+.store_signin_btn.btn.btn-primary{
+    padding: 0;
+}
+
+.signin_btn.btn.btn-primary{
+    padding: 0;
+}
+/* .signin_btn{
+   
    display: flex;
    height: 40px;
-   width: 100px;
+   width: 100%;
    background-color: transparent;
    border: none;
    font-size: 15px;
@@ -20,12 +44,13 @@ align-items: center;
    color: rgb(207, 204, 214);
 
 
-}
+} */
 
 .sub_navbar{
     padding-left: 5%;
     background-color: rgb(204, 151, 253);
     height: 40px;
+    width: 100%;
 
     display: flex;
     align-items: center;
@@ -33,4 +58,7 @@ align-items: center;
     column-gap: 40px;
     color: aliceblue;
     
+}
+.bg-body-tertiary.navbar.navbar-expand-lg.navbar-light.bg-primary{
+    padding-left: 4% !important;
 }
