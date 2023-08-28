@@ -17,9 +17,11 @@ const Sidebar = () => {
   const categories = ['My Orders', 'Wishlist', 'Books', 'Beauty'];
 
   return (
-    <>
+    <div className='main_sidebar'>
     <div className="sidebar">
+      <div style={{display:'flex',justifyContent:'space-between'}}>
         <h2 onClick={()=>nav('/')} >Home</h2> <span onClick={()=>dispatch(sidebar_hide())}><GrClose/></span>
+        </div>
         <h2>Categories</h2>
       <ul>
         {categories.map((category, index) => (
@@ -29,8 +31,12 @@ const Sidebar = () => {
       <Button onClick={()=>dispatch(logout())} className='logout_btn'> log out </Button>
        
     </div>
+    <div onClick={()=>dispatch(sidebar_hide())} className="free_space">
+      
+
+    </div>
     
-    </>
+    </div>
   );
 };
 
