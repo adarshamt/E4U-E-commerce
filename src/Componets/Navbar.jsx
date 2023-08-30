@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+// import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
 
@@ -34,11 +34,15 @@ function Navbars() {
 
   const dispatch = useDispatch()
 
+  const checkToken = localStorage.getItem("token")
+
   const sidebarHandler = ()=>{
+
+
 
     dispatch( sidebar_show())
   }
-  console.log("store data",data)
+  // console.log("store data",data)
   return (
 <>
 
@@ -59,7 +63,7 @@ function Navbars() {
             navbarScroll
           >
             <Nav.Link href="#action1">Home</Nav.Link>
-            <Nav.Link href="#action2">Link</Nav.Link>
+            {/* <Nav.Link href="#action2">Link</Nav.Link>
             <NavDropdown title="Link" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action4">
@@ -72,7 +76,7 @@ function Navbars() {
             </NavDropdown>
             <Nav.Link href="#" disabled>
               Link
-            </Nav.Link>
+            </Nav.Link> */}
           </Nav>
           <Form style={{alignItems:'center'}} className="d-flex">
             <Form.Control
@@ -99,8 +103,8 @@ function Navbars() {
 
               <FaUserAlt style={{fontSize:'20px'}} />
 
-
-              {(data.login == false)? <span>Cutomer login  </span>  : <span>Active <FcApproval/> </span>    }
+       
+              {(!checkToken)? <span>Cutomer login  </span>  : <span>Active <FcApproval/> </span>    }
 
              </Button>
 

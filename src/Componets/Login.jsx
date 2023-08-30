@@ -42,12 +42,13 @@ import { login } from '../store/ecommerse_slice'
         
         console.log("response",response)
         const data = response
-        if (data.data.status == "success"){
+        const token = data.data.token
+        console.log(data.data.token)
+        if (token){
+
+          localStorage.setItem("token",token)
           
           dispatch(login())
-
-          
-      
 
        console.log("response data email",store_data)
        nav('/')

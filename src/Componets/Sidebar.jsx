@@ -2,7 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import '../Styles/Sidebar.css'
 
-import { login, logout, sidebar_hide } from '../store/ecommerse_slice';
+import {  logout, sidebar_hide } from '../store/ecommerse_slice';
 
 import { GrClose } from 'react-icons/gr';
 import { useDispatch } from 'react-redux';
@@ -14,6 +14,15 @@ const Sidebar = () => {
   const dispatch = useDispatch()
 
     const nav = useNavigate()
+    
+
+     const logoutHandler = ()=>{
+
+      localStorage.clear()
+      dispatch(logout())
+        
+
+     }
   const categories = ['My Orders', 'Wishlist', 'Books', 'Beauty'];
 
   return (
@@ -28,7 +37,7 @@ const Sidebar = () => {
           <li key={index}>{category}</li>
         ))}
       </ul>
-      <Button onClick={()=>dispatch(logout())} className='logout_btn'> log out </Button>
+      <Button onClick={logoutHandler} className='logout_btn'> log out </Button>
        
     </div>
     <div onClick={()=>dispatch(sidebar_hide())} className="free_space">

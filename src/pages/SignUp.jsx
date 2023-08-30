@@ -72,7 +72,7 @@ import  Navbars  from '../Componets/Navbar'
 
      
 
-    <form  ref={ipref} className='registration_form'>
+    <form onSubmit={(e)=>{e.preventDefault()}}  ref={ipref} className='registration_form'>
 
          <label>Name </label>
 
