@@ -1,0 +1,59 @@
+.store_main_container{
+    display: flex;
+    
+   
+}
+
+.sidebar_main{
+   border: 1px solid #e0e0e0;
+   border-radius: 24px;
+    margin: 2%;
+   padding: 1%;
+    width: 20%;
+    height: 500px;
+
+
+
+}
+.list_container{
+    margin: 3%;
+    padding: 2%;
+    width: 100%;
+    height: auto;
+    /* background-color: aqua; */
+
+
+    display: flex;
+    flex-direction: column;
+
+    
+}
+
+.grocery_div{
+    display: flex;
+    column-gap: 5%;
+    margin: 3%;
+    height: 400px;
+   
+
+}
+.fruits_div{
+    display: flex;
+    column-gap: 5%;
+    margin: 3%;
+    height: 400px;
+}
+.meat_div{
+    display: flex;
+    column-gap: 5%;
+    margin: 3%;
+    height: 400px;
+
+}
+.Bakery_div{
+    display: flex;
+    column-gap: 5%;
+    margin: 3%;
+    height: 400px;
+
+}
