@@ -5,13 +5,15 @@ import '../Styles/Sidebar.css'
 import {  logout, sidebar_hide } from '../store/ecommerse_slice';
 
 import { GrClose } from 'react-icons/gr';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
 
 
 const Sidebar = () => {
 
   const dispatch = useDispatch()
+    
+   const data = useSelector(state=>state.E4U_slice)
 
     const nav = useNavigate()
     
@@ -37,8 +39,9 @@ const Sidebar = () => {
           <li key={index}>{category}</li>
         ))}
       </ul>
-      <Button onClick={logoutHandler} className='logout_btn'> log out </Button>
-       
+      {
+       (data.login ==true)? <Button onClick={logoutHandler} className='logout_btn'> log out </Button>:null
+      }
     </div>
     <div onClick={()=>dispatch(sidebar_hide())} className="free_space">
       

@@ -2,11 +2,11 @@
 
 
 import Navbar from '../Componets/Navbar'
-import '../Styles/StoreLogin.css'
+import '../Styles/StoreSignup.css'
 
 import { useNavigate } from 'react-router-dom'
 
-import axios from 'axios'
+// import axios from 'axios'
 import { useRef } from 'react'
 
 
@@ -33,7 +33,7 @@ const ipref = useRef()
     };
     console.log("store data ",storeData)
 
-    link('/')
+    link('/storesignin')
 
 }
 //   const Storename = ipref.current.storename.value
@@ -42,53 +42,51 @@ const ipref = useRef()
 //   const password = ipref.current.password.value
   return (
     <>
-    <Navbar/>
+    <div className="str_navbar">
+        <Navbar/>
+
+    </div>
     <div className='main_div_str'>
 
 
         <div className="bag_img">
-            <img src="https://img.freepik.com/free-vector/shop-with-sign-we-are-open_52683-38687.jpg" alt="" />
+            <img src="https://o.remove.bg/downloads/3cadb6c5-4193-45b2-be07-cf5ccf69cc2a/shop-with-sign-we-are-open_52683-38687-removebg-preview.png" alt="" />
         </div>
 
 
-      <div className='form_div_str'>
+   <div className='form_div_str'>
 
      
 
-    <form ref={ipref} className='registration_form_str'>
+     <form ref={ipref} className='signup_form_str'>
 
-            <label> Store Name </label>
+            {/* <label> Store Name </label> */}
             <input  name='storename'  type='text' placeholder='Store Name'/>
 
-           <label>Email </label>
+           {/* <label>Email </label> */}
            <input name='email'   type='Email' placeholder='Email'/>
 
-           <label>Username </label>
+           {/* <label>Username </label> */}
            <input name='Username'   type='String' placeholder='username'/>
 
-           <label>Phone Number </label>
-           <input name='phone'   type='number' placeholder='Phone Number'/>
+           {/* <label>Phone Number </label> */}
+           <input name='phone' style={{textDecoration:'none'}}   type='number' placeholder='Phone Number'/>
 
 
-          <label>Password </label>
+          {/* <label>Password </label> */}
           <input name='phone'   type='text' placeholder='Password'/>
          
-          <label>Address </label>
-         <textarea name="address" id="" cols="30" rows="4"></textarea>
+          {/* <label>Address </label> */}
+         <textarea style={{border:'none',resize:'none'}} name="address" id="" cols="35" rows="4"></textarea>
           
+      <div className='btn_div'>
+      <button onClick={handleSubmit} className='signup'>Sign up</button>
+      <button onClick={()=>link("/storelogin")} className='login'>Log in</button>
+      </div>
 
      </form>
 
-      <div className='btn_div'>
-      <button onClick={handleSubmit} className='signup'>Sign up</button>
-      <button onClick={()=>link("/")} className='login'>Log in</button>
-      </div>
-
-
-
-
-
-    </div>
+  </div>
 
 
 

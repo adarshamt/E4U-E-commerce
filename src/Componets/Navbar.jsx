@@ -92,7 +92,7 @@ function Navbars() {
              <p>Store </p>
              </button>  */}
 
-             <Button className='store_signin_btn'>
+             <Button onClick={()=>nav('/storelogin')} className='store_signin_btn'>
 
              <FaStore style={{fontSize:'20px'}} />
               Store sign in

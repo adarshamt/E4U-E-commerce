@@ -1,0 +1,39 @@
+
+
+
+.storOnwr_maindiv{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    /* background-color: blue; */
+    height: 100vh  ;
+}
+.storeOwner{
+    /* width: 500px;
+    border: 2px solid black;
+    padding: 20%;
+    background-color: turquoise; */
+
+    
+    
+}
+.display_div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100vh;
+    width: 100%;
+    /* background-color: yellow; */
+    margin-left: 10%;
+
+    padding: 20%;
+}
+.display_div Form{
+    display: flex;
+    flex-direction:column;
+    padding: 2%;
+    border: 1px rgb(97, 94, 94) solid;
+    height: auto;
+}
