@@ -8,6 +8,8 @@ import { GrClose } from 'react-icons/gr';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
 
+import cookie from 'js-cookie'
+
 
 const Sidebar = () => {
 
@@ -20,7 +22,9 @@ const Sidebar = () => {
 
      const logoutHandler = ()=>{
 
-      localStorage.clear()
+      // localStorage.clear()
+      cookie.remove('token')
+      console.log("store data",data)
       dispatch(logout())
         
 
@@ -42,6 +46,7 @@ const Sidebar = () => {
       {
        (data.login ==true)? <Button onClick={logoutHandler} className='logout_btn'> log out </Button>:null
       }
+     
     </div>
     <div onClick={()=>dispatch(sidebar_hide())} className="free_space">
       

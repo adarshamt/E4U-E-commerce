@@ -7,6 +7,8 @@ import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../store/ecommerse_slice'
 
+import cookie from 'js-cookie'
+
 
 
 
@@ -46,7 +48,7 @@ import { login } from '../store/ecommerse_slice'
         console.log(data.data.token)
         if (token){
 
-          localStorage.setItem("token",token)
+          cookie.set("token",token)
           
           dispatch(login())
 

@@ -5,14 +5,45 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import Row from 'react-bootstrap/Row';
+// import Row from 'react-bootstrap/Row';
 
 import Sidebar from '../Componets/StoreOwerSidebar'
+
+import { MdOutlineArrowDropDownCircle } from 'react-icons/md'
+
+import axios from '../Services/AxiosInstance'
 
 import '../Styles/StoreOwner.css'
 const StoreOwner = () => {
 
   const [validated, setValidated] = useState(false);
+
+  const [formdata,setFormData] = useState({
+    
+    productName:'',
+    discription:'',
+    price:'',
+    category:'',
+    images:[{type:'String'}]
+
+
+  })
+  const HandleInputChange = (event)=>{
+
+    console.log("handle input change function")
+
+    const {name,value} =event.target
+
+    setFormData({
+      ...formdata, [name]:value
+    })
+
+    console.log("formdata ",formdata)
+
+  }
+
+    
+
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -23,6 +54,50 @@ const StoreOwner = () => {
 
     setValidated(true);
   };
+
+  const Handleimages = (event) =>{
+
+    const files = event.target.files;
+    setFormData({
+
+      ...formdata,
+      
+      images :files
+    })
+
+  }
+
+  const HandleSubmit = async()=>{
+
+    try{
+
+      const formDataToSend = new FormData()
+
+
+      for (const key in formdata) {
+      if (key === 'images') {
+        for (let i = 0; i < formdata.images.length; i++) {
+          formDataToSend.append('images', formdata.images[i]);
+        }
+      } else {
+        formDataToSend.append(key, formdata[key]);
+      }
+    }
+
+    const response = await axios.post('/store/userowner',formDataToSend)
+ 
+     console.log('Registration successful:', response.data.message);
+
+    }
+    catch (error) {
+      console.error('Registration error:', error);
+      console.log('Response:' , error.response);
+    
+  }
+  }
+
+
+
 
   return (
     <div className='storOnwr_maindiv'>
@@ -42,30 +117,55 @@ const StoreOwner = () => {
             required
             type="text"
             placeholder="Product name"
+            name='productName'
+            value={formdata.productName}
+            onChange={HandleInputChange}
             // defaultValue="Mark"
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md="" controlId="validationCustom02">
-          <Form.Label>Last name</Form.Label>
+          <Form.Label>Discription</Form.Label>
           <Form.Control
             required
             type="text"
-            placeholder="Last name"
+            placeholder="Discription"
+            name='discription'
+            value={formdata.discription}
+            onChange={HandleInputChange}
+
+
             // defaultValue="Otto"
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md="" controlId="validationCustomUsername">
-          <Form.Label>Username</Form.Label>
+          <Form.Label>Category</Form.Label>
           <InputGroup hasValidation>
-            <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
-            <Form.Control
+            <InputGroup.Text id="inputGroupPrepend"><MdOutlineArrowDropDownCircle/></InputGroup.Text>
+            {/* <Form.Control
               type="text"
-              placeholder="Username"
+              placeholder="Category"
               aria-describedby="inputGroupPrepend"
               required
-            />
+            /> */}
+             <Form.Control
+            as="select"
+            
+            name='category'
+            value={formdata.category}
+            onChange={HandleInputChange}
+            // value={formData.propertyType}
+            // onChange={handleInputChange}
+            required
+            placeholder='Category'
+          >
+            <option value="Grocery">grocery</option>
+            <option value="vegitable">Vegitable</option>
+            <option value="Meat">Meat</option>
+            <option value="Fruits">Fruits</option>
+            <option value="Bakery">Bakery</option>
+          </Form.Control>
             <Form.Control.Feedback type="invalid">
               Please choose a username.
             </Form.Control.Feedback>
@@ -74,13 +174,21 @@ const StoreOwner = () => {
 
       
         <Form.Group as={Col} md="" controlId="validationCustom03">
-          <Form.Label>City</Form.Label>
-          <Form.Control type="text" placeholder="City" required />
+          <Form.Label>Price in rupees ₹</Form.Label>
+          <Form.Control type="text" placeholder="price" required 
+          
+          name='price'
+            value={formdata.price}
+            onChange={HandleInputChange}
+
+            />
           <Form.Control.Feedback type="invalid">
             Please provide a valid city.
+            
+
           </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group as={Col} md="" controlId="validationCustom04">
+        {/* <Form.Group as={Col} md="" controlId="validationCustom04">
           <Form.Label>State</Form.Label>
           <Form.Control type="text" placeholder="State" required />
           <Form.Control.Feedback type="invalid">
@@ -93,10 +201,18 @@ const StoreOwner = () => {
           <Form.Control.Feedback type="invalid">
             Please provide a valid zip.
           </Form.Control.Feedback>
-        </Form.Group>
+        </Form.Group> */}
         <Form.Group as={Col} md="" controlId="validationCustom05">
           <Form.Label>Upload images</Form.Label>
-          <Form.Control type="file" placeholder="Zip" required />
+          <Form.Control placeholder="Zip" required
+          
+            accept=".png, .jpg, .jpeg"
+            type="file"
+            name="images"
+            multiple
+            onChange={Handleimages}
+          
+          />
           <Form.Control.Feedback type="invalid">
             Please provide a valid zip.
           </Form.Control.Feedback>
@@ -110,20 +226,11 @@ const StoreOwner = () => {
           feedbackType="invalid"
         />
       </Form.Group> */}
-      <Button type="submit">Submit form</Button>
+      <Button type="submit" onClick={HandleSubmit}>Submit form</Button>
     </Form>
 
-
-        
-
-      </div>
-
-        
-
-
-
-
     </div>
+      </div>
   )
 }
 

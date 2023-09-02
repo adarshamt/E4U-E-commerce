@@ -24,6 +24,8 @@ import '../Styles/Navbar.css'
 import { Button } from 'react-bootstrap';
 import Sidebar from './Sidebar';
 
+import cookie from 'js-cookie'
+
 
 
 function Navbars() {
@@ -34,7 +36,8 @@ function Navbars() {
 
   const dispatch = useDispatch()
 
-  const checkToken = localStorage.getItem("token")
+  const checkToken = cookie.get("token")
+  console.log("check token",checkToken)
 
   const sidebarHandler = ()=>{
 
