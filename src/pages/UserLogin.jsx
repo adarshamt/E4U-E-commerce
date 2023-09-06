@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import '../Styles/Login.css'
 
-import Navbar from './Navbar'
+import Navbar from '../Componets/Navbar'
 import {  useRef } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,7 +14,7 @@ import cookie from 'js-cookie'
 
 
 
-  const Login = () => {
+  const UserLogin = () => {
 
     
 
@@ -56,7 +56,7 @@ import cookie from 'js-cookie'
        nav('/')
 
        
-     console.log("login after message",Login)
+     console.log("login after message",UserLogin)
         
         }
   }
@@ -111,4 +111,4 @@ import cookie from 'js-cookie'
   )
 }
 
-export default Login
+export default UserLogin

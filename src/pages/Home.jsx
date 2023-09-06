@@ -1,8 +1,8 @@
-import Navbars from './Navbar'
+import Navbars from '../Componets/Navbar'
 import '../Styles/Home.css'
-import Carousel from './Carousel'
-import Footer from './footer'
-import ProductSlider from './ProductSlider'
+import Carousel from '../Componets/Carousel'
+import Footer from '../Componets/footer'
+import ProductSlider from '../Componets/ProductSlider'
 
 
 
@@ -14,7 +14,7 @@ const Home = () => {
        <Navbars/>
         </div>
     
-        <div style={{height:'100 vh',marginTop:'2%'}} className='body_div'>
+        <div style={{height:'100 vh',marginTop:'0%'}} className='body_div'>
 
             <Carousel/>
         
