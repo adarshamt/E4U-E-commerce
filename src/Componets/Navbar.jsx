@@ -48,7 +48,6 @@ function Navbars() {
   // console.log("store data",data)
   return (
 <>
-
 { (data.sidebar == true)?<Sidebar/>:null}     
 
   
@@ -126,7 +125,8 @@ function Navbars() {
         <Container>
           {/* <Navbar.Brand href="#home">Navbar</Navbar.Brand> */}
           <Nav className="me-auto">
-            <Nav.Link onClick={()=>nav('/products')}>Gerocery </Nav.Link>
+            <Nav.Link onClick={()=>nav('/products')}>All Products </Nav.Link>
+            <Nav.Link href="#features">Gerocery</Nav.Link>
             <Nav.Link href="#features">vegitables</Nav.Link>
             <Nav.Link href="#pricing">Meat</Nav.Link>
           </Nav>
