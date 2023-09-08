@@ -30,7 +30,7 @@ const StoreOwner = () => {
   })
   const HandleInputChange = (event)=>{
 
-    console.log("handle input change function")
+    console.log("handle input change function") 
 
     const {name,value} =event.target
 
@@ -151,20 +151,13 @@ const StoreOwner = () => {
           <Form.Label>Category</Form.Label>
           <InputGroup hasValidation>
             <InputGroup.Text id="inputGroupPrepend"><MdOutlineArrowDropDownCircle/></InputGroup.Text>
-            {/* <Form.Control
-              type="text"
-              placeholder="Category"
-              aria-describedby="inputGroupPrepend"
-              required
-            /> */}
+          
              <Form.Control
             as="select"
             
             name='category'
             value={formdata.category}
             onChange={HandleInputChange}
-            // value={formData.propertyType}
-            // onChange={handleInputChange}
             required
             placeholder='Category'
           >
@@ -173,9 +166,10 @@ const StoreOwner = () => {
             <option value="Meat">Meat</option>
             <option value="Fruits">Fruits</option>
             <option value="Bakery">Bakery</option>
+            <option value="Bakery">Fish</option>
           </Form.Control>
             <Form.Control.Feedback type="invalid">
-              Please choose a username.
+              Please choose a category.
             </Form.Control.Feedback>
           </InputGroup>
         </Form.Group>
@@ -246,105 +240,3 @@ const StoreOwner = () => {
 export default StoreOwner
 
 
-// ********************  GPT  *****************
-
-
-// import { useState } from 'react';
-// import Button from 'react-bootstrap/Button';
-// import Col from 'react-bootstrap/Col';
-// import Form from 'react-bootstrap/Form';
-// import InputGroup from 'react-bootstrap/InputGroup';
-// import { MdOutlineArrowDropDownCircle } from 'react-icons/md';
-// import axios from '../Services/AxiosInstance';
-// import '../Styles/StoreOwner.css';
-
-// const StoreOwner = () => {
-//   const [validated, setValidated] = useState(false);
-
-//   const [formData, setFormData] = useState({
-//     productName: '',
-//     description: '',
-//     price: '',
-//     category: '',
-//     images: [],
-//   });
-
-//   const handleInputChange = (event) => {
-//     const { name, value } = event.target;
-//     setFormData({
-//       ...formData,
-//       [name]: value,
-//     });
-//   };
-
-//   const handleImages = (event) => {
-//     const files = event.target.files;
-//     setFormData({
-//       ...formData,
-//       images: [...formData.images, ...files],
-//     });
-//   };
-
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-//     const form = event.currentTarget;
-
-//     if (form.checkValidity() === false) {
-//       event.stopPropagation();
-//     } else {
-//       try {
-//         const formDataToSend = new FormData();
-
-//         for (const key in formData) {
-//           if (key === 'images') {
-//             for (let i = 0; i < formData.images.length; i++) {
-//               formDataToSend.append('images', formData.images[i]);
-//             }
-//           } else {
-//             formDataToSend.append(key, formData[key]);
-//           }
-//         }
-
-//         console.log('form data to send', formDataToSend);
-
-//         const response = await axios.post('/store/addproduct', formDataToSend);
-
-//         console.log('Registration successful:', response.data.message);
-//       } catch (error) {
-//         console.error('Registration error:', error);
-//         console.log('Response:', error.response);
-//       }
-//     }
-
-//     setValidated(true);
-//   };
-
-//   return (
-//     <div className='storOnwr_maindiv'>
-//       <div className='storeOwner'></div>
-//       <div className='display_div'>
-//         <Form noValidate validated={validated} onSubmit={handleSubmit}>
-//           {/* ... Your form fields ... */}
-//           <Form.Group as={Col} md='' controlId='validationCustom05'>
-//             <Form.Label>Upload images</Form.Label>
-//             <Form.Control
-//               placeholder='Zip'
-//               required
-//               accept='.png, .jpg, .jpeg'
-//               type='file'
-//               name='images'
-//               multiple
-//               onChange={handleImages}
-//             />
-//             <Form.Control.Feedback type='invalid'>
-//               Please provide a valid zip.
-//             </Form.Control.Feedback>
-//           </Form.Group>
-//           <Button type='submit'>Submit form</Button>
-//         </Form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default StoreOwner;

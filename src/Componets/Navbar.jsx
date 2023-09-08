@@ -129,6 +129,7 @@ function Navbars() {
             <Nav.Link href="#features">Gerocery</Nav.Link>
             <Nav.Link href="#features">vegitables</Nav.Link>
             <Nav.Link href="#pricing">Meat</Nav.Link>
+            <Nav.Link onClick={()=>nav('/stores')} href="#pricing">Stors</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
