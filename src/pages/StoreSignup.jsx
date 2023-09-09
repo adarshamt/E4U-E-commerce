@@ -53,13 +53,23 @@ const ipref = useRef()
       phone: form.phone.value,
       address: form.address.value,
       category:form.category.value,
+      images:[]
       
     };
     console.log("store data ",storeData)
 
     const formdatatosend = new FormData ()
+    for (const key in storeData) {
+      if (key === 'images') {
+       
 
-    formdatatosend.append('images',image.images[0])
+        formdatatosend.append('images',image.images[0])
+        
+      } else {
+        formdatatosend.append(key, storeData[key]);
+      }
+    }
+
     console.log("form data to send ",formdatatosend)
 
 
