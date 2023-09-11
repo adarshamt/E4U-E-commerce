@@ -53,7 +53,7 @@ function Navbars() {
   
     <Navbar bg='primary' expand="lg" className="bg-body-tertiary">
        
-        <Button className='menu_btn' onClick={sidebarHandler}> <GiHamburgerMenu/></Button> 
+        <Button style={{backgroundColor:'transparent',boxShadow:'none'}} className='menu_btn' onClick={sidebarHandler}> <GiHamburgerMenu/></Button> 
         
       <Container fluid>
         <Navbar.Brand onClick={()=>nav('/')} style={{color:'white'}} href="#">E4U</Navbar.Brand> 
@@ -94,13 +94,13 @@ function Navbars() {
              <p>Store </p>
              </button>  */}
 
-             <Button onClick={()=>nav('/storelogin')} className='store_signin_btn'>
+             <Button style={{backgroundColor:'transparent',boxShadow:'none'}} onClick={()=>nav('/storelogin')} className='store_signin_btn'>
 
              <FaStore style={{fontSize:'20px'}} />
               Store sign in
              </Button>
 
-             <Button className='signin_btn' onClick={()=>nav('/login')}  >
+             <Button style={{backgroundColor:'transparent',boxShadow:'none'}} className='signin_btn' onClick={()=>nav('/login')}  >
               
 
               <FaUserAlt style={{fontSize:'20px'}} />

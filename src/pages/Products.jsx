@@ -30,7 +30,7 @@ const Products = () => {
     getProducts()
   },[])
   
-  console.log("data response",data)
+  console.log("data response name",data)
 
 
   return (

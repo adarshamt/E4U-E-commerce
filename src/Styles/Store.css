@@ -1,6 +1,9 @@
 .store_main_container{
     display: flex;
     
+
+    
+    
    
 }
 
@@ -15,45 +18,81 @@
 
 
 }
+.card{
+    width: 15rem !important;
+    margin-bottom: 5rem;
+}
 .list_container{
-    margin: 3%;
-    padding: 2%;
-    width: 100%;
+    /* margin: 3%; */
+    padding: 5%;
+    width: 80%;
     height: auto;
+
     /* background-color: aqua; */
 
 
     display: flex;
     flex-direction: column;
+    /* align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex-direction: row; */
 
     
 }
 
 .grocery_div{
     display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
     column-gap: 5%;
-    margin: 3%;
-    height: 400px;
+    margin: 2%;
+    
+
+    width: 100%;
+    flex-wrap: wrap;
+    
    
 
 }
 .fruits_div{
     display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
     column-gap: 5%;
-    margin: 3%;
-    height: 400px;
+    margin: 2%;
+    
+
+    width: 100%;
+    flex-wrap: wrap;
+    background-color: blueviolet;
 }
-.meat_div{
+/* .meat_div{
     display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
     column-gap: 5%;
-    margin: 3%;
-    height: 400px;
+    margin: 2%;
+    
+
+    width: 100%;
+    flex-wrap: wrap;
 
 }
 .Bakery_div{
     display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
     column-gap: 5%;
-    margin: 3%;
-    height: 400px;
+    margin: 2%;
+    
 
-}
+    width: 100%;
+    flex-wrap: wrap;
+
+} */
