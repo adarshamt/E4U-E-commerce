@@ -1,6 +1,9 @@
 import React from "react";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 
+import { Button } from 'react-bootstrap';
+
+
 import SideNav, {
 //   Toggle,
 //   Nav,
@@ -19,6 +22,7 @@ class SideNavBar extends React.Component {
 
   render() {
     return (
+      <>
       <SideNav expanded={this.state.isVisible}>
         <SideNav.Toggle
           onClick={() => {
@@ -51,8 +55,12 @@ class SideNavBar extends React.Component {
             </NavIcon>
             <NavText>Your Products</NavText>
           </NavItem>
+
+
         </SideNav.Nav>
       </SideNav>
+        <Button style={{position:'absolute',top:'2%',left:'90%',width:'80px',height:'30px',textAlign:'center',padding:'0',backgroundColor:'#d73333'}}>Log out</Button>
+      </>
     );
   }
 }

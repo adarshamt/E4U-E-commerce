@@ -7,9 +7,11 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 // import Row from 'react-bootstrap/Row';
 
-// import Sidebar from '../Componets/StoreOwerSidebar'
+import Sidebar from '../Componets/StoreOwerSidebar'
 
 import { MdOutlineArrowDropDownCircle } from 'react-icons/md'
+
+
 
 import axios from '../Services/AxiosInstance'
 
@@ -113,7 +115,7 @@ const StoreOwner = () => {
       <div className="storeOwner">
 
 
-        {/* <Sidebar/> */}
+        <Sidebar/>
       </div>
       
       <div className="display_div">

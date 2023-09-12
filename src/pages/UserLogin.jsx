@@ -4,7 +4,7 @@ import '../Styles/Login.css'
 import Navbar from '../Componets/Navbar'
 import {  useRef } from 'react'
 import axios from 'axios'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { login } from '../store/ecommerse_slice'
 
 import cookie from 'js-cookie'
@@ -23,7 +23,7 @@ import cookie from 'js-cookie'
    const nav = useNavigate()
    const dispatch =useDispatch()
 
-   const store_data = useSelector(state=>state.E4U_slice)
+  //  const store_data = useSelector(state=>state.E4U_slice)
 
     const loginHandler = async ()=>{
 
@@ -52,7 +52,7 @@ import cookie from 'js-cookie'
           
           dispatch(login())
 
-       console.log("response data email",store_data)
+       
        nav('/')
 
        

@@ -42,7 +42,7 @@
     
 }
 
-.grocery_div{
+#cards {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -57,7 +57,37 @@
    
 
 }
-.fruits_div{
+/* .fruits_div{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+    column-gap: 5%;
+    
+    margin: 2%;
+    
+
+    width: 100%;
+    flex-wrap: wrap;
+    
+}
+.Vegitables_div{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+    column-gap: 5%;
+    
+    margin: 2%;
+    
+
+    width: 100%;
+    flex-wrap: wrap;
+
+
+}
+ .Meat_div{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -68,9 +98,9 @@
 
     width: 100%;
     flex-wrap: wrap;
-    background-color: blueviolet;
+
 }
-/* .meat_div{
+ .Fish_div{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -95,4 +125,4 @@
     width: 100%;
     flex-wrap: wrap;
 
-} */
+}  */
