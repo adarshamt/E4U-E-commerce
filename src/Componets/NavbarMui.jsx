@@ -197,6 +197,7 @@ export default function Navbarmui() {
             <MenuIcon />
           </IconButton>
           <Typography
+          onClick={()=>nav('/')}
             variant="h6"
             noWrap
             component="div"
@@ -258,6 +259,24 @@ export default function Navbarmui() {
       {renderMobileMenu}
       {renderMenu}
     </Box>
+    <>
+    {/* *************************************** */}
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar style={{marginLeft:'5%'}} variant="dense">
+          {/* <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+            <MenuIcon />
+          </IconButton> */}
+          <Typography onClick={()=>nav('/products')} variant="h6" color="inherit" component="div">
+           Products
+          </Typography>
+          <Typography onClick={()=>nav('/stores')} style={{marginLeft:'5%'}} variant="h6" color="inherit" component="div">
+           Store
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </Box>
+    </>
     </>
   );
 }
