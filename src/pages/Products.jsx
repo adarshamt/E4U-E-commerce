@@ -5,11 +5,14 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 import { AiOutlineHeart } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 const Products = () => {
 
 
   const [data,setData] = useState([])
+
+  const nav = useNavigate()
 
 
   const getProducts=async()=>{
@@ -43,7 +46,7 @@ const Products = () => {
       <>
     <div className="Pdt_main_div">
     <div className="container">  
-     <div className="card">  
+     <div onClick={()=>nav(`/view/products/${itm._id}`)} className="card">  
            <AiOutlineHeart style={{position:'absolute',top:'5%',left:'5%',fontSize:'30px',color:'#19cf19'}}/>
        <div className="imgBx">  
          <img src={itm.images[0].url} alt="orange"/>  

@@ -16,8 +16,11 @@ import { MdOutlineArrowDropDownCircle } from 'react-icons/md'
 import axios from '../Services/AxiosInstance'
 
 import '../Styles/StoreOwner.css'
+import { useParams } from 'react-router-dom';
 const StoreOwner = () => {
+  const {id} =useParams()
 
+  console.log(" owner store email :",id)
   const [validated, setValidated] = useState(false);
 
   const [formdata,setFormData] = useState({
@@ -26,6 +29,7 @@ const StoreOwner = () => {
     discription:'',
     price:'',
     category:'',
+    id:id,
     images:[]
 
 

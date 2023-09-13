@@ -16,6 +16,7 @@ const Sidebar = () => {
   const dispatch = useDispatch()
     
    const data = useSelector(state=>state.E4U_slice)
+   console.log(" redux state :",data)
 
     const nav = useNavigate()
     

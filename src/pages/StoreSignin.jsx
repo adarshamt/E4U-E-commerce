@@ -28,13 +28,14 @@ const StoreSignin = () => {
 
     const respose = await axios.post('http://localhost:4743/store/login',body)
     
-    console.log("login request response token :",respose.data.token)
+    console.log("login request response token :",respose)
+    const remail =respose.data.email
     const token = respose.data.token
 
     if(token){
 
       Cookie.set("str_token",token)
-       link('/storeowner')
+       link(`/storeowner/${remail}`)
     }
 
      

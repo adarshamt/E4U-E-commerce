@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import '../Styles/Login.css'
 
-import Navbar from '../Componets/Navbar'
+import Navbar from '../Componets/NavbarMui'
 import {  useRef } from 'react'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'

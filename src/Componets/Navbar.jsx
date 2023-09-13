@@ -18,6 +18,7 @@ import {sidebar_show} from '../store/ecommerse_slice.jsx'
 import { FcApproval } from 'react-icons/fc';
 
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 
 import '../Styles/Navbar.css'
@@ -110,6 +111,11 @@ function Navbars() {
 
              </Button>
 
+             <Button style={{backgroundColor:'transparent',boxShadow:'none'}}>
+
+              <AiOutlineShoppingCart style={{fontSize:'20px'}}/>
+             </Button>
+
               </div>
               </Navbar.Collapse>
               
@@ -126,9 +132,9 @@ function Navbars() {
           {/* <Navbar.Brand href="#home">Navbar</Navbar.Brand> */}
           <Nav className="me-auto">
             <Nav.Link onClick={()=>nav('/products')}>All Products </Nav.Link>
-            <Nav.Link href="#features">Gerocery</Nav.Link>
+            {/* <Nav.Link href="#features">Gerocery</Nav.Link>
             <Nav.Link href="#features">vegitables</Nav.Link>
-            <Nav.Link href="#pricing">Meat</Nav.Link>
+            <Nav.Link href="#pricing">Meat</Nav.Link> */}
             <Nav.Link onClick={()=>nav('/stores')} href="#pricing">Stors</Nav.Link>
           </Nav>
         </Container>

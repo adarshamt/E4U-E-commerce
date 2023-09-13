@@ -7,6 +7,7 @@ import Store  from  "./pages/Shops"
 import StoreSignup from './pages/StoreSignup'
 import Products from './pages/Products'
 import StoreOwer from './pages/StoreOwner'
+import ViewProducts from "./pages/ViewProducts"
 
 
 
@@ -26,7 +27,8 @@ function App() {
       <Route path="/storesignup" element ={<StoreSignup/>}/> 
       <Route path="/products" element ={<Products/>}/> 
 
-      <Route path="/storeowner" element ={<StoreOwer/>}/> 
+      <Route path="/storeowner/:id" element ={<StoreOwer/>}/> 
+      <Route path="/view/products/:id" element ={<ViewProducts/>}/> 
 
     </Routes>
 
