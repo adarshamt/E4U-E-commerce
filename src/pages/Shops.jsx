@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 
-import Navbar from '../Componets/Navbar'
+import Navbar from '../Componets/NavbarMui'
 
 import '../Styles/Store.css'
 import axios from '../Services/AxiosInstance';

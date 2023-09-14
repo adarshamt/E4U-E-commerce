@@ -1,5 +1,5 @@
 import '../Styles/StoreSignin.css'
-import Navbars from '../Componets/Navbar'
+import Navbars from '../Componets/NavbarMui'
 import { useNavigate } from 'react-router-dom'
 import { useRef } from 'react'
 
@@ -18,19 +18,21 @@ const StoreSignin = () => {
     e.preventDefault()
 
     const email = ipref.current.email.value
-    console.log(" email :",email)
+    // console.log(" email :",email)
     const password = ipref.current.password.value
 
     const body = { email,password}
 
-    console.log(" body data :",body)
+    // console.log(" body data :",body)
 
 
     const respose = await axios.post('http://localhost:4743/store/login',body)
     
-    console.log("login request response token :",respose)
+    console.log("login request response  :",respose.data)
     const remail =respose.data.email
+    console.log(" r email :",remail)
     const token = respose.data.token
+    console.log(" token :",token)
 
     if(token){
 

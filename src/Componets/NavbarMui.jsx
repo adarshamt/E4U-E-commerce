@@ -16,12 +16,18 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import StoreIcon from '@mui/icons-material/Store';
+import Tooltip from '@mui/material/Tooltip';
+
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Cookie from 'js-cookie'
 import {sidebar_show} from '../store/ecommerse_slice.jsx'
 import Sidebar from './Sidebar.jsx';
 import { FcApproval } from 'react-icons/fc';
+
  
 
 const Search = styled('div')(({ theme }) => ({
@@ -99,6 +105,7 @@ export default function Navbarmui() {
     setAnchorEl(null);
     handleMobileMenuClose();
     nav('/login')
+   
   };
 
   const handleMobileMenuOpen = (event) => {
@@ -123,7 +130,7 @@ export default function Navbarmui() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-      {(!checkToken)? <span>login  </span>  : <span> Active <FcApproval/></span> }
+      {(!checkToken)? <span> login  </span>  : <span> Active <FcApproval/></span> }
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
@@ -148,7 +155,7 @@ export default function Navbarmui() {
     >
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
+          <Badge badgeContent={0} color="error">
             <MailIcon />
           </Badge>
         </IconButton>
@@ -160,7 +167,7 @@ export default function Navbarmui() {
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={17} color="error">
+          <Badge badgeContent={0} color="error">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -183,7 +190,7 @@ export default function Navbarmui() {
 
   return (<>
     { (data.sidebar == true)?<Sidebar/>:null}   
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, backgroundColor:'red'}}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -216,20 +223,36 @@ export default function Navbarmui() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
+
+            <Tooltip title='Store login' >
+            <IconButton onClick={()=>nav('/storelogin')} size="large" aria-label="show 4 new mails" color="inherit">
+              <Badge badgeContent={0} color="error">
+                <StoreIcon />
               </Badge>
             </IconButton>
+            </Tooltip>
+            <Tooltip title='Wish list' >
+            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+              <Badge badgeContent={0} color="error">
+                <FavoriteIcon  />
+              </Badge>
+            </IconButton>
+            </Tooltip>
+
+            <Tooltip title="Cart">
             <IconButton
+              onClick={()=>nav('/cart')}
               size="large"
-              aria-label="show 17 new notifications"
+              aria-label="show 0 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
+              <Badge badgeContent={0} color="error">
+                {/* <NotificationsIcon /> */}
+            <ShoppingCartIcon/>
               </Badge>
             </IconButton>
+           </Tooltip>
+           <Tooltip title=" user"></Tooltip>
             <IconButton
               size="large"
               edge="end"

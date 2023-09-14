@@ -8,6 +8,8 @@ import StoreSignup from './pages/StoreSignup'
 import Products from './pages/Products'
 import StoreOwer from './pages/StoreOwner'
 import ViewProducts from "./pages/ViewProducts"
+import Cart from "./pages/Cart"
+import BoxSx from "./Componets/muiTest"
 
 
 
@@ -29,6 +31,10 @@ function App() {
 
       <Route path="/storeowner/:id" element ={<StoreOwer/>}/> 
       <Route path="/view/products/:id" element ={<ViewProducts/>}/> 
+      <Route path="/cart" element ={<Cart/>}/> 
+      
+
+      <Route path="/muitest" element ={<BoxSx/>}/> 
 
     </Routes>
 

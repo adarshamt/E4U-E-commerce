@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import axios from '../Services/AxiosInstance';
 import { useParams } from 'react-router-dom';
 
-import Navbar from '../Componets/Navbar'
+import Navbar from '../Componets/NavbarMui'
 
 const ViewProducts = () => {
     const {id} =useParams()
