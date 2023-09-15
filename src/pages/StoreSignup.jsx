@@ -143,7 +143,7 @@ const ipref = useRef()
             style={{height:'20px',width:'200px',marginBottom:'10px'}}
           >
             <option value="Grocery">grocery</option>
-            <option value="vegitable">Vegitable</option>
+            <option value="Vegitables">Vegitables</option>
             <option value="Meat">Meat</option>
             <option value="Fruits">Fruits</option>
             <option value="Bakery">Bakery</option>

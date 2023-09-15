@@ -20,7 +20,7 @@ import { useParams } from 'react-router-dom';
 const StoreOwner = () => {
   const {id} =useParams()
 
-  console.log(" owner store email :",id)
+  console.log(" owner store user name :",id)
   const [validated, setValidated] = useState(false);
 
   const [formdata,setFormData] = useState({
@@ -29,7 +29,7 @@ const StoreOwner = () => {
     discription:'',
     price:'',
     category:'',
-    id:id,
+    store_id:id,
     images:[]
 
 
@@ -168,7 +168,7 @@ const StoreOwner = () => {
             placeholder='Category'
           >
             <option value="Grocery">grocery</option>
-            <option value="vegitable">Vegitable</option>
+            <option value="vegitable">Vegitables</option>
             <option value="Meat">Meat</option>
             <option value="Fruits">Fruits</option>
             <option value="Bakery">Bakery</option>

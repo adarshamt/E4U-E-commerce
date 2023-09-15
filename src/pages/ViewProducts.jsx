@@ -4,20 +4,26 @@ import Box from '@mui/joy/Box';
 import Button from '@mui/joy/Button';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
-import Typography from '@mui/joy/Typography';
+
 import Sheet from '@mui/joy/Sheet';
 import { useEffect, useState } from 'react';
 import axios from '../Services/AxiosInstance';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Navbar from '../Componets/NavbarMui'
+
+import { Breadcrumbs, Stack,Typography,Link } from '@mui/material';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 const ViewProducts = () => {
     const {id} =useParams()
     console.log(" id :",id)
-
+     
+    const nav =useNavigate()
     const[data,setData] = useState([])
     const [image,setImage]=useState('')
+    const [pname,setPname] = useState()
+    
     const getProducts=async()=>{
 
         try{
@@ -30,6 +36,9 @@ const ViewProducts = () => {
           console.log(" data use state :",response.data.data)
           setImage(response.data.image.url)
           console.log("image : ",image)
+          let productname=response.data.data.productName
+          // console.log("product name :",productname)
+          setPname(productname)
         }catch(error){
           console.log("error",error);
         }
@@ -41,6 +50,31 @@ const ViewProducts = () => {
         getProducts()
       },[])
 
+      function handleClick(event) {
+        event.preventDefault();
+        nav('/')
+      
+      }
+
+      const breadcrumbs = [
+        <Link underline="hover" key="1" color="inherit" href="/" onClick={handleClick}>
+          Home
+        </Link>,
+        <Link
+          underline="hover"
+          key="2"
+          color="inherit"
+          
+          onClick={()=>nav('/products')}
+        >
+          Products
+        </Link>,
+        <Typography key="3" color="text.primary">
+         {pname} 
+         
+        </Typography>,
+      ];
+
 
 
 
@@ -48,6 +82,20 @@ const ViewProducts = () => {
   return (
     <>
       <Navbar/>
+
+      <div style={{margin:'3%'}} className="BreadCrumbs">
+    
+    <Stack spacing={2}>
+       
+        <Breadcrumbs
+          separator={<NavigateNextIcon fontSize="small" />}
+          aria-label="breadcrumb"
+        >
+          {breadcrumbs}
+        </Breadcrumbs>
+      </Stack>
+  
+    </div>
 
     <div style={{display:'flex',height:'80vh', justifyContent:'center',alignItems:'center'}}   className="view_main_div">
     

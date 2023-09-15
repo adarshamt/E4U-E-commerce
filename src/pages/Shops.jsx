@@ -9,9 +9,17 @@ import '../Styles/Store.css'
 import axios from '../Services/AxiosInstance';
 import { useEffect, useState } from 'react';
 
+import Button from '@mui/material/Button';
+import { Breadcrumbs, Stack,Typography,Link } from '@mui/material';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { useNavigate } from 'react-router-dom';
+
+
 const Shops = () => {
 
   const [data,setData] = useState([])
+
+  const nav = useNavigate()
 
 
   const getStores=async()=>{
@@ -33,14 +41,51 @@ const Shops = () => {
     getStores()
   },[])
 
-  // console.log("store response data",data[0].image[0][0].url)
+  console.log("store response data",data)
 
-  //  const photo = data[0].image[0][0].url
+  function handleClick(event) {
+    event.preventDefault();
+    nav('/')
+  
+  }
 
-      // console.log("photo :",photo)
+  const breadcrumbs = [
+    // <Link underline="hover" key="1" color="inherit" href="/" onClick={handleClick}>
+    //   Home
+    // </Link>,
+    <Link
+      underline="hover"
+      key="2"
+      color="inherit"
+      href="/material-ui/getting-started/installation/"
+      onClick={handleClick}
+    >
+      Home
+    </Link>,
+    <Typography key="3" color="text.primary">
+      Store
+    </Typography>,
+  ];
+  
+
+  
+  
   return (
     <>
   <Navbar/>
+  <div style={{margin:'3%'}} className="BreadCrumbs">
+    
+  <Stack spacing={2}>
+     
+      <Breadcrumbs
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+      >
+        {breadcrumbs}
+      </Breadcrumbs>
+    </Stack>
+
+  </div>
     <div className='store_main_container'>
 
     
@@ -82,8 +127,10 @@ const Shops = () => {
                          <Card.Text>
              
                          </Card.Text>
-                           <button >Shop now</button>
-                       </Card.Body>
+                         <Button variant="contained" color="success">
+                          Buy now
+                          </Button>
+                          </Card.Body>
                    </Card>
              </>
           ))}
@@ -99,14 +146,16 @@ const Shops = () => {
                     <Card.Img variant="top" src={itm.image[0][0].url} />
                      <Card.Body>
                        <Card.Title>
-                         {itm.userName}
+                         {itm.storName}
                          
                          
                          </Card.Title>
                          <Card.Text>
              
                          </Card.Text>
-                           <button >Shop now</button>
+                         <Button variant="contained" color="success">
+                          Buy now
+                          </Button>
                        </Card.Body>
                    </Card>
              </>
@@ -130,7 +179,9 @@ const Shops = () => {
                          <Card.Text>
              
                          </Card.Text>
-                           <button >Shop now</button>
+                         <Button onClick={()=>nav(`/storeproducts/${itm.id}`)} variant="contained" color="success">
+                          Buy now
+                          </Button>
                        </Card.Body>
                    </Card>
              </>
@@ -154,7 +205,9 @@ const Shops = () => {
                          <Card.Text>
              
                          </Card.Text>
-                           <button >Shop now</button>
+                         <Button variant="contained" color="success">
+                          Buy now
+                          </Button>
                        </Card.Body>
                    </Card>
              </>
@@ -178,7 +231,9 @@ const Shops = () => {
                          <Card.Text>
              
                          </Card.Text>
-                           <button >Shop now</button>
+                         <Button onClick={()=>nav('/storeproducts')} variant="contained" color="success">
+                          Buy now
+                          </Button>
                        </Card.Body>
                    </Card>
              </>
