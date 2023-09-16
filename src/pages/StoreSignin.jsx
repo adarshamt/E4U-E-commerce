@@ -28,7 +28,7 @@ const StoreSignin = () => {
 
     const response = await axios.post('http://localhost:4743/store/login',body)
     
-    console.log("login request response  :",response.data.id)
+    
     
     const token = response.data.token
     console.log(" token :",token)

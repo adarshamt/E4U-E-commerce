@@ -67,6 +67,10 @@ const Shops = () => {
     </Typography>,
   ];
   
+   {data.filter((item) =>item.category=='Grocery').map((itm)=>(
+
+    console.log(" grocet id :",itm._id)
+  ) )}
 
   
   
@@ -173,13 +177,14 @@ const Shops = () => {
                      <Card.Body>
                        <Card.Title>
                          {itm.storName}
+                        
                          
                          
                          </Card.Title>
                          <Card.Text>
              
                          </Card.Text>
-                         <Button onClick={()=>nav(`/storeproducts/${itm.id}`)} variant="contained" color="success">
+                         <Button onClick={()=>nav(`/storeproducts/${itm._id}`)} variant="contained" color="success">
                           Buy now
                           </Button>
                        </Card.Body>

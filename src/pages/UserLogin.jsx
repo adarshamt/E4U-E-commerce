@@ -42,9 +42,13 @@ import cookie from 'js-cookie'
       try { 
         const response= await axios.post("http://localhost:4743/user/login",body)
         
-        console.log("response",response)
+        
+        console.log("login request response id :",response.data.user_id)
         const data = response
         const token = data.data.token
+        const userId = response.data.user_id
+        
+        cookie.set("userId",userId)
         console.log(data.data.token)
         if (token){
 
