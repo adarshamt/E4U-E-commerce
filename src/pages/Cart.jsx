@@ -20,17 +20,55 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Cookies from "js-cookie";
+import axios from "../Services/AxiosInstance";
+import { useEffect } from "react";
+
+
+
 
 const Cart = () => {
+ 
 
-    const Item = styled(Paper)(({ theme }) => ({
-        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-        ...theme.typography.body2,
-        padding: theme.spacing(1),
+    let products =[]
+    
+  const getCartItems = async ()=>{
+
+    try{
+
+    const user_id =Cookies.get("userId")
+
+
+    const response = await axios.get("http://localhost:4743/user/cart/products", {
+      params: {
+        id:user_id
+      },
+    })
         
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-      }));
+   products = response.data.products
+    console.log( "STATE products +++++++++++++ ",products)
+   
+
+  }
+  catch(err){
+
+    console.log("Get cart items error",err)
+  }
+}
+
+         useEffect(()=>{
+
+          getCartItems()
+        },[])
+
+    // const Item = styled(Paper)(({ theme }) => ({
+    //     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    //     ...theme.typography.body2,
+    //     padding: theme.spacing(1),
+        
+    //     textAlign: 'center',
+    //     color: theme.palette.text.secondary,
+    //   }));
 
   return (
     <>
@@ -39,28 +77,36 @@ const Cart = () => {
         <h2 style={{marginLeft:'6%'}}> My Cart</h2>
     <div className="cart_subdiv">
 
-
-        <Box sx={{ width: '50%', padding:'2%'}}>
+        <Box  sx={{ width: '50%', padding:'2%'}}>
              <Stack spacing={6}>
-           
-             <Item style={{display:'flex',justifyContent:'space-between',alignItems:'center'}} >
-             
-         <img style={{width:'70px',height:'90px'}} src="https://www.jiomart.com/images/product/original/491186625/good-life-almonds-500-g-product-images-o491186625-p491186625-0-202205180139.jpg?im=Resize=(420,420)" alt="" />
-         <Typography component={'span'} variant="h6"> Product name</Typography>
-          <RemoveCircleIcon/>
-         <TextField 
-         style={{width:'50px'}}
-         
-           value={2}
-         />
-         <AddCircleIcon/>
+   { products.map((itm,index)=>(
+    <>
+   
+    <img key={index} src={itm.images[0].url} alt="" />
 
-         <TextField style={{width:'100px'}} id="standard-basic" variant="standard" />
-             </Item>
-              {/* <Item>Item 3</Item> */}
+    <h2>{itm.productName}</h2>
+    </>
+           
+        //      <Item key={index} style={{display:'flex',justifyContent:'space-between',alignItems:'center'}} >
+             
+        //  <img style={{width:'70px',height:'90px'}} src={itm.images[0].url} alt=" no image found" />
+        //  <Typography component={'span'} variant="h6"> {itm.productName}</Typography>
+        //   <RemoveCircleIcon/>
+        //  <TextField 
+        //  style={{width:'50px'}}
+         
+        //    value={2}
+        //  />
+        //  <AddCircleIcon/>
+
+        //  <TextField style={{width:'100px'}} id="standard-basic" variant="standard" />
+        //      </Item>
+              
+))}
         </Stack>
     </Box>
     <Box   sx={{ width: '50%', padding:'2%'}}>
+
     
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 70 }} aria-label="spanning table">

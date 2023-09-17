@@ -13,7 +13,6 @@ import Navbar from "../Componets/NavbarMui";
 
 import { Breadcrumbs, Stack, Typography, Link } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import Cookies from "js-cookie";
 
 const ViewProducts = () => {
   const { id } = useParams();
@@ -92,6 +91,27 @@ const ViewProducts = () => {
 
 
   //  }
+
+  const addtoCartHandler = async ()=>{
+
+    const body ={
+      id
+    }
+
+    try{
+
+
+     const response = await axios.post('http://localhost:4743/user/addtocart',body)
+
+     console.log("---------------",response)
+    }
+
+    catch(err){
+
+      console.log(" add to cart axios error",err)
+    }
+
+  }
 
   function handleClick(event) {
     event.preventDefault();
@@ -269,7 +289,7 @@ const ViewProducts = () => {
               <Box
                 sx={{ display: "flex", gap: 1.5, "& > button": { flex: 1 } }}
               >
-                <Button variant="outlined" color="neutral">
+                <Button onClick={addtoCartHandler} variant="outlined" color="neutral">
                   Add to cart
                 </Button>
                 <Button variant="solid" color="primary">
