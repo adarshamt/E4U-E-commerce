@@ -77,13 +77,14 @@ const Shops = () => {
   return (
     <>
   <Navbar/>
-  <div style={{margin:'3%'}} className="BreadCrumbs">
+  <div style={{margin:'2%'}} className="BreadCrumbs">
     
   <Stack spacing={2}>
      
       <Breadcrumbs
-        separator={<NavigateNextIcon fontSize="small" />}
+        separator={<NavigateNextIcon  fontSize="small" />}
         aria-label="breadcrumb"
+        
       >
         {breadcrumbs}
       </Breadcrumbs>
@@ -93,7 +94,7 @@ const Shops = () => {
     <div className='store_main_container'>
 
     
-  <div className='sidebar_main'>
+  <div  className='sidebar_main'>
 
     <h3>category</h3>
 

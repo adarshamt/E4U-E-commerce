@@ -33,7 +33,7 @@ const Sidebar = () => {
         
 
      }
-  const categories = ['My Orders', 'Wishlist', 'Books', 'Beauty'];
+  const categories = ['My Orders', 'Wishlist', 'Books', 'Beauty','grocery'];
 
   return (
     <div className='main_sidebar'>

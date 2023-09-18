@@ -24,13 +24,18 @@ import Cookies from "js-cookie";
 import axios from "../Services/AxiosInstance";
 import { useEffect } from "react";
 
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+
 
 
 
 const Cart = () => {
  
 
-    let products =[]
+    // let products;
+    const [products, setProducts] = React.useState([])
+    
+    
     
   const getCartItems = async ()=>{
 
@@ -45,10 +50,10 @@ const Cart = () => {
       },
     })
         
-   products = response.data.products
-    console.log( "STATE products +++++++++++++ ",products)
+   setProducts([...response.data.products])
+   console.log("hy");
    
-
+   
   }
   catch(err){
 
@@ -56,19 +61,70 @@ const Cart = () => {
   }
 }
 
-         useEffect(()=>{
 
-          getCartItems()
-        },[])
 
-    // const Item = styled(Paper)(({ theme }) => ({
-    //     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    //     ...theme.typography.body2,
-    //     padding: theme.spacing(1),
+const deletItemHandler =  async(id)=>{
+
+  console.log("**************** product id",id)
+  const user_id =Cookies.get('userId')
+
+  const body = {
+    user_id,
+    product_id:id
+    
+
+  }
+
+  try {
+      
+    const response = await axios.post('http://localhost:4743/user/removefromcart',body)
+    
+
+    console.log("************* remove item cart response**** ",response)
+
+    // const updatedArray = response.data.cart
+    getCartItems()
+    
+
+    // const status_message = response.data.message
+    // console.log(status_message,"*****************************")
+
+    // window.alert(status_message)
+
+
+    
+
+  } catch (error) {
+    console.log(" addto cart axios error",error)
+    
+  }
+
+
+
+}
+
+
+useEffect(()=>{
+
+  
+    getCartItems();
+    // Set the flag to false after fetching data
+    
+  
+  
+ },[])
+
+ console.log(products);
+  console.log(products.length);
+
+    const Item = styled(Paper)(({ theme }) => ({
+        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+        ...theme.typography.body2,
+        padding: theme.spacing(1),
         
-    //     textAlign: 'center',
-    //     color: theme.palette.text.secondary,
-    //   }));
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+      }));
 
   return (
     <>
@@ -77,34 +133,49 @@ const Cart = () => {
         <h2 style={{marginLeft:'6%'}}> My Cart</h2>
     <div className="cart_subdiv">
 
-        <Box  sx={{ width: '50%', padding:'2%'}}>
+        <Box className=" map component"  sx={{  width: '50%', padding:'2%'}}>
              <Stack spacing={6}>
-   { products.map((itm,index)=>(
+     {products && <>{products.map((itm,index)=>{
+      console.log(" ****************itm",itm)
+
+      return(
     <>
-   
-    <img key={index} src={itm.images[0].url} alt="" />
-
-    <h2>{itm.productName}</h2>
-    </>
-           
-        //      <Item key={index} style={{display:'flex',justifyContent:'space-between',alignItems:'center'}} >
+    {(products.length>0) ?
+    
+             <Item key={index}  style={{display:'flex',justifyContent:'space-between',alignItems:'center'}} >
              
-        //  <img style={{width:'70px',height:'90px'}} src={itm.images[0].url} alt=" no image found" />
-        //  <Typography component={'span'} variant="h6"> {itm.productName}</Typography>
-        //   <RemoveCircleIcon/>
-        //  <TextField 
-        //  style={{width:'50px'}}
+         <img style={{width:'70px',height:'90px'}} src={itm.images[0].url} alt=" no image found" />
+         <Typography component={'span'} variant="h6"> {itm.productName}</Typography>
+          <RemoveCircleIcon/>
+         <TextField 
+         style={{width:'50px'}}
          
-        //    value={2}
-        //  />
-        //  <AddCircleIcon/>
+           value={1}
+         />
+         <AddCircleIcon/>
 
-        //  <TextField style={{width:'100px'}} id="standard-basic" variant="standard" />
-        //      </Item>
+         <TextField value={itm.price} style={{width:'100px'}} id="standard-basic" variant="standard" />
+
+         <HighlightOffIcon onClick={()=>deletItemHandler(itm._id)} />
+             </Item>
+             :<Item>
+              <TextField 
+         style={{width:'500px'}}
+         
+           value={54545454}
+         />
+
+               <img style={{width:'70px',height:'90px'}}src="https://mir-s3-cdn-cf.behance.net/projects/404/95974e121862329.Y3JvcCw5MjIsNzIxLDAsMTM5.png" />
+             </Item> 
+    }
+     </>
+     )
+      })} </>}
+            
               
-))}
         </Stack>
     </Box>
+    
     <Box   sx={{ width: '50%', padding:'2%'}}>
 
     
