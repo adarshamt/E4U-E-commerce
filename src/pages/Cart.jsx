@@ -25,6 +25,7 @@ import axios from "../Services/AxiosInstance";
 import { useEffect } from "react";
 
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import Button from '@mui/material/Button';
 
 
 
@@ -34,14 +35,15 @@ const Cart = () => {
 
     // let products;
     const [products, setProducts] = React.useState([])
+    const[carttotal,setCartTotal] =React.useState('')
     
+    const user_id =Cookies.get("userId")
     
     
   const getCartItems = async ()=>{
 
     try{
 
-    const user_id =Cookies.get("userId")
 
 
     const response = await axios.get("http://localhost:4743/user/cart/products", {
@@ -51,7 +53,8 @@ const Cart = () => {
     })
         
    setProducts([...response.data.products])
-   console.log("hy");
+   setCartTotal(response.data.total)
+   console.log("response ------------ total",response.data.total );
    
    
   }
@@ -103,8 +106,36 @@ const deletItemHandler =  async(id)=>{
 
 }
 
+ const makePayment = async()=>{
+
+
+  
+
+  try {
+
+    const body ={
+      
+      user_id
+    }
+
+    const response = await axios.post('http://localhost:4743/user/makepayment',body)
+
+    console.log(response.data.url,"***************** payment response ******************")
+
+    window.open(response.data.url, '_blank');
+    
+  } catch (error) {
+
+    console.log(" payment error :",error)
+    
+  }
+
+ }
+
 
 useEffect(()=>{
+
+
 
   
     getCartItems();
@@ -193,30 +224,32 @@ useEffect(()=>{
       
             <TableRow >
               <TableCell>MRP Total</TableCell>
-              <TableCell align="right">0000</TableCell>
+              <TableCell align="right">₹ {carttotal}</TableCell>
       
             </TableRow>
             <TableRow >
               <TableCell>Discount</TableCell>
-              <TableCell align="right">0000</TableCell>
+              <TableCell align="right">₹ 0000</TableCell>
       
             </TableRow>
             <TableRow >
               <TableCell>Delivery Fee</TableCell>
-              <TableCell align="right">0000</TableCell>
+              <TableCell align="right">₹ 40</TableCell>
       
             </TableRow>
       
           <TableRow>
             
             <TableCell >total</TableCell>
-            <TableCell align="right">25144</TableCell>
+            <TableCell align="right"> ₹ {carttotal+40}</TableCell>
           </TableRow>
+
          
         </TableBody>
       </Table>
     </TableContainer>
 
+          <Button onClick={()=> makePayment} sx={{width:'90%',margin:'5% 0 0 5%',height:'12%',}} variant="outlined">Place order</Button>
     </Box>
        </div>
 

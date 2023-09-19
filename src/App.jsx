@@ -11,6 +11,7 @@ import ViewProducts from "./pages/ViewProducts"
 import Cart from "./pages/Cart"
 import BoxSx from "./Componets/muiTest"
 import StoreProducts from "./pages/StoreProducts"
+import Checkout from "./pages/Checkout"
 
 
 
@@ -34,6 +35,7 @@ function App() {
       <Route path="/view/products/:id" element ={<ViewProducts/>}/> 
       <Route path="/cart" element ={<Cart/>}/> 
       <Route path="/storeproducts/:id" element ={<StoreProducts/>}/> 
+      <Route path="/user/checkout" element ={<Checkout/>}/> 
       
 
       <Route path="/muitest" element ={<BoxSx/>}/> 
