@@ -14,7 +14,7 @@
     width: 100vw;
   }
    */
-  form {
+  /* form {
     width: 30vw;
     min-width: 500px;
     align-self: center;
@@ -35,7 +35,7 @@
   
   #payment-element {
     margin-bottom: 24px;
-  }
+  } */
   
   /* Buttons and links */
   /* button {
@@ -54,7 +54,7 @@
     width: 100%;
   } */
   
-  button:hover {
+  /* button:hover {
     filter: contrast(115%);
   }
   
@@ -62,9 +62,9 @@
     opacity: 0.5;
     cursor: default;
   }
-  
+   */
   /* spinner/processing state, errors */
-  .spinner,
+  /* .spinner,
   .spinner:before,
   .spinner:after {
     border-radius: 50%;
@@ -132,6 +132,6 @@
       width: 80vw;
       min-width: initial;
     }
-  }
+  } */
   
   

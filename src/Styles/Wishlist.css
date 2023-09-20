@@ -1,0 +1,8 @@
+.err-btton:hover{
+    background-color: rgb(255, 0, 0);
+    color: white;
+}
+.add-btton:hover{
+    background-color: green;
+    color: white;
+}

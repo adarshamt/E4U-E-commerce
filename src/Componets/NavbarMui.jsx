@@ -232,7 +232,7 @@ export default function Navbarmui() {
             </IconButton>
             </Tooltip>
             <Tooltip title='Wish list' >
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            <IconButton onClick={()=>nav('/wishlist')} size="large" aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={0} color="error">
                 <FavoriteIcon  />
               </Badge>

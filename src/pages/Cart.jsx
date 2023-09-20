@@ -35,10 +35,13 @@ const Cart = () => {
 
     // let products;
     const [products, setProducts] = React.useState([])
-    const[carttotal,setCartTotal] =React.useState('')
+    const[carttotal,setCartTotal] =React.useState(0)
+
+    
     
     const user_id =Cookies.get("userId")
-    
+
+    const delfee = (10/100)*carttotal
     
   const getCartItems = async ()=>{
 
@@ -52,9 +55,16 @@ const Cart = () => {
       },
     })
         
-   setProducts([...response.data.products])
+   setProducts(response.data.products)
+   console.log(" response products ------",response.data)
    setCartTotal(response.data.total)
-   console.log("response ------------ total",response.data.total );
+
+
+
+   console.log(" cart total ----------------",carttotal)
+  
+   
+   
    
    
   }
@@ -136,17 +146,11 @@ const deletItemHandler =  async(id)=>{
 useEffect(()=>{
 
 
-
-  
     getCartItems();
-    // Set the flag to false after fetching data
     
-  
-  
  },[])
 
- console.log(products);
-  console.log(products.length);
+ 
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -234,14 +238,14 @@ useEffect(()=>{
             </TableRow>
             <TableRow >
               <TableCell>Delivery Fee</TableCell>
-              <TableCell align="right">₹ 40</TableCell>
+              <TableCell align="right">₹ {delfee || 0}</TableCell>
       
             </TableRow>
       
           <TableRow>
             
             <TableCell >total</TableCell>
-            <TableCell align="right"> ₹ {carttotal+40}</TableCell>
+            <TableCell align="right"> ₹ {carttotal + delfee || 0} </TableCell>
           </TableRow>
 
          

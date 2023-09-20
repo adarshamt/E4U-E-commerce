@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { Breadcrumbs, Stack,Typography,Link } from '@mui/material';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { Cookie } from '@mui/icons-material';
+import Cookies from 'js-cookie';
 
 const Products = () => {
 
@@ -45,6 +47,28 @@ const Products = () => {
     nav('/')
   
   }
+
+   const addtowishlist = async(id)=>{
+    try {
+      const user_id =Cookies.get("userId")
+       const product_id =id
+      const body ={
+        user_id,
+        product_id
+
+      }
+
+      const response  = await axios.post('http://localhost:4743/user/addtowishlist',body)
+
+      console.log(" add to wishlist response------------", response)
+      
+    } catch (error) {
+
+      console.log(" add to wishlist error", error)
+      
+    }
+
+   }
 
   const breadcrumbs = [
     // <Link underline="hover" key="1" color="inherit" href="/" onClick={handleClick}>
@@ -89,9 +113,9 @@ const Products = () => {
       <>
     <div  className="Pdt_main_div">
     <div key={itm._id} className="container"> 
-     <div  onClick={()=>nav(`/view/products/${itm._id}`)} className="card">  
-           <AiOutlineHeart style={{position:'absolute',top:'5%',left:'5%',fontSize:'30px',color:'#19cf19'}}/>
-       <div  className="imgBx">  
+     <div   className="card">  
+           <AiOutlineHeart onClick={()=>addtowishlist(itm._id)} style={{position:'absolute',top:'5%',left:'5%',fontSize:'30px',color:'#19cf19'}}/>
+       <div onClick={()=>nav(`/view/products/${itm._id}`)}  className="imgBx">  
          <img src={itm.images[0]?.url} alt="orange"/>  
        </div>  
        <div  className="contentBx">  
