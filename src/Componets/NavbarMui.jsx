@@ -191,7 +191,7 @@ export default function Navbarmui() {
   return (<>
     { (data.sidebar == true)?<Sidebar/>:null}   
     <Box sx={{ flexGrow: 1, backgroundColor:'red'}}>
-      <AppBar position="static">
+      <AppBar sx={{backgroundColor:'#419197'}} position="static">
         <Toolbar>
           <IconButton
           onClick={sidebarHandler}
@@ -285,7 +285,7 @@ export default function Navbarmui() {
     <>
     {/* *************************************** */}
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar sx={{backgroundColor:'#12486B'}} position="static">
         <Toolbar style={{marginLeft:'5%'}} variant="dense">
           {/* <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             <MenuIcon />

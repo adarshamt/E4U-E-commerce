@@ -8,6 +8,8 @@ import '../Styles/Wishlist.css'
 import axios from '../Services/AxiosInstance'
 import Cookies from "js-cookie";
 import { useEffect } from "react";
+import { useState } from "react";
+import Products from "./Products";
 
 // import ClearIcon from "@mui/icons-material/Clear";
 
@@ -22,6 +24,10 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function wishlist() {
 
   const user_id = Cookies.get("userId")
+
+  const [product,setProduct]=useState([])
+
+  console.log(" +++++++++++++++++++++ user id +++++++++++++",user_id)
   const fechDataHandler = async()=>{
 
      try {
@@ -31,7 +37,10 @@ export default function wishlist() {
           params: { user_id },
         })
 
-        console.log("---------response",response)
+        console.log("---------response products ------------",response.data.products)
+
+        setProduct(response.data.products)
+
       
      } catch (error) {
 
@@ -42,11 +51,79 @@ export default function wishlist() {
 
   }
 
+  const removeFromWishlist =async(id)=>{
+
+
+    try {
+      
+
+      const body ={
+
+        user_id,
+        product_id:id
+      }
+    
+      const response = await axios.post("http://localhost:4743/user/wishlistremoveitem",body)
+
+      console.log(" response------------------",response)
+
+      fechDataHandler()
+
+      
+    } catch (error) {
+
+      console.log("error :",error)
+      
+    }
+
+
+  }
+
+
+  const addToCart = async(id)=>{
+
+    if(! user_id){
+
+      window.alert(" Please log in to add to cart")
+      nav('/login')
+     }
+     
+  
+      const body = {
+        user_id,
+        product_id:id
+  
+      }
+      
+  
+      try {
+        
+        const response = await axios.post('http://localhost:4743/user/addtocart',body)
+  
+        console.log("************* add to cart response**** ",response.data.status)
+  
+        const status_message = response.data.message
+        console.log(status_message,"*****************************")
+  
+        window.alert(status_message)
+  
+  
+        
+  
+      } catch (error) {
+        console.log(" addto cart axios error",error)
+        
+      }
+
+
+
+  }
+
   useEffect(()=>{
  
     fechDataHandler()
 
-  },[user_id,fechDataHandler()])
+  },[])
  
 
 
@@ -66,7 +143,7 @@ export default function wishlist() {
         className="wish_main_div"
       >
        
-        <Stack
+        <Stack 
           sx={{
             width: "60%",
             display: "flex",
@@ -79,7 +156,9 @@ export default function wishlist() {
             <Typography sx={{fontSize:'25px',marginBottom:'10rem'}}>
                 Wish list
             </Typography>
-          <Item
+        {product.map((itm,index)=>(
+
+          <Item key={index}
             sx={{
               width: "100%",
               display: "flex",
@@ -89,25 +168,27 @@ export default function wishlist() {
           >
             <img
               style={{ width: "6rem", height: "6rem" }}
-              src="https://www.jiomart.com/images/product/original/590000165/brinjal-purple-striped-500-g-product-images-o590000165-p590000165-0-202203151524.jpg?im=Resize=(360,360)"
+              src={itm.images[0].url}
               alt=""
             />
-            <Typography>Product name</Typography>
+            <Typography>{itm.productName}</Typography>
           
           
             <Box sx={{display:'flex',justifyContent:'space-between', width:'15rem'}}>
 
-            <Button className="err-btton" color="error" variant="outlined">
+            <Button onClick={()=>removeFromWishlist(itm._id)} className="err-btton" color="error" variant="outlined">
                 remove
             </Button>
-            <Button className="add-btton" color='success' variant="outlined">
+            <Button onClick={()=>addToCart(itm._id)} className="add-btton" color='success' variant="outlined">
                 Add To cart
             </Button>
             </Box>
 
             
           </Item>
+            ))}
         </Stack>
+
       </div>
     </>
   );

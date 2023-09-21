@@ -1,74 +1,65 @@
-import '../Styles/Products.css'
+import "../Styles/Products.css";
 
-import Navbar from '../Componets/NavbarMui'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import Navbar from "../Componets/NavbarMui";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-import { AiOutlineHeart } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
+import { AiOutlineHeart } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
-import { Breadcrumbs, Stack,Typography,Link } from '@mui/material';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { Cookie } from '@mui/icons-material';
-import Cookies from 'js-cookie';
+import { Breadcrumbs, Stack, Typography, Link } from "@mui/material";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { Cookie } from "@mui/icons-material";
+import Cookies from "js-cookie";
 
 const Products = () => {
-
-
-  const [data,setData] = useState([])
+  const [data, setData] = useState([]);
   // const [image,setImage]=useState('')
 
-  const nav = useNavigate()
+  const nav = useNavigate();
 
+  const getProducts = async () => {
+    try {
+      const response = await axios.get("http://localhost:4743/products");
 
-  const getProducts=async()=>{
-    try{
-      const response =     await axios.get('http://localhost:4743/products')
-      
-      setData(response.data.data)
-      
-      
-     
-    }catch(error){
-      console.log("error",error);
+      setData(response.data.data);
+    } catch (error) {
+      console.log("error", error);
     }
-  }
-  useEffect(()=>{
+  };
+  useEffect(() => {
+    getProducts();
+  }, []);
 
- 
-
-    getProducts()
-  },[])
-  
-  console.log("data response ",data)
+  console.log("data response ", data);
 
   function handleClick(event) {
     event.preventDefault();
-    nav('/')
-  
+    nav("/");
   }
 
-   const addtowishlist = async(id)=>{
+  const addtowishlist = async (id) => {
+    console.log("************* add to wishlist handler*********")
     try {
-      const user_id =Cookies.get("userId")
-       const product_id =id
-      const body ={
+      const user_id = Cookies.get("userId");
+      const product_id = id;
+      const body = {
         user_id,
-        product_id
+        product_id,
+      };
 
-      }
+      console.log("-------------- body-------------",body)
 
-      const response  = await axios.post('http://localhost:4743/user/addtowishlist',body)
+      const response = await axios.post(
+        "http://localhost:4743/user/addtowishlist",
+        body
+      );
 
-      console.log(" add to wishlist response------------", response)
-      
+      console.log(" add to wishlist response------------", response);
     } catch (error) {
-
-      console.log(" add to wishlist error", error)
-      
+      console.log(" add to wishlist error", error);
     }
-
-   }
+  };
 
   const breadcrumbs = [
     // <Link underline="hover" key="1" color="inherit" href="/" onClick={handleClick}>
@@ -88,59 +79,77 @@ const Products = () => {
     </Typography>,
   ];
 
-
   return (
     <>
-    <Navbar/>
-    <div style={{margin:'3%'}} className="BreadCrumbs">
-    
-    <Stack spacing={2}>
-       
-        <Breadcrumbs
-          separator={<NavigateNextIcon fontSize="small" />}
-          aria-label="breadcrumb"
-        >
-          {breadcrumbs}
-        </Breadcrumbs>
-      </Stack>
-  
-    </div>
-          <h3 style={{margin:'5% 0 2% 12%',fontFamily: 'Oswald'}}> products</h3>
+      <Navbar />
+      <div style={{ margin: "3%" }} className="BreadCrumbs">
+        <Stack spacing={2}>
+          <Breadcrumbs
+            separator={<NavigateNextIcon fontSize="small" />}
+            aria-label="breadcrumb"
+          >
+            {breadcrumbs}
+          </Breadcrumbs>
+        </Stack>
+      </div>
+      <h3 style={{ margin: "5% 0 2% 12%", fontFamily: "Oswald" }}> products</h3>
       <div className="supr_main_div_pdt">
-
-   
-    {data.map((itm)=>( 
-      <>
-    <div  className="Pdt_main_div">
-    <div key={itm._id} className="container"> 
-     <div   className="card">  
-           <AiOutlineHeart onClick={()=>addtowishlist(itm._id)} style={{position:'absolute',top:'5%',left:'5%',fontSize:'30px',color:'#19cf19'}}/>
-       <div onClick={()=>nav(`/view/products/${itm._id}`)}  className="imgBx">  
-         <img src={itm.images[0]?.url} alt="orange"/>  
-       </div>  
-       <div  className="contentBx">  
-         <h2 >{itm.productName}</h2>  
-         {/* <div className="size">  
+        {data.map((itm) => (
+          <>
+            <div className="Pdt_main_div">
+              <div key={itm._id} className="container">
+                <div className="card">
+                  <div
+                    style={{
+                     
+                      width: "2rem",
+                      zIndex: "10000",
+                      height: "2rem",
+                      position: "absolute",
+                      top: "5%",
+                      left: "5%",
+                      fontSize: "30px",
+                      color: "red",
+                    }}
+                    onClick={() => addtowishlist(itm._id)}
+                  >
+                    <AiOutlineHeart
+                      style={{
+                        position: "absolute",
+                        top: "5%",
+                        left: "5%",
+                        fontSize: "30px",
+                        color: "red",
+                      }}
+                    />
+                  </div>
+                  <div
+                    onClick={() => nav(`/view/products/${itm._id}`)}
+                    className="imgBx"
+                  >
+                    <img src={itm.images[0]?.url} alt="orange" />
+                  </div>
+                  <div className="contentBx">
+                    <h2>{itm.productName}</h2>
+                    {/* <div className="size">  
            <h3>1 kg: 100</h3>  
            <span>7</span>  
            <span>8</span>  
            <span>9</span>  
            <span>10</span>  
           </div>   */}
-           <h4 style={{color:'#002bff73'}}>Price  : ₹{itm.price}</h4>  
-          
-         <a href="#">Buy Now</a>  
-       </div>  
-     </div>  
-   </div>  
-    
-   </div>
+                    <h4 style={{ color: "#002bff73" }}>Price : ₹{itm.price}</h4>
 
-   </>
-   ))}
-    </div>
+                    <a href="#">Buy Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        ))}
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;

@@ -12,6 +12,7 @@ import Cart from "./pages/Cart"
 import BoxSx from "./Componets/muiTest"
 import StoreProducts from "./pages/StoreProducts"
 import Wishlist from "./pages/Wishlist"
+import Adminpanel from "./pages/Admin"
 // import Checkout from "./pages/Checkout"
 
 
@@ -37,6 +38,7 @@ function App() {
       <Route path="/cart" element ={<Cart/>}/> 
       <Route path="/wishlist" element ={<Wishlist/>}/> 
       <Route path="/storeproducts/:id" element ={<StoreProducts/>}/> 
+      <Route path="/admin" element ={<Adminpanel/>}/> 
       {/* <Route path="/user/checkout" element ={<Checkout/>}/>  */}
       
 
