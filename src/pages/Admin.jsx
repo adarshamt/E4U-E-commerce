@@ -22,11 +22,16 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
 
 
 import  axios from '../Services/AxiosInstance.jsx'
 import { useEffect } from 'react';
 import { useState } from 'react';
+
+import '../Styles/Admin.css'
+import { Store } from '@mui/icons-material';
+
 
 const pages = ['User', 'store', 'Products'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -34,6 +39,14 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 function Adminpanel() {
 
     const [user,setuser] = useState([])
+    const [stores,setstores] = useState([])
+    const [products,setProducts] = useState([])
+
+     const [userbutton, setUserButton] = useState(false);
+     const [storebutton, setStoreButton] = useState(false);
+     const [productbutton, setProdcutButton] = useState(false);
+
+
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -51,6 +64,12 @@ function Adminpanel() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+   const buttenHandler = () => {
+    setUserButton(!userbutton);
+
+    console.log("----------------- user butten in handler --------------",userbutton)
   };
 
 //  **************************** table *****************************
@@ -114,10 +133,131 @@ function Adminpanel() {
         
     }
   }
+
+   const userDEleteHandler = async (id)=>{
+
+    try {
+
+      
+
+      const body ={
+        
+        user_id : id,
+
+      }
+
+      const response = await axios.post("http://localhost:4743/user/delteleuser",body)
+
+      console.log("------------------- response data",response.data.status)
+
+      const status = response.data.status
+      if( status == 200){
+
+        fetchUser()
+      }
+      
+    } catch (error) {
+      console.log(" error ",error)
+      
+    }
+   }
+  const fetchStore = async()=>{
+
+    try {
+        
+        const response = await axios.get("http://localhost:4743/store/allstores")
+
+        console.log(" response ----------------", response)
+
+
+        const stores = response.data.Users
+        console.log("******************** users ",stores)
+        setuser(stores)
+    } catch (error) {
+
+        console.log("error ",error)
+        
+    }
+  }
+
+   const StoreDEleteHandler = async (id)=>{
+
+    try {
+
+      
+
+      const body ={
+        
+        store_id : id,
+
+      }
+
+      const response = await axios.post("http://localhost:4743/stores/list",body)
+
+      console.log("------------------- response data",response.data.status)
+
+      const status = response.data.status
+      if( status == 200){
+
+        fetchStore()
+      }
+      
+    } catch (error) {
+      console.log(" error ",error)
+      
+    }
+   }
+  const fetchProduct = async()=>{
+
+    try {
+        
+        const response = await axios.get("http://localhost:4743/store/allstores")
+
+        console.log(" response ----------------", response)
+
+
+        const products = response.data.Users
+        console.log("******************** users ",products)
+        setuser(products)
+    } catch (error) {
+
+        console.log("error ",error)
+        
+    }
+  }
+
+   const productDEleteHandler = async (id)=>{
+
+    try {
+
+      
+
+      const body ={
+        
+        product_id : id,
+
+      }
+
+      const response = await axios.post("http://localhost:4743/products",body)
+
+      console.log("------------------- response data",response.data.status)
+
+      const status = response.data.status
+      if( status == 200){
+
+        fetchProduct()
+      }
+      
+    } catch (error) {
+      console.log(" error ",error)
+      
+    }
+   }
   useEffect(()=>{
-
+    fetchProduct()
    fetchUser()
-
+   fetchStore()
+   
   },[])
 
   return (
@@ -175,7 +315,7 @@ function Adminpanel() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography onClick={()=>buttenHandler()} textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -200,15 +340,29 @@ function Adminpanel() {
             Admin
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {/* {pages.map((page) => ( */}
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                // key={page}
+                onClick={buttenHandler}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                User
               </Button>
-            ))}
+              <Button
+                // key={page}
+                onClick={buttenHandler}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Store
+              </Button>
+              <Button
+                // key={page}
+                onClick={buttenHandler}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Products
+              </Button>
+            {/* ))} */}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -235,7 +389,7 @@ function Adminpanel() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography onClick={()=>buttenHandler} textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -243,21 +397,39 @@ function Adminpanel() {
         </Toolbar>
       </Container>
     </AppBar>
+
+    {/* ******************************maindisplay *************************** */}
+
+    {/* <Box  sx={{ width:'100%',height: '100vh', overflowY: 'auto',backgroundColor:"#D0E7D2",display:'flex',alignItems:'center',
+    
+    justifyContent:'center'}}>
+
+      <img src="https://www.imf.org/wp-content/uploads/2017/08/BLOG-1024x600-image-of-charts-TOP5Charts-iStock-615507200.jpg" alt="" />
+
+     
+
+
+    </Box> */}
+  
     {/* ********************************************************************************************************************** */}
 
-    <Box sx={{ width:'100%',height:'auto',backgroundColor:"#D0E7D2",display:'flex',alignItems:'center',
+
+   {userbutton &&
+  
+    <Box className="user-container"  sx={{ width:'100%',height: '100vh', overflowY: 'auto',backgroundColor:"#D0E7D2",display:'flex',alignItems:'start',
     
-    justifyContent:'center',padding:'5%',position:'static'}}>
+    justifyContent:'center',padding:'5%',position:'static'}}   >
 
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 , }} aria-label="customized table">
-        <TableHead sx={{backgroundColor:'#D0E7D2'}}  >
+      <Table sx={{ minWidth: 700  }} aria-label="customized table">
+        <TableHead   >
           <TableRow>
             <StyledTableCell>name</StyledTableCell>
-            <StyledTableCell align="right">Email</StyledTableCell>
-            <StyledTableCell align="right">Username</StyledTableCell>
-            <StyledTableCell align="right">Phone Number</StyledTableCell>
-            <StyledTableCell align="right"></StyledTableCell>
+            <StyledTableCell align="center">Name</StyledTableCell>
+            <StyledTableCell align="center">Email</StyledTableCell>
+            <StyledTableCell align="center">Username</StyledTableCell>
+            <StyledTableCell align="center">Phone Number</StyledTableCell>
+            <StyledTableCell align="center">Action</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -270,6 +442,15 @@ function Adminpanel() {
               <StyledTableCell align="right">{row.email}</StyledTableCell>
               <StyledTableCell align="right">{row.username}</StyledTableCell>
               <StyledTableCell align="right">{row.phoneNumber}</StyledTableCell>
+              <StyledTableCell align="right">
+               <Stack sx={{display:'flex',justifyContent:'center'}} spacing={3} direction="row">
+     
+      {/* <Button sx={{width:'3rem',fontSize:'.5rem',fontWeight:'300'}} variant="outlined">Block user</Button> */}
+      <Button onClick={()=>userDEleteHandler(row._id)} className='dlt_btn' sx={{width:'8rem',height:'2rem',
+           fontSize:'.7rem',fontWeight:'800', fontFamily:" 'Oswald', sans-serif"}} variant="outlined">Delete User</Button>
+    </Stack>
+
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
@@ -278,6 +459,108 @@ function Adminpanel() {
 
 
     </Box>
+
+  }
+    {/* **********************************************   Store ************************************************************************ */}
+
+
+   {storebutton &&
+  
+    <Box className="store-container" sx={{ width:'100%',height: '100vh', overflowY: 'auto',backgroundColor:"#D0E7D2",display:'flex',alignItems:'start',
+    
+    justifyContent:'center',padding:'5%',position:'static'}}  >
+
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 700  }} aria-label="customized table">
+        <TableHead   >
+          <TableRow>
+            <StyledTableCell>name</StyledTableCell>
+            <StyledTableCell align="center">Name</StyledTableCell>
+            <StyledTableCell align="center">Email</StyledTableCell>
+            <StyledTableCell align="center">Username</StyledTableCell>
+            <StyledTableCell align="center">Phone Number</StyledTableCell>
+            <StyledTableCell align="center">Action</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {stores.map((row) => (
+            <StyledTableRow key={row.name}>
+              <StyledTableCell component="th" scope="row">
+                {row.name}
+              </StyledTableCell>
+              <StyledTableCell align="right">{row.name}</StyledTableCell>
+              <StyledTableCell align="right">{row.email}</StyledTableCell>
+              <StyledTableCell align="right">{row.username}</StyledTableCell>
+              <StyledTableCell align="right">{row.phoneNumber}</StyledTableCell>
+              <StyledTableCell align="right">
+               <Stack sx={{display:'flex',justifyContent:'center'}} spacing={3} direction="row">
+     
+      {/* <Button sx={{width:'3rem',fontSize:'.5rem',fontWeight:'300'}} variant="outlined">Block user</Button> */}
+      <Button onClick={()=>StoreDEleteHandler(row._id)} className='dlt_btn' sx={{width:'8rem',height:'2rem',
+           fontSize:'.7rem',fontWeight:'800', fontFamily:" 'Oswald', sans-serif"}} variant="outlined">Delete User</Button>
+    </Stack>
+
+              </StyledTableCell>
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+
+
+    </Box>
+
+  }
+    {/* ************************************************** Prodducts ******************************************************************** */}
+
+
+   {productbutton &&
+  
+    <Box  className="product-container" sx={{ width:'100%',height: '100vh', overflowY: 'auto',backgroundColor:"#D0E7D2",display:'flex',alignItems:'start',
+    
+    justifyContent:'center',padding:'5%',position:'static'}}  >
+
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 700  }} aria-label="customized table">
+        <TableHead   >
+          <TableRow>
+            <StyledTableCell>name</StyledTableCell>
+            <StyledTableCell align="center">Name</StyledTableCell>
+            <StyledTableCell align="center">Email</StyledTableCell>
+            <StyledTableCell align="center">Username</StyledTableCell>
+            <StyledTableCell align="center">Phone Number</StyledTableCell>
+            <StyledTableCell align="center">Action</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {products.map((row) => (
+            <StyledTableRow key={row.name}>
+              <StyledTableCell component="th" scope="row">
+                {row.name}
+              </StyledTableCell>
+              <StyledTableCell align="right">{row.name}</StyledTableCell>
+              <StyledTableCell align="right">{row.email}</StyledTableCell>
+              <StyledTableCell align="right">{row.username}</StyledTableCell>
+              <StyledTableCell align="right">{row.phoneNumber}</StyledTableCell>
+              <StyledTableCell align="right">
+               <Stack sx={{display:'flex',justifyContent:'center'}} spacing={3} direction="row">
+     
+      {/* <Button sx={{width:'3rem',fontSize:'.5rem',fontWeight:'300'}} variant="outlined">Block user</Button> */}
+      <Button onClick={()=>productDEleteHandler(row._id)} className='dlt_btn' sx={{width:'8rem',height:'2rem',
+           fontSize:'.7rem',fontWeight:'800', fontFamily:" 'Oswald', sans-serif"}} variant="outlined">Delete User</Button>
+    </Stack>
+
+              </StyledTableCell>
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+
+
+    </Box>
+
+  }
 
 
     

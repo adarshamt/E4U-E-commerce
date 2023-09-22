@@ -1,0 +1,13 @@
+.dlt_btn:hover{
+    background-color: rgba(255, 0, 0, 0.5) !important;
+    color: white;
+}
+
+.dlt_btn{
+
+   font-style: bold !important;
+
+}
+.user-container{
+    display: none;
+}
