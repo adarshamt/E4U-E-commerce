@@ -132,7 +132,7 @@ const Shops = () => {
                          <Card.Text>
              
                          </Card.Text>
-                         <Button variant="contained" color="success">
+                         <Button onClick={()=>nav(`/storeproducts/${itm._id}`)} variant="contained" color="success">
                           Buy now
                           </Button>
                           </Card.Body>
@@ -158,7 +158,7 @@ const Shops = () => {
                          <Card.Text>
              
                          </Card.Text>
-                         <Button variant="contained" color="success">
+                         <Button onClick={()=>nav(`/storeproducts/${itm._id}`)} variant="contained" color="success">
                           Buy now
                           </Button>
                        </Card.Body>
@@ -211,7 +211,7 @@ const Shops = () => {
                          <Card.Text>
              
                          </Card.Text>
-                         <Button variant="contained" color="success">
+                         <Button onClick={()=>nav(`/storeproducts/${itm._id}`)} variant="contained" color="success">
                           Buy now
                           </Button>
                        </Card.Body>
@@ -263,7 +263,7 @@ const Shops = () => {
                          <Card.Text>
              
                          </Card.Text>
-                           <button >Shop now</button>
+                           <button onClick={()=>nav(`/storeproducts/${itm._id}`)} >Shop now</button>
                        </Card.Body>
                    </Card>
              </>

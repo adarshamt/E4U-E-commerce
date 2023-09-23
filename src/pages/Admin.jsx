@@ -66,11 +66,29 @@ function Adminpanel() {
     setAnchorElUser(null);
   };
 
-   const buttenHandler = () => {
+   const userHandler = () => {
     setUserButton(!userbutton);
+    setStoreButton(false)
+    setProdcutButton(false)
 
     console.log("----------------- user butten in handler --------------",userbutton)
   };
+  const storeHandler =()=>{
+
+    setUserButton(false);
+    setStoreButton(!storebutton)
+    setProdcutButton(false)
+
+
+  }
+  const productHandler =()=>{
+
+    setUserButton(false);
+    setStoreButton(false)
+    setProdcutButton(!productbutton)
+
+
+  }
 
 //  **************************** table *****************************
 
@@ -114,14 +132,14 @@ function Adminpanel() {
 
 
 
-
+ console.log("---------------- products array ---------------",products)
   const fetchUser = async()=>{
 
     try {
         
         const response = await axios.get("http://localhost:4743/user/allusers")
 
-        console.log(" response ----------------", response)
+        console.log(" response ---------------- ", response)
 
 
         const users = response.data.Users
@@ -161,18 +179,22 @@ function Adminpanel() {
       
     }
    }
+
+   
   const fetchStore = async()=>{
 
     try {
         
-        const response = await axios.get("http://localhost:4743/store/allstores")
+        const response = await axios.get("http://localhost:4743/stores/list")
 
-        console.log(" response ----------------", response)
+        console.log(" response ---------------- stores ", response.data)
 
 
-        const stores = response.data.Users
-        console.log("******************** users ",stores)
-        setuser(stores)
+        const stores = response.data
+
+        setstores(stores)
+        console.log("---------------- stores  array---------------",stores)
+
     } catch (error) {
 
         console.log("error ",error)
@@ -192,7 +214,7 @@ function Adminpanel() {
 
       }
 
-      const response = await axios.post("http://localhost:4743/stores/list",body)
+      const response = await axios.post("http://localhost:4743/stores/",body)
 
       console.log("------------------- response data",response.data.status)
 
@@ -211,14 +233,14 @@ function Adminpanel() {
 
     try {
         
-        const response = await axios.get("http://localhost:4743/store/allstores")
+        const response = await axios.get("http://localhost:4743/products")
 
-        console.log(" response ----------------", response)
+        console.log(" response products ----------------", response.data.data)
 
 
-        const products = response.data.Users
+        const products = response.data.data
         console.log("******************** users ",products)
-        setuser(products)
+        setProducts(products)
     } catch (error) {
 
         console.log("error ",error)
@@ -315,7 +337,7 @@ function Adminpanel() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography onClick={()=>buttenHandler()} textAlign="center">{page}</Typography>
+                  <Typography onClick={()=>userHandler()} textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -343,21 +365,21 @@ function Adminpanel() {
             {/* {pages.map((page) => ( */}
               <Button
                 // key={page}
-                onClick={buttenHandler}
+                onClick={userHandler}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 User
               </Button>
               <Button
                 // key={page}
-                onClick={buttenHandler}
+                onClick={storeHandler}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 Store
               </Button>
               <Button
                 // key={page}
-                onClick={buttenHandler}
+                onClick={productHandler}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 Products
@@ -389,7 +411,7 @@ function Adminpanel() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography onClick={()=>buttenHandler} textAlign="center">{setting}</Typography>
+                  <Typography onClick={()=>userHandler} textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -475,7 +497,7 @@ function Adminpanel() {
         <TableHead   >
           <TableRow>
             <StyledTableCell>name</StyledTableCell>
-            <StyledTableCell align="center">Name</StyledTableCell>
+            {/* <StyledTableCell align="center">Name</StyledTableCell> */}
             <StyledTableCell align="center">Email</StyledTableCell>
             <StyledTableCell align="center">Username</StyledTableCell>
             <StyledTableCell align="center">Phone Number</StyledTableCell>
@@ -486,10 +508,11 @@ function Adminpanel() {
           {stores.map((row) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {/* {row.name} */}
+                names
               </StyledTableCell>
-              <StyledTableCell align="right">{row.name}</StyledTableCell>
-              <StyledTableCell align="right">{row.email}</StyledTableCell>
+              {/* <StyledTableCell align="right">{row.name}</StyledTableCell> */}
+              <StyledTableCell align="center">{row.email}</StyledTableCell>
               <StyledTableCell align="right">{row.username}</StyledTableCell>
               <StyledTableCell align="right">{row.phoneNumber}</StyledTableCell>
               <StyledTableCell align="right">
@@ -524,30 +547,30 @@ function Adminpanel() {
       <Table sx={{ minWidth: 700  }} aria-label="customized table">
         <TableHead   >
           <TableRow>
-            <StyledTableCell>name</StyledTableCell>
-            <StyledTableCell align="center">Name</StyledTableCell>
-            <StyledTableCell align="center">Email</StyledTableCell>
-            <StyledTableCell align="center">Username</StyledTableCell>
-            <StyledTableCell align="center">Phone Number</StyledTableCell>
+            <StyledTableCell align='center'>product</StyledTableCell>
+            <StyledTableCell align="center">Category</StyledTableCell>
+            <StyledTableCell align="center">Image</StyledTableCell>
+            <StyledTableCell align="center">Price ₹</StyledTableCell>
+            <StyledTableCell align="center">Store</StyledTableCell>
             <StyledTableCell align="center">Action</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {products.map((row) => (
             <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
+              <StyledTableCell align='center'sx={{width:'12rem'}}  >
+                {row.productName}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.name}</StyledTableCell>
-              <StyledTableCell align="right">{row.email}</StyledTableCell>
-              <StyledTableCell align="right">{row.username}</StyledTableCell>
-              <StyledTableCell align="right">{row.phoneNumber}</StyledTableCell>
-              <StyledTableCell align="right">
+              <StyledTableCell align="center" >{row.category}</StyledTableCell>
+              <StyledTableCell align="center"><img style={{width:'3rem',height:'3rem'}} src={row.images[0].url} alt='No image found' /></StyledTableCell>
+              <StyledTableCell align="center">{row.price}</StyledTableCell>
+              <StyledTableCell align="center">{row.phoneNumber}</StyledTableCell>
+              <StyledTableCell align="center">
                <Stack sx={{display:'flex',justifyContent:'center'}} spacing={3} direction="row">
      
       {/* <Button sx={{width:'3rem',fontSize:'.5rem',fontWeight:'300'}} variant="outlined">Block user</Button> */}
-      <Button onClick={()=>productDEleteHandler(row._id)} className='dlt_btn' sx={{width:'8rem',height:'2rem',
-           fontSize:'.7rem',fontWeight:'800', fontFamily:" 'Oswald', sans-serif"}} variant="outlined">Delete User</Button>
+      <Button onClick={()=>productDEleteHandler(row._id)} className='dlt_btn' sx={{width:'8rem',height:'2.5rem',
+           fontSize:'.7em',fontWeight:'600' }} variant="outlined">Delete Product</Button>
     </Stack>
 
               </StyledTableCell>
