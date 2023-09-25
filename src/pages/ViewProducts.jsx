@@ -20,8 +20,9 @@ const ViewProducts = () => {
 
   const nav = useNavigate();
   const [data, setData] = useState([]);
-  // const [image, setImage] = useState("");
+  const [image, setImage] = useState("");
   const [pname, setPname] = useState();
+  
 
   // const getProducts = async () => {
   //   console.log("+++++++++++++++++++++++++");
@@ -57,9 +58,9 @@ const ViewProducts = () => {
         console.log(response.data.data, "response");
         setData(response.data.data);
   
-        // console.log(" data use state :",response.data.data)
+        console.log(" data use state :",response.data.data.images[0].url)
         
-        // setImage(response.data.image.url);
+        setImage(response.data.data.images[0].url);
 
         // console.log("image : ",image)
         let productname = response.data.data.productName;
@@ -146,7 +147,7 @@ const ViewProducts = () => {
     <>
       <Navbar />
 
-      <div style={{ margin: "3%" }} className="BreadCrumbs">
+      <div style={{ margin: '2% 0 0 2%' }} className="BreadCrumbs">
         <Stack spacing={2}>
           <Breadcrumbs
             separator={<NavigateNextIcon fontSize="small" />}
@@ -160,7 +161,7 @@ const ViewProducts = () => {
       <div
         style={{
           display: "flex",
-          height: "80vh",
+          height: "75vh",
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -170,8 +171,9 @@ const ViewProducts = () => {
           sx={{
             display: "flex",
             justifyContent: "center",
-            width: "90%",
-            height: "90%",
+            width: "80%",
+            height: "80%",
+            alignItems:'start',
             position: "relative",
             overflow: { xs: "auto", sm: "initial" },
           }}
@@ -238,15 +240,17 @@ const ViewProducts = () => {
           /> 
           )})}</>} */}
               <img
-                style={{ padding: "2%" }}
-                // src={data?.images[0]?.url}
+                style={{ padding: "5%",width:'25rem',height:'25rem' }}
+                
+                src={image}
                 // srcSet={data.images[0].url}
+              
                 loading="lazy"
                 alt=" no image found"
               />
             </AspectRatio>
             <CardContent>
-              <Typography fontSize="xl" fontWeight="lg">
+              <Typography fontSize="3rem" fontWeight="lg">
                 {data.productName}
               </Typography>
               <Typography
@@ -268,7 +272,7 @@ const ViewProducts = () => {
                 }}
               >
                 <div>
-                  <Typography level="body-xs" fontWeight="lg">
+                  <Typography level="body-xs" fontWeight="xl">
                     M.R.P
                   </Typography>
                   <Typography fontWeight="lg">{data.price}</Typography>

@@ -11,6 +11,9 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Products from "./Products";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 // import ClearIcon from "@mui/icons-material/Clear";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -85,7 +88,7 @@ export default function wishlist() {
     if(! user_id){
 
       window.alert(" Please log in to add to cart")
-      nav('/login')
+      toast(" product added to cart");
      }
      
   

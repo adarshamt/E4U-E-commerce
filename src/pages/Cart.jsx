@@ -1,222 +1,201 @@
+import Navbar from "../Componets/NavbarMui";
+import "../Styles/Cart.css";
 
-import Navbar from "../Componets/NavbarMui"
-import '../Styles/Cart.css'
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import { styled } from "@mui/material/styles";
 
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import { styled } from '@mui/material/styles';
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import { Card, CardContent, TextField, Typography } from "@mui/material";
+import CardMedia from "@mui/material/CardMedia";
 
-import {Card,CardContent,TextField,Typography} from '@mui/material';
-import CardMedia from '@mui/material/CardMedia';
-
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 import Cookies from "js-cookie";
 import axios from "../Services/AxiosInstance";
 import { useEffect } from "react";
 
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import Button from '@mui/material/Button';
-
-
-
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
- 
+  // let products;
+  const [products, setProducts] = React.useState([]);
+  const [carttotal, setCartTotal] = React.useState(0);
 
-    // let products;
-    const [products, setProducts] = React.useState([])
-    const[carttotal,setCartTotal] =React.useState(0)
+  // const nav = useNavigate()
 
-    
-    
-    const user_id =Cookies.get("userId")
+  const user_id = Cookies.get("userId");
 
-    const delfee = (10/100)*carttotal
-    
-  const getCartItems = async ()=>{
+  const deliveryCharge = (15 / 100) * carttotal;
 
-    try{
+  const getCartItems = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:4743/user/cart/products",
+        {
+          params: {
+            id: user_id,
+          },
+        }
+      );
 
+      setProducts(response.data.products);
+      console.log(" response products ------", response.data);
+      setCartTotal(response.data.total);
 
-
-    const response = await axios.get("http://localhost:4743/user/cart/products", {
-      params: {
-        id:user_id
-      },
-    })
-        
-   setProducts(response.data.products)
-   console.log(" response products ------",response.data)
-   setCartTotal(response.data.total)
-
-
-
-   console.log(" cart total ----------------",carttotal)
-  
-   
-   
-   
-   
-  }
-  catch(err){
-
-    console.log("Get cart items error",err)
-  }
-}
-
-
-
-const deletItemHandler =  async(id)=>{
-
-  console.log("**************** product id",id)
-  const user_id =Cookies.get('userId')
-
-  const body = {
-    user_id,
-    product_id:id
-    
-
-  }
-
-  try {
-      
-    const response = await axios.post('http://localhost:4743/user/removefromcart',body)
-    
-
-    console.log("************* remove item cart response**** ",response)
-
-    // const updatedArray = response.data.cart
-    getCartItems()
-    
-
-    // const status_message = response.data.message
-    // console.log(status_message,"*****************************")
-
-    // window.alert(status_message)
-
-
-    
-
-  } catch (error) {
-    console.log(" addto cart axios error",error)
-    
-  }
-
-
-
-}
-
- const makePayment = async()=>{
-
-
-  
-
-  try {
-
-    const body ={
-      
-      user_id
+      console.log(" cart total ----------------", carttotal);
+    } catch (err) {
+      console.log("Get cart items error", err);
     }
+  };
 
-    const response = await axios.post('http://localhost:4743/user/makepayment',body)
+  const deletItemHandler = async (id) => {
+    console.log("**************** product id", id);
+    const user_id = Cookies.get("userId");
 
-    console.log(response.data.url,"***************** payment response ******************")
+    const body = {
+      user_id,
+      product_id: id,
+    };
 
-    window.open(response.data.url, '_blank');
-    
-  } catch (error) {
+    try {
+      const response = await axios.post(
+        "http://localhost:4743/user/removefromcart",
+        body
+      );
 
-    console.log(" payment error :",error)
-    
-  }
+      console.log("************* remove item cart response**** ", response);
 
- }
+      // const updatedArray = response.data.cart
+      getCartItems();
 
+      // const status_message = response.data.message
+      // console.log(status_message,"*****************************")
 
-useEffect(()=>{
+      // window.alert(status_message)
+    } catch (error) {
+      console.log(" addto cart axios error", error);
+    }
+  };
 
+  const makePayment = async () => {
+    try {
+      const body = {
+        user_id,
+      };
 
+      const response = await axios.post(
+        "http://localhost:4743/user/makepayment",
+        body
+      );
+
+      console.log(
+        response.data.url,
+        "***************** payment response ******************"
+      );
+
+      window.open(response.data.url, "_blank");
+    } catch (error) {
+      console.log(" payment error :", error);
+    }
+  };
+
+  useEffect(() => {
     getCartItems();
-    
- },[])
+  }, []);
 
- 
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
 
-    const Item = styled(Paper)(({ theme }) => ({
-        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-        ...theme.typography.body2,
-        padding: theme.spacing(1),
-        
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-      }));
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  }));
 
   return (
     <>
-        <Navbar/>
-    <div style={{margin:'3% 0 0 5%'}} className="cart_maindiv">
-        <h2 style={{marginLeft:'6%'}}> My Cart</h2>
-    <div className="cart_subdiv">
+      <Navbar />
+      <div style={{ margin: "3% 0 0 5%" }} className="cart_maindiv">
+        <h2 style={{ marginLeft: "6%" }}> My Cart</h2>
+        <div className="cart_subdiv">
+          <Box className=" map component" sx={{ width: "50%", padding: "2%" }}>
+            <Stack spacing={6}>
+              {products && (
+                <>
+                  {products.map((itm, index) => {
+                    console.log(" ****************itm", itm);
 
-        <Box className=" map component"  sx={{  width: '50%', padding:'2%'}}>
-             <Stack spacing={6}>
-     {products && <>{products.map((itm,index)=>{
-      console.log(" ****************itm",itm)
+                    return (
+                      <>
+                        {products.length > 0 ? (
+                          <Item
+                            key={index}
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                            }}
+                          >
+                            <img
+                              style={{ width: "70px", height: "90px" }}
+                              src={itm.images[0].url}
+                              alt=" no image found"
+                            />
+                            <Typography component={"span"} variant="h6">
+                              {" "}
+                              {itm.productName}
+                            </Typography>
+                            <RemoveCircleIcon />
+                            <TextField style={{ width: "50px" }} value={1} />
+                            <AddCircleIcon />
 
-      return(
-    <>
-    {(products.length>0) ?
-    
-             <Item key={index}  style={{display:'flex',justifyContent:'space-between',alignItems:'center'}} >
-             
-         <img style={{width:'70px',height:'90px'}} src={itm.images[0].url} alt=" no image found" />
-         <Typography component={'span'} variant="h6"> {itm.productName}</Typography>
-          <RemoveCircleIcon/>
-         <TextField 
-         style={{width:'50px'}}
-         
-           value={1}
-         />
-         <AddCircleIcon/>
+                            <TextField
+                              value={itm.price}
+                              style={{ width: "100px" }}
+                              id="standard-basic"
+                              variant="standard"
+                            />
 
-         <TextField value={itm.price} style={{width:'100px'}} id="standard-basic" variant="standard" />
+                            <HighlightOffIcon
+                              onClick={() => deletItemHandler(itm._id)}
+                            />
+                          </Item>
+                        ) : (
+                          <Item>
+                            <TextField
+                              style={{ width: "500px" }}
+                              value={54545454}
+                            />
 
-         <HighlightOffIcon onClick={()=>deletItemHandler(itm._id)} />
-             </Item>
-             :<Item>
-              <TextField 
-         style={{width:'500px'}}
-         
-           value={54545454}
-         />
+                            <img
+                              style={{ width: "70px", height: "90px" }}
+                              src="https://mir-s3-cdn-cf.behance.net/projects/404/95974e121862329.Y3JvcCw5MjIsNzIxLDAsMTM5.png"
+                            />
+                          </Item>
+                        )}
+                      </>
+                    );
+                  })}{" "}
+                </>
+              )}
+            </Stack>
+          </Box>
 
-               <img style={{width:'70px',height:'90px'}}src="https://mir-s3-cdn-cf.behance.net/projects/404/95974e121862329.Y3JvcCw5MjIsNzIxLDAsMTM5.png" />
-             </Item> 
-    }
-     </>
-     )
-      })} </>}
-            
-              
-        </Stack>
-    </Box>
-    
-    <Box   sx={{ width: '50%', padding:'2%'}}>
-
-    
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 70 }} aria-label="spanning table">
-        {/* <TableHead>
+          <Box sx={{ width: "50%", padding: "2%" }}>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 70 }} aria-label="spanning table">
+                {/* <TableHead>
           
           <TableRow>
             <TableCell>Desc</TableCell>
@@ -224,45 +203,43 @@ useEffect(()=>{
             
           </TableRow>
         </TableHead> */}
-        <TableBody>
-      
-            <TableRow >
-              <TableCell>MRP Total</TableCell>
-              <TableCell align="right">₹ {carttotal}</TableCell>
-      
-            </TableRow>
-            <TableRow >
-              <TableCell>Discount</TableCell>
-              <TableCell align="right">₹ 0000</TableCell>
-      
-            </TableRow>
-            <TableRow >
-              <TableCell>Delivery Fee</TableCell>
-              <TableCell align="right">₹ {delfee || 0}</TableCell>
-      
-            </TableRow>
-      
-          <TableRow>
-            
-            <TableCell >total</TableCell>
-            <TableCell align="right"> ₹ {carttotal + delfee || 0} </TableCell>
-          </TableRow>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>MRP Total</TableCell>
+                    <TableCell align="right">₹ {carttotal}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Discount</TableCell>
+                    <TableCell align="right">₹ 0000</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Delivery Fee</TableCell>
+                    <TableCell align="right">₹ {deliveryCharge || 0}</TableCell>
+                  </TableRow>
 
-         
-        </TableBody>
-      </Table>
-    </TableContainer>
+                  <TableRow>
+                    <TableCell>total</TableCell>
+                    <TableCell align="right">
+                      {" "}
+                      ₹ {carttotal + deliveryCharge || 0}{" "}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
 
-          <Button onClick={()=> makePayment} sx={{width:'90%',margin:'5% 0 0 5%',height:'12%',}} variant="outlined">Place order</Button>
-    </Box>
-       </div>
-
-    </div>
+            <Button
+              onClick={() => makePayment}
+              sx={{ width: "90%", margin: "5% 0 0 5%", height: "12%" }}
+              variant="outlined"
+            >
+              Place order
+            </Button>
+          </Box>
+        </div>
+      </div>
     </>
+  );
+};
 
-
-
-  )
-}
-
-export default Cart
+export default Cart;

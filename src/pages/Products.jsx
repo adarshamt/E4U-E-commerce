@@ -9,8 +9,11 @@ import { useNavigate } from "react-router-dom";
 
 import { Breadcrumbs, Stack, Typography, Link } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { Cookie } from "@mui/icons-material";
+
 import Cookies from "js-cookie";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Products = () => {
   const [data, setData] = useState([]);
@@ -38,8 +41,10 @@ const Products = () => {
     nav("/");
   }
 
+  const notify = (msg) => toast(msg);
+
   const addtowishlist = async (id) => {
-    console.log("************* add to wishlist handler*********")
+    console.log("************* add to wishlist handler*********");
     try {
       const user_id = Cookies.get("userId");
       const product_id = id;
@@ -48,14 +53,18 @@ const Products = () => {
         product_id,
       };
 
-      console.log("-------------- body-------------",body)
+      // console.log("-------------- body-------------",body)
 
       const response = await axios.post(
         "http://localhost:4743/user/addtowishlist",
         body
       );
+      notify(response.data.message);
 
-      console.log(" add to wishlist response------------", response);
+      console.log(
+        " add to wishlist response------------",
+        response.data.message
+      );
     } catch (error) {
       console.log(" add to wishlist error", error);
     }
@@ -101,14 +110,13 @@ const Products = () => {
                 <div className="card">
                   <div
                     style={{
-                     
                       width: "2rem",
                       zIndex: "10000",
                       height: "2rem",
                       position: "absolute",
                       top: "5%",
                       left: "5%",
-                      fontSize: "30px",
+
                       color: "red",
                     }}
                     onClick={() => addtowishlist(itm._id)}
@@ -121,6 +129,18 @@ const Products = () => {
                         fontSize: "30px",
                         color: "red",
                       }}
+                    />
+                    <ToastContainer
+                      position="top-left"
+                      autoClose={1000}
+                      hideProgressBar={false}
+                      newestOnTop={false}
+                      closeOnClick
+                      rtl={false}
+                      pauseOnFocusLoss
+                      draggable
+                      pauseOnHover
+                      theme="light"
                     />
                   </div>
                   <div

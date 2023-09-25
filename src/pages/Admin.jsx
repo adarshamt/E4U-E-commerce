@@ -23,7 +23,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
-
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 
 import  axios from '../Services/AxiosInstance.jsx'
 import { useEffect } from 'react';
@@ -71,7 +71,7 @@ function Adminpanel() {
     setStoreButton(false)
     setProdcutButton(false)
 
-    console.log("----------------- user butten in handler --------------",userbutton)
+    // console.log("----------------- user butten in handler --------------",userbutton)
   };
   const storeHandler =()=>{
 
@@ -132,18 +132,18 @@ function Adminpanel() {
 
 
 
- console.log("---------------- products array ---------------",products)
+//  console.log("---------------- products array ---------------",products)
   const fetchUser = async()=>{
 
     try {
         
         const response = await axios.get("http://localhost:4743/user/allusers")
 
-        console.log(" response ---------------- ", response)
+        // console.log(" response ---------------- ", response)
 
 
         const users = response.data.Users
-        console.log("******************** users ",users)
+        // console.log("******************** users ",users)
         setuser(users)
     } catch (error) {
 
@@ -166,7 +166,7 @@ function Adminpanel() {
 
       const response = await axios.post("http://localhost:4743/user/delteleuser",body)
 
-      console.log("------------------- response data",response.data.status)
+      // console.log("------------------- response data",response.data.status)
 
       const status = response.data.status
       if( status == 200){
@@ -193,7 +193,7 @@ function Adminpanel() {
         const stores = response.data
 
         setstores(stores)
-        console.log("---------------- stores  array---------------",stores)
+        // console.log("---------------- stores  array---------------",stores)
 
     } catch (error) {
 
@@ -216,7 +216,7 @@ function Adminpanel() {
 
       const response = await axios.post("http://localhost:4743/stores/",body)
 
-      console.log("------------------- response data",response.data.status)
+      // console.log("------------------- response data",response.data.status)
 
       const status = response.data.status
       if( status == 200){
@@ -235,11 +235,11 @@ function Adminpanel() {
         
         const response = await axios.get("http://localhost:4743/products")
 
-        console.log(" response products ----------------", response.data.data)
+        // console.log(" response products ----------------", response.data.data[0].store_id.storName)
 
 
         const products = response.data.data
-        console.log("******************** users ",products)
+        // console.log("******************** users ",products)
         setProducts(products)
     } catch (error) {
 
@@ -262,7 +262,7 @@ function Adminpanel() {
 
       const response = await axios.post("http://localhost:4743/products",body)
 
-      console.log("------------------- response data",response.data.status)
+      // console.log("------------------- response data",response.data.status)
 
       const status = response.data.status
       if( status == 200){
@@ -287,12 +287,14 @@ function Adminpanel() {
     <AppBar sx={{backgroundColor:'#618264'}} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          
+          <SupervisorAccountIcon  sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -342,12 +344,14 @@ function Adminpanel() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          
+          <SupervisorAccountIcon  sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href="/"
+            
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -508,8 +512,8 @@ function Adminpanel() {
           {stores.map((row) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
-                {/* {row.name} */}
-                names
+                {row.storName}
+                
               </StyledTableCell>
               {/* <StyledTableCell align="right">{row.name}</StyledTableCell> */}
               <StyledTableCell align="center">{row.email}</StyledTableCell>
@@ -564,7 +568,7 @@ function Adminpanel() {
               <StyledTableCell align="center" >{row.category}</StyledTableCell>
               <StyledTableCell align="center"><img style={{width:'3rem',height:'3rem'}} src={row.images[0].url} alt='No image found' /></StyledTableCell>
               <StyledTableCell align="center">{row.price}</StyledTableCell>
-              <StyledTableCell align="center">{row.phoneNumber}</StyledTableCell>
+              <StyledTableCell align="center">{row.store_id.storName}</StyledTableCell>
               <StyledTableCell align="center">
                <Stack sx={{display:'flex',justifyContent:'center'}} spacing={3} direction="row">
      

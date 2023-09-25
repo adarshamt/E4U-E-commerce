@@ -27,6 +27,8 @@ import Cookie from 'js-cookie'
 import {sidebar_show} from '../store/ecommerse_slice.jsx'
 import Sidebar from './Sidebar.jsx';
 import { FcApproval } from 'react-icons/fc';
+import { Token } from '@mui/icons-material';
+import { Button } from 'react-bootstrap';
 
  
 
@@ -95,6 +97,7 @@ export default function Navbarmui() {
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+    
   };
 
   const handleMobileMenuClose = () => {
@@ -104,7 +107,7 @@ export default function Navbarmui() {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
-    nav('/login')
+  
    
   };
 
@@ -130,7 +133,10 @@ export default function Navbarmui() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-      {(!checkToken)? <span> login  </span>  : <span> Active <FcApproval/></span> }
+        
+      {(!checkToken)? < Button
+       style={{backgroundColor:'transparent',color:'black',width:'100%',padding:'0',margin:'0',boxShadow:'unset',fontSize:'1rem'}}
+      onClick={()=>nav('/login')} > login  </Button>  : <span> Active <FcApproval/></span> }
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
@@ -188,6 +194,18 @@ export default function Navbarmui() {
     </Menu>
   );
 
+  const CartHanlder = ()=>{
+
+    if(!checkToken){
+      window.alert(" Please login to see your cart")
+    return  nav('/login')
+    }
+    
+    nav('/cart')
+
+
+  } 
+
   return (<>
     { (data.sidebar == true)?<Sidebar/>:null}   
     <Box sx={{ flexGrow: 1, backgroundColor:'red'}}>
@@ -241,7 +259,7 @@ export default function Navbarmui() {
 
             <Tooltip title="Cart">
             <IconButton
-              onClick={()=>nav('/cart')}
+              onClick={CartHanlder}
               size="large"
               aria-label="show 0 new notifications"
               color="inherit"

@@ -15,6 +15,8 @@ import Cookies from 'js-cookie';
 const Sidebar = () => {
 
   const dispatch = useDispatch()
+
+  const token = Cookies.get('token')
     
    const data = useSelector(state=>state.E4U_slice)
    console.log(" redux state :",data)
@@ -48,7 +50,7 @@ const Sidebar = () => {
         ))}
       </ul>
       {
-       (data.login ==true)? <Button onClick={logoutHandler} className='logout_btn'> log out </Button>:null
+       (token)? <Button onClick={logoutHandler} className='logout_btn'> log out </Button>:null
       }
      
     </div>

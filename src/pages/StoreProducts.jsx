@@ -7,7 +7,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-import StorefrontIcon from '@mui/icons-material/Storefront';
+import StorefrontIcon from "@mui/icons-material/Storefront";
 
 import axios from "../Services/AxiosInstance";
 import { useNavigate, useParams } from "react-router-dom";
@@ -15,12 +15,15 @@ import { useEffect, useState } from "react";
 
 import Cookies from "js-cookie";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const StoreProducts = () => {
   const [products, setProducts] = useState([]);
   const [storename, setStorename] = useState("");
 
   const { id } = useParams(); // store id ***************
- const nav = useNavigate()
+  const nav = useNavigate();
   const body = {
     id,
   };
@@ -30,7 +33,7 @@ const StoreProducts = () => {
     try {
       const response = await axios.get("http://localhost:4743/store/products", {
         params: {
-          id: id, 
+          id: id,
         },
       });
 
@@ -45,48 +48,42 @@ const StoreProducts = () => {
     getproducts();
   }, []);
 
- 
+  const addtoCartHandler = async (id) => {
+    const user_id = Cookies.get("userId");
 
-
-  const addtoCartHandler = async(id) =>{
-
-    const user_id =Cookies.get('userId')
-
-   if(! user_id){
-
-    window.alert(" Please log in to add to cart")
-    nav('/login')
-   }
-   
+    if (!user_id) {
+      window.alert(" Please log in to add to cart");
+      nav("/login");
+    }
 
     const body = {
       user_id,
-      product_id:id
+      product_id: id,
+    };
 
-    }
-    
+    const notify = (msg) => toast(msg);
 
     try {
-      
-      const response = await axios.post('http://localhost:4743/user/addtocart',body)
+      const response = await axios.post(
+        "http://localhost:4743/user/addtocart",
+        body
+      );
 
-      console.log("************* add to cart response**** ",response.data.status)
+      console.log(
+        "************* add to cart response**** ",
+        response.data.status
+      );
 
-      const status_message = response.data.message
-      console.log(status_message,"*****************************")
+      const status_message = response.data.message;
+      console.log(status_message, "*****************************");
 
-      window.alert(status_message)
+      notify(status_message);
 
-
-      
-
+      // window.alert(status_message)
     } catch (error) {
-      console.log(" addto cart axios error",error)
-      
+      console.log(" addto cart axios error", error);
     }
-
-  }
-
+  };
 
   return (
     <>
@@ -99,11 +96,16 @@ const StoreProducts = () => {
         }}
         className="str_dsply_pdts"
       >
-       
-        <Typography color="green" padding=" 5% 0 0 5%" fontWeight="900"  gutterBottom variant="h4" component="div">
-           <  StorefrontIcon fontSize="60px" />
-           {storename}
-           
+        <Typography
+          color="green"
+          padding=" 5% 0 0 5%"
+          fontWeight="900"
+          gutterBottom
+          variant="h4"
+          component="div"
+        >
+          <StorefrontIcon fontSize="60px" />
+          {storename}
         </Typography>
 
         <div
@@ -115,18 +117,26 @@ const StoreProducts = () => {
           }}
           className="str_sub_div"
         >
-          {products.map((itm,index) => (
-            <Card key={index} sx={{ margin: "3%", maxWidth: 345 }}>
+          {products.map((itm, index) => (
+            <Card
+              key={index}
+              sx={{
+                margin: "3%",
+                maxWidth: 345,
+                width: "15rem",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
               <CardMedia
-                sx={{ height: 140, margin: "5%" }}
+                sx={{ height: 150, width: 150, margin: "5%" }}
                 image={itm.images[0].url}
                 title={itm.productName}
-
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                   {itm.productName}
-                  
                 </Typography>
                 <Typography variant="h5" color="text.secondary">
                   ₹{itm.price}
@@ -134,7 +144,21 @@ const StoreProducts = () => {
               </CardContent>
               <CardActions color="yellow">
                 <Button size="medium">Buy now</Button>
-                <Button onClick={()=>addtoCartHandler(itm._id)} size="medium">Add to cart</Button>
+                <Button onClick={() => addtoCartHandler(itm._id)} size="medium">
+                  Add to cart
+                </Button>
+                <ToastContainer
+                  position="top-left"
+                  autoClose={1000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="light"
+                />
               </CardActions>
             </Card>
           ))}

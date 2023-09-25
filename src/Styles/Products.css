@@ -186,3 +186,7 @@
   transform: translateY(0px);  
   transition-delay: .7s;  
 }   
+/* .Toastify__toast{
+  width: auto;
+  height: auto;
+} */

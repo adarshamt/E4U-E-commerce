@@ -1,19 +1,18 @@
 
-import Box from '@mui/material/Box';
+  import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+  
 
 export default function BoxSx() {
-  return (
-    <Box
+
     
-      sx={{
-        width: 300,
-        height: 300,
-        backgroundColor: 'primary.dark',
-        '&:hover': {
-          backgroundColor: 'primary.main',
-          opacity: [0.9, 0.8, 0.7],
-        },
-      }}
-    />
-  );
+  
+    const notify = () => toast(" product added to cart");
+
+    return (
+      <div>
+        <button onClick={notify}>Notify!</button>
+        <ToastContainer />
+      </div>
+    );
 }
