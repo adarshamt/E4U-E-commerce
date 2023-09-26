@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { AiOutlineHeart } from "react-icons/ai";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
 
 import { Breadcrumbs, Stack, Typography, Link } from "@mui/material";
@@ -19,6 +20,8 @@ const Products = () => {
   const [data, setData] = useState([]);
   // const [image,setImage]=useState('')
 
+  const [wishlist, setWishlist] = useState([]);
+
   const nav = useNavigate();
 
   const getProducts = async () => {
@@ -32,9 +35,28 @@ const Products = () => {
   };
   useEffect(() => {
     getProducts();
+    getWishlist();
+    
   }, []);
 
-  console.log("data response ", data);
+  const getWishlist = async () => {
+    try {
+      const user_id = Cookies.get("userId");
+      const response = await axios.get(`http://localhost:4743/user/wishlist`, {
+        params: { user_id },
+      });
+      console.log(
+        "*************** wishlist response*************",
+        response.data.ids
+      );
+      setWishlist(response.data.ids); // Store the user's wishlist data in state
+    } catch (error) {
+      console.log("wishlist error", error);
+    }
+  };
+  const isProductInWishlist = (productId) => {
+    return wishlist.some((item) => item === productId);
+  };
 
   function handleClick(event) {
     event.preventDefault();
@@ -60,7 +82,7 @@ const Products = () => {
         body
       );
       notify(response.data.message);
-
+       getProducts   ()
       console.log(
         " add to wishlist response------------",
         response.data.message
@@ -112,7 +134,7 @@ const Products = () => {
                     style={{
                       width: "2rem",
                       zIndex: "10000",
-                      height: "2rem",
+                      height: "1rem",
                       position: "absolute",
                       top: "5%",
                       left: "5%",
@@ -121,15 +143,27 @@ const Products = () => {
                     }}
                     onClick={() => addtowishlist(itm._id)}
                   >
-                    <AiOutlineHeart
-                      style={{
-                        position: "absolute",
-                        top: "5%",
-                        left: "5%",
-                        fontSize: "30px",
-                        color: "red",
-                      }}
-                    />
+                    {isProductInWishlist(itm._id) ? (
+                      <FavoriteIcon
+                        style={{
+                          position: "absolute",
+                          top: "5%",
+                          left: "5%",
+                          fontSize: "30px",
+                          colo33r: "red",
+                        }}
+                      />
+                    ) : (
+                      <AiOutlineHeart
+                        style={{
+                          position: "absolute",
+                          top: "5%",
+                          left: "5%",
+                          fontSize: "30px",
+                          color: "red",
+                        }}
+                      />
+                    )}
                     <ToastContainer
                       position="top-left"
                       autoClose={1000}

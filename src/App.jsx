@@ -13,6 +13,9 @@ import BoxSx from "./Componets/muiTest"
 import StoreProducts from "./pages/StoreProducts"
 import Wishlist from "./pages/Wishlist"
 import Adminpanel from "./pages/Admin"
+import { Payment } from "@mui/icons-material"
+import PaymentSuccess from "./pages/PaymentSuccess"
+import CheckoutForm from "./pages/checkoutForm"
 // import Checkout from "./pages/Checkout"
 
 
@@ -40,9 +43,11 @@ function App() {
       <Route path="/storeproducts/:id" element ={<StoreProducts/>}/> 
       <Route path="/admin" element ={<Adminpanel/>}/> 
       {/* <Route path="/user/checkout" element ={<Checkout/>}/>  */}
+      <Route path="/payment" element ={<Payment/>}/> 
+      <Route path="/paymentsucccess" element ={<PaymentSuccess/>}/> 
       
 
-      <Route path="/muitest" element ={<BoxSx/>}/> 
+      <Route path="/ckeckform" element ={<CheckoutForm/>}/> 
 
     </Routes>
 

@@ -82,13 +82,17 @@ export default function wishlist() {
 
   }
 
+  const notify = (msg) => toast(msg);
+  
+
+
 
   const addToCart = async(id)=>{
 
     if(! user_id){
 
       window.alert(" Please log in to add to cart")
-      toast(" product added to cart");
+      
      }
      
   
@@ -108,7 +112,10 @@ export default function wishlist() {
         const status_message = response.data.message
         console.log(status_message,"*****************************")
   
-        window.alert(status_message)
+        
+        
+      notify(status_message);
+
   
   
         
@@ -181,9 +188,24 @@ export default function wishlist() {
 
             <Button onClick={()=>removeFromWishlist(itm._id)} className="err-btton" color="error" variant="outlined">
                 remove
+
+
             </Button>
             <Button onClick={()=>addToCart(itm._id)} className="add-btton" color='success' variant="outlined">
                 Add To cart
+
+                <ToastContainer
+                      position="top-left"
+                      autoClose={1000}
+                      hideProgressBar={false}
+                      newestOnTop={false}
+                      closeOnClick
+                      rtl={false}
+                      pauseOnFocusLoss
+                      draggable
+                      pauseOnHover
+                      theme="light"
+                    />
             </Button>
             </Box>
 
