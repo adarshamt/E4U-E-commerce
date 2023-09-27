@@ -39,7 +39,7 @@ const StoreProducts = () => {
 
       console.log(" response :", response.data.store.storName);
       setProducts(response.data.data);
-      setStorename(response.data.store.storName);
+      setStorename(response.data.store.storeName);
     } catch (err) {
       console.log("error :", err);
     }

@@ -23,6 +23,7 @@ const Products = () => {
   const [wishlist, setWishlist] = useState([]);
 
   const nav = useNavigate();
+  const user_id = Cookies.get("userId");
 
   const getProducts = async () => {
     try {
@@ -36,12 +37,11 @@ const Products = () => {
   useEffect(() => {
     getProducts();
     getWishlist();
-    
   }, []);
 
   const getWishlist = async () => {
     try {
-      const user_id = Cookies.get("userId");
+    
       const response = await axios.get(`http://localhost:4743/user/wishlist`, {
         params: { user_id },
       });
@@ -68,7 +68,7 @@ const Products = () => {
   const addtowishlist = async (id) => {
     console.log("************* add to wishlist handler*********");
     try {
-      const user_id = Cookies.get("userId");
+      
       const product_id = id;
       const body = {
         user_id,
@@ -82,13 +82,37 @@ const Products = () => {
         body
       );
       notify(response.data.message);
-       getProducts   ()
+      getWishlist();
       console.log(
         " add to wishlist response------------",
         response.data.message
       );
     } catch (error) {
       console.log(" add to wishlist error", error);
+    }
+  };
+
+  const removeFromWishlist = async (id) => {
+    try {
+
+      
+      const body = {
+        user_id,
+        product_id: id,
+      };
+
+      const response = await axios.post(
+        "http://localhost:4743/user/wishlistremoveitem",
+        body
+      );
+
+      console.log(" response------------------", response.data.message);
+      notify(response.data.message);
+
+
+      getWishlist();
+    } catch (error) {
+      console.log("error :", error);
     }
   };
 
@@ -127,21 +151,20 @@ const Products = () => {
       <div className="supr_main_div_pdt">
         {data.map((itm) => (
           <>
-            <div className="Pdt_main_div">
-              <div key={itm._id} className="container">
+            <div key={itm._id} className="Pdt_main_div">
+              <div  className="container">
                 <div className="card">
                   <div
                     style={{
                       width: "2rem",
                       zIndex: "10000",
-                      height: "1rem",
+                      height: "3rem",
                       position: "absolute",
                       top: "5%",
                       left: "5%",
 
                       color: "red",
                     }}
-                    onClick={() => addtowishlist(itm._id)}
                   >
                     {isProductInWishlist(itm._id) ? (
                       <FavoriteIcon
@@ -152,8 +175,10 @@ const Products = () => {
                           fontSize: "30px",
                           colo33r: "red",
                         }}
-                      />
-                    ) : (
+                      onClick={() => removeFromWishlist(itm._id)}
+
+                        />
+                        ) : (
                       <AiOutlineHeart
                         style={{
                           position: "absolute",
@@ -162,6 +187,7 @@ const Products = () => {
                           fontSize: "30px",
                           color: "red",
                         }}
+                      onClick={() => addtowishlist(itm._id)}
                       />
                     )}
                     <ToastContainer

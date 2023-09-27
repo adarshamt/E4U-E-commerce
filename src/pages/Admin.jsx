@@ -239,7 +239,7 @@ function Adminpanel() {
 
 
         const products = response.data.data
-        // console.log("******************** users ",products)
+         console.log("******************** users ",products)
         setProducts(products)
     } catch (error) {
 
@@ -512,7 +512,7 @@ function Adminpanel() {
           {stores.map((row) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
-                {row.storName}
+                {row.storeName}
                 
               </StyledTableCell>
               {/* <StyledTableCell align="right">{row.name}</StyledTableCell> */}
@@ -568,7 +568,7 @@ function Adminpanel() {
               <StyledTableCell align="center" >{row.category}</StyledTableCell>
               <StyledTableCell align="center"><img style={{width:'3rem',height:'3rem'}} src={row.images[0].url} alt='No image found' /></StyledTableCell>
               <StyledTableCell align="center">{row.price}</StyledTableCell>
-              <StyledTableCell align="center">{row.store_id.storName}</StyledTableCell>
+              <StyledTableCell align="center">{row.store_id.storeName}</StyledTableCell>
               <StyledTableCell align="center">
                <Stack sx={{display:'flex',justifyContent:'center'}} spacing={3} direction="row">
      

@@ -32,10 +32,15 @@ const StoreSignin = () => {
     
     const token = response.data.token
     console.log(" token :",token)
+    console.log("response*************************",response.data)
+    // cookie.set("userId", userId);
+
 
     if(token){
 
       Cookie.set("str_token",token)
+      Cookie.set("str_id",response.data.id)
+
        link(`/storeowner/${response.data.id}`)
     }
 

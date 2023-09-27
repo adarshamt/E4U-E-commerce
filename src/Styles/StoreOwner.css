@@ -9,7 +9,7 @@
     /* background-color: blue; */
     height: 100vh  ;
 
-    background-color: #f1d26c;
+    background-color: #4B527E;
 }
 .storeOwner{
     /* width: 500px;
@@ -36,6 +36,6 @@
     display: flex;
     flex-direction:column;
     padding: 2%;
-    border: 1px #CECE5A solid;
+    border: 1px #E5C3A6 solid;
     height: auto;
 }

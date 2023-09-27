@@ -9,7 +9,6 @@ import Products from './pages/Products'
 import StoreOwer from './pages/StoreOwner'
 import ViewProducts from "./pages/ViewProducts"
 import Cart from "./pages/Cart"
-import BoxSx from "./Componets/muiTest"
 import StoreProducts from "./pages/StoreProducts"
 import Wishlist from "./pages/Wishlist"
 import Adminpanel from "./pages/Admin"
