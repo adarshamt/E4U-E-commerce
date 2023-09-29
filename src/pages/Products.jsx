@@ -24,6 +24,8 @@ const Products = () => {
 
   const nav = useNavigate();
   const user_id = Cookies.get("userId");
+   
+  const [search,setSearch]=useState('')
 
   const getProducts = async () => {
     try {
@@ -133,6 +135,9 @@ const Products = () => {
       Products
     </Typography>,
   ];
+
+
+ 
 
   return (
     <>

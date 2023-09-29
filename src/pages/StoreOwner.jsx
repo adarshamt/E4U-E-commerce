@@ -110,6 +110,7 @@ const StoreOwner = () => {
       console.log(" response ++++++++++++++++++++++++++:", response.data.store.storeName);
       
       setStorename( response.data.store.storeName);
+      console.log("storename ///////////////////////",storename)
     } catch (err) {
       console.log("error :", err);
     }
@@ -120,7 +121,7 @@ const StoreOwner = () => {
 
   return (
     <>
-      <StoreNavbar />
+      <StoreNavbar storeName={storename} />
       <div className="storOnwr_maindiv">
         <div className="storeOwner">
           {/* <Sidebar /> */}

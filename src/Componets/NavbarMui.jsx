@@ -29,6 +29,7 @@ import Sidebar from './Sidebar.jsx';
 import { FcApproval } from 'react-icons/fc';
 import { Token } from '@mui/icons-material';
 import { Button } from 'react-bootstrap';
+import { useState } from 'react';
 
  
 
@@ -71,6 +72,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+
+
+
 // **************** Start *******************
 export default function Navbarmui() {
   const data= useSelector(state=>state.E4U_slice)
@@ -205,6 +209,18 @@ export default function Navbarmui() {
 
 
   } 
+  const [searchText, setSearchText] = useState('')
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      // Your function to execute when Enter key is pressed
+
+      console.log("+++++++++++++++",event)
+      nav(`/search/${searchText} `)
+    }
+  };
+  const handleInputChange = (event) => {
+    setSearchText(event.target.value); // Update the searchText state when input changes
+  };
 
   return (<>
     { (data.sidebar == true)?<Sidebar/>:null}   
@@ -237,6 +253,9 @@ export default function Navbarmui() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+                   onKeyDown={handleKeyDown}
+                   onChange={handleInputChange}
+                   value={searchText}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />

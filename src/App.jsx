@@ -15,6 +15,7 @@ import Adminpanel from "./pages/Admin"
 import { Payment } from "@mui/icons-material"
 import PaymentSuccess from "./pages/PaymentSuccess"
 import CheckoutForm from "./pages/checkoutForm"
+import Search from "./pages/Search"
 // import Checkout from "./pages/Checkout"
 
 
@@ -46,7 +47,7 @@ function App() {
       <Route path="/paymentsucccess" element ={<PaymentSuccess/>}/> 
       
 
-      <Route path="/ckeckform" element ={<CheckoutForm/>}/> 
+      <Route path="/search/:id" element ={<Search/>}/> 
 
     </Routes>
 
