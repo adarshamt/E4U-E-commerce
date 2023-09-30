@@ -88,27 +88,7 @@ const Cart = () => {
     }
   };
 
-  const makePayment = async () => {
-    try {
-      const body = {
-        user_id,
-      };
-
-      const response = await axios.post(
-        "http://localhost:4743/user/makepayment",
-        body
-      );
-
-      console.log(
-        response.data.url,
-        "***************** payment response ******************"
-      );
-
-      window.open(response.data.url, "_blank");
-    } catch (error) {
-      console.log(" payment error :", error);
-    }
-  };
+ 
 
   useEffect(() => {
     getCartItems();
@@ -122,6 +102,51 @@ const Cart = () => {
     textAlign: "center",
     color: theme.palette.text.secondary,
   }));
+
+  const initPayment = (data) => {
+		const options = {
+			key: "rzp_test_4Baxb5ttFuRGgg",
+			amount: data.amount,
+			currency: data.currency,
+			// name: book.name,
+			description: "Test Transaction",
+			// image: book.img,
+			order_id: data.id,
+			handler: async (response) => {
+				try {
+					const verifyUrl = "http://localhost:4743/user/veryfypayment";
+					const { data } = await axios.post(verifyUrl, response);
+					console.log("razorpay------------------------",data);
+          if (data.status =="success") {
+            // Redirect to the desired URL after a successful payment
+            window.location.href = "https://www.google.com";
+             // Replace with your desired URL
+        } else {
+            // Handle payment failure or other conditions here
+        }
+				} catch (error) {
+					console.log(error);
+				}
+			},
+			theme: {
+				color: "#3399cc",
+			},
+		};
+		const rzp1 = new window.Razorpay(options);
+		rzp1.open();
+	};
+
+	const handlePayment = async () => {
+		try {
+			const orderUrl = "http://localhost:4743/user/payment";
+			const { data } = await axios.post(orderUrl, { amount: carttotal });
+			console.log(data);
+			initPayment(data.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 
   return (
     <>
@@ -229,7 +254,7 @@ const Cart = () => {
             </TableContainer>
 
             <Button
-              onClick={() => makePayment}
+              onClick={ handlePayment}
               sx={{ width: "90%", margin: "5% 0 0 5%", height: "12%" }}
               variant="outlined"
             >

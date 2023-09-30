@@ -25,7 +25,7 @@ const Products = () => {
   const nav = useNavigate();
   const user_id = Cookies.get("userId");
    
-  const [search,setSearch]=useState('')
+  
 
   const getProducts = async () => {
     try {
@@ -38,9 +38,11 @@ const Products = () => {
   };
   useEffect(() => {
     getProducts();
+    if(user_id){
     getWishlist();
-  }, []);
-
+    }
+  }, [user_id]);
+ 
   const getWishlist = async () => {
     try {
     
@@ -76,8 +78,6 @@ const Products = () => {
         user_id,
         product_id,
       };
-
-      // console.log("-------------- body-------------",body)
 
       const response = await axios.post(
         "http://localhost:4743/user/addtowishlist",
