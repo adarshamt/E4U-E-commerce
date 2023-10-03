@@ -11,13 +11,13 @@ import ViewProducts from "./pages/ViewProducts"
 import Cart from "./pages/Cart"
 import StoreProducts from "./pages/StoreProducts"
 import Wishlist from "./pages/Wishlist"
-import Adminpanel from "./pages/Admin"
+// import Adminpanel from "./pages/Admin"
 import { Payment } from "@mui/icons-material"
 import PaymentSuccess from "./pages/PaymentSuccess"
-import CheckoutForm from "./pages/checkoutForm"
+// import CheckoutForm from "./pages/checkoutForm"
 import Search from "./pages/Search"
 import { MapBox } from "./Componets/MapBox"
-import AdminLogin from "./pages/AdminLogin"
+// import AdminLogin from "./pages/AdminLogin"
 // import Checkout from "./pages/Checkout"
 
 
@@ -43,7 +43,7 @@ function App() {
       <Route path="/cart" element ={<Cart/>}/> 
       <Route path="/wishlist" element ={<Wishlist/>}/> 
       <Route path="/storeproducts/:id" element ={<StoreProducts/>}/> 
-      <Route path="/admin" element ={<Adminpanel/>}/> 
+      {/* <Route path="/admin" element ={<Adminpanel/>}/>  */}
       {/* <Route path="/user/checkout" element ={<Checkout/>}/>  */}
       <Route path="/payment" element ={<Payment/>}/> 
       <Route path="/paymentsucccess" element ={<PaymentSuccess/>}/> 
@@ -51,7 +51,7 @@ function App() {
 
       <Route path="/search/:id" element ={<Search/>}/> 
       <Route path="/map" element ={<MapBox/>}/> 
-      <Route path="/admin/login" element ={<AdminLogin/>}/> 
+      {/* <Route path="/admin/login" element ={<AdminLogin/>}/>  */}
 
     </Routes>
 

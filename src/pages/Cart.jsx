@@ -32,7 +32,7 @@ const Cart = () => {
   const [products, setProducts] = React.useState([]);
   const [carttotal, setCartTotal] = React.useState(0);
 
-  // const nav = useNavigate()
+  const nav = useNavigate();
 
   const user_id = Cookies.get("userId");
 
@@ -88,8 +88,6 @@ const Cart = () => {
     }
   };
 
- 
-
   useEffect(() => {
     getCartItems();
   }, []);
@@ -104,50 +102,54 @@ const Cart = () => {
   }));
 
   const initPayment = (data) => {
-		const options = {
-			key: "rzp_test_4Baxb5ttFuRGgg",
-			amount: data.amount,
-			currency: data.currency,
-			// name: book.name,
-			description: "Test Transaction",
-			// image: book.img,
-			order_id: data.id,
-			handler: async (response) => {
-				try {
-					const verifyUrl = "http://localhost:4743/user/veryfypayment";
-					const { data } = await axios.post(verifyUrl, response);
-					console.log("razorpay------------------------",data);
-          if (data.status =="success") {
+    const options = {
+      key: "rzp_test_4Baxb5ttFuRGgg",
+      amount: data.amount,
+      currency: data.currency,
+      // name: book.name,
+      description: "Test Transaction",
+      // image: book.img,
+      order_id: data.id,
+      handler: async (response) => {
+        try {
+          const verifyUrl = `http://localhost:4743/user/veryfypayment/${user_id}`;
+          const { data } = await axios.post(verifyUrl, response);
+          console.log("razorpay------------------------", data);
+          if (data.status == "success") {
             // Redirect to the desired URL after a successful payment
-            window.location.href = "https://www.google.com";
-             // Replace with your desired URL
-        } else {
+            // window.location.href = "https://www.google.com";
+            nav("/");
+            getCartItems();
+            // Replace with your desired URL
+          } else {
             // Handle payment failure or other conditions here
+          }
+        } catch (error) {
+          console.log(error);
         }
-				} catch (error) {
-					console.log(error);
-				}
-			},
-			theme: {
-				color: "#3399cc",
-			},
-		};
-		const rzp1 = new window.Razorpay(options);
-		rzp1.open();
-	};
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
 
-	const handlePayment = async () => {
-		try {
-			const orderUrl = "http://localhost:4743/user/payment";
-			const { data } = await axios.post(orderUrl, { amount: carttotal });
-			console.log(data);
-			initPayment(data.data);
-		} catch (error) {
-			console.log(error);
-		}
-	};
+  const handlePayment = async () => {
+    try {
+      const orderUrl = "http://localhost:4743/user/payment";
+      const { data } = await axios.post(orderUrl, {
+        amount: carttotal + deliveryCharge,
+      });
+      console.log(data);
+      initPayment(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-
+              // console.log("product length -------------",products.length)
   return (
     <>
       <Navbar />
@@ -158,13 +160,13 @@ const Cart = () => {
             <Stack spacing={6}>
               {products && (
                 <>
-                  {products.map((itm, index) => {
-                    console.log(" ****************itm", itm);
+
 
                     return (
                       <>
                         {products.length > 0 ? (
-                          <Item
+                          products.map((itm, index) => (
+                            <Item
                             key={index}
                             style={{
                               display: "flex",
@@ -196,22 +198,29 @@ const Cart = () => {
                               onClick={() => deletItemHandler(itm._id)}
                             />
                           </Item>
+                       ))
+
                         ) : (
                           <Item>
-                            <TextField
-                              style={{ width: "500px" }}
-                              value={54545454}
-                            />
+                             
+                             <h2>cart is empty</h2>
 
-                            <img
-                              style={{ width: "70px", height: "90px" }}
-                              src="https://mir-s3-cdn-cf.behance.net/projects/404/95974e121862329.Y3JvcCw5MjIsNzIxLDAsMTM5.png"
-                            />
                           </Item>
+                             
+                          // <Item>
+                          //   <TextField
+                          //     style={{ width: "500px" }}
+                          //     value={54545454}
+                          //   />
+
+                          //   <img
+                          //     style={{ width: "70px", height: "90px" }}
+                          //     src="https://mir-s3-cdn-cf.behance.net/projects/404/95974e121862329.Y3JvcCw5MjIsNzIxLDAsMTM5.png"
+                          //   />
+                          // </Item>
                         )}
                       </>
                     );
-                  })}{" "}
                 </>
               )}
             </Stack>
@@ -220,22 +229,14 @@ const Cart = () => {
           <Box sx={{ width: "50%", padding: "2%" }}>
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 70 }} aria-label="spanning table">
-                {/* <TableHead>
-          
-          <TableRow>
-            <TableCell>Desc</TableCell>
-            <TableCell align="right">Qty.</TableCell>
-            
-          </TableRow>
-        </TableHead> */}
                 <TableBody>
                   <TableRow>
                     <TableCell>MRP Total</TableCell>
-                    <TableCell align="right">₹ {carttotal}</TableCell>
+                    <TableCell align="right">₹ {carttotal || 0}</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell>Discount</TableCell>
-                    <TableCell align="right">₹ 0000</TableCell>
+                    <TableCell align="right">₹ 00</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell>Delivery Fee</TableCell>
@@ -254,7 +255,7 @@ const Cart = () => {
             </TableContainer>
 
             <Button
-              onClick={ handlePayment}
+              onClick={handlePayment}
               sx={{ width: "90%", margin: "5% 0 0 5%", height: "12%" }}
               variant="outlined"
             >

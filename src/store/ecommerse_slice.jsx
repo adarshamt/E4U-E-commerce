@@ -5,7 +5,8 @@ import { createSlice } from "@reduxjs/toolkit";
   const initial_state ={
 
      login : false,
-     sidebar :false
+     sidebar :false,
+     admin_token:false
   }
 const E4U_slice =createSlice({
     name :"E4U_slice",
@@ -28,7 +29,16 @@ const E4U_slice =createSlice({
         sidebar_hide:(state)=>{
             state.sidebar=false
             return state
+        },
+        admin_login : (state)=>{
+
+            state.admin_token =true
+        },
+        admin_logout : (state)=>{
+
+            state.admin_token =false
         }
+    
     }
     
 })

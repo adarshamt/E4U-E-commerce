@@ -3,7 +3,7 @@ import "../Styles/Login.css";
 
 import Navbar from "../Componets/NavbarMui";
 import { useRef } from "react";
-import axios from "axios";
+import axios from "../Services/AxiosInstance";
 import { useDispatch } from "react-redux";
 import { login } from "../store/ecommerse_slice";
 
@@ -29,7 +29,7 @@ const UserLogin = () => {
     };
     try {
       const response = await axios.post(
-        "http://localhost:4743/user/login",
+        "user/login",
         body
       );
 
