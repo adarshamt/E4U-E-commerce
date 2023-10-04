@@ -14,6 +14,10 @@ import Navbar from "../Componets/NavbarMui";
 import { Breadcrumbs, Stack, Typography, Link } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
+import { ToastContainer, toast } from "react-toastify";
+import Cookies from "js-cookie";
+
+
 const ViewProducts = () => {
   const { id } = useParams();
   console.log(" id :", id);
@@ -93,26 +97,44 @@ const ViewProducts = () => {
 
   //  }
 
-  const addtoCartHandler = async ()=>{
+  const addtoCartHandler = async (id) => {
+    
+    const user_id = Cookies.get("userId");
+    console.log(" cookie id ----------------------", user_id)
 
-    const body ={
-      id
+    if (!user_id) {
+      window.alert(" Please log in to add to cart");
+      nav("/login");
     }
 
-    try{
+    const body = {
+      user_id,
+      product_id: id,
+    };
 
+    const notify = (msg) => toast(msg);
 
-     const response = await axios.post('http://localhost:4743/user/addtocart',body)
+    try {
+      const response = await axios.post(
+        "http://localhost:4743/user/addtocart",
+        body
+      );
 
-     console.log("---------------",response)
+      console.log(
+        "************* add to cart response**** ",
+        response.data.status
+      );
+
+      const status_message = response.data.message;
+      console.log(status_message, "*****************************");
+
+      notify(status_message);
+
+      // window.alert(status_message)
+    } catch (error) {
+      console.log(" addto cart axios error", error);
     }
-
-    catch(err){
-
-      console.log(" add to cart axios error",err)
-    }
-
-  }
+  };
 
   function handleClick(event) {
     event.preventDefault();
@@ -293,12 +315,25 @@ const ViewProducts = () => {
               <Box
                 sx={{ display: "flex", gap: 1.5, "& > button": { flex: 1 } }}
               >
-                <Button onClick={addtoCartHandler} variant="outlined" color="neutral">
+                <Button onClick={()=>addtoCartHandler(data._id)} variant="outlined" color="neutral">
                   Add to cart
                 </Button>
-                <Button variant="solid" color="primary">
+                {/* <Button variant="solid" color="primary">
                   Buy now
-                </Button>
+                </Button> */}
+
+                 <ToastContainer
+                  position="top-left"
+                  autoClose={1000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="light"
+                />
               </Box>
             </CardContent>
           </Card>

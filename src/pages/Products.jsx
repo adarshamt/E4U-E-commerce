@@ -215,7 +215,9 @@ const Products = () => {
                     <img src={itm.images[0]?.url} alt="orange" />
                   </div>
                   <div className="contentBx">
-                    <h2>{itm.productName}</h2>
+                  {itm.productName.length > 10
+                 ?<h3>{ itm.productName.substring(0, 18) }</h3>
+                  : <h3>{ itm.productName} </h3>}
                     {/* <div className="size">  
            <h3>1 kg: 100</h3>  
            <span>7</span>  
@@ -225,7 +227,7 @@ const Products = () => {
           </div>   */}
                     <h4 style={{ color: "#002bff73" }}>Price : ₹{itm.price}</h4>
 
-                    <a href="#">Buy Now</a>
+                    {/* <a href="#">Buy Now</a> */}
                   </div>
                 </div>
               </div>

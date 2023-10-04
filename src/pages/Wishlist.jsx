@@ -24,7 +24,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function wishlist() {
+export default function Wishlist() {
   const user_id = Cookies.get("userId");
 
   const [product, setProduct] = useState([]);

@@ -33,11 +33,11 @@ const Cart = () => {
   const [carttotal, setCartTotal] = React.useState(0);
 
   const nav = useNavigate();
-
+  
   const user_id = Cookies.get("userId");
-
+  
   const deliveryCharge = (15 / 100) * carttotal;
-
+  
   const getCartItems = async () => {
     try {
       const response = await axios.get(
@@ -48,6 +48,7 @@ const Cart = () => {
           },
         }
       );
+    console.log("cart response -----------------",response)
 
       setProducts(response.data.products);
       console.log(" response products ------", response.data);
@@ -149,7 +150,7 @@ const Cart = () => {
     }
   };
 
-              // console.log("product length -------------",products.length)
+  // console.log("product length -------------",products.length)
   return (
     <>
       <Navbar />
@@ -160,67 +161,60 @@ const Cart = () => {
             <Stack spacing={6}>
               {products && (
                 <>
+                  <>
+                    {products.length > 0 ? (
+                      products.map((itm, index) => (
+                        <Item
+                          key={index}
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                          }}
+                        >
+                          <img
+                            style={{ width: "70px", height: "90px" }}
+                            src={itm.images[0].url}
+                            alt=" no image found"
+                          />
+                          <Typography component={"span"} variant="h6">
+                            {" "}
+                            {itm.productName}
+                          </Typography>
+                          <RemoveCircleIcon />
+                          <TextField style={{ width: "50px" }} value={1} />
+                          <AddCircleIcon />
 
+                          <TextField
+                            value={itm.price}
+                            style={{ width: "100px" }}
+                            id="standard-basic"
+                            variant="standard"
+                          />
 
-                    return (
-                      <>
-                        {products.length > 0 ? (
-                          products.map((itm, index) => (
-                            <Item
-                            key={index}
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              alignItems: "center",
-                            }}
-                          >
-                            <img
-                              style={{ width: "70px", height: "90px" }}
-                              src={itm.images[0].url}
-                              alt=" no image found"
-                            />
-                            <Typography component={"span"} variant="h6">
-                              {" "}
-                              {itm.productName}
-                            </Typography>
-                            <RemoveCircleIcon />
-                            <TextField style={{ width: "50px" }} value={1} />
-                            <AddCircleIcon />
+                          <HighlightOffIcon
+                            onClick={() => deletItemHandler(itm._id)}
+                          />
+                        </Item>
+                      ))
+                    ) : (
+                      <Item>
+                        <h2>cart is empty</h2>
+                      </Item>
 
-                            <TextField
-                              value={itm.price}
-                              style={{ width: "100px" }}
-                              id="standard-basic"
-                              variant="standard"
-                            />
+                      // <Item>
+                      //   <TextField
+                      //     style={{ width: "500px" }}
+                      //     value={54545454}
+                      //   />
 
-                            <HighlightOffIcon
-                              onClick={() => deletItemHandler(itm._id)}
-                            />
-                          </Item>
-                       ))
-
-                        ) : (
-                          <Item>
-                             
-                             <h2>cart is empty</h2>
-
-                          </Item>
-                             
-                          // <Item>
-                          //   <TextField
-                          //     style={{ width: "500px" }}
-                          //     value={54545454}
-                          //   />
-
-                          //   <img
-                          //     style={{ width: "70px", height: "90px" }}
-                          //     src="https://mir-s3-cdn-cf.behance.net/projects/404/95974e121862329.Y3JvcCw5MjIsNzIxLDAsMTM5.png"
-                          //   />
-                          // </Item>
-                        )}
-                      </>
-                    );
+                      //   <img
+                      //     style={{ width: "70px", height: "90px" }}
+                      //     src="https://mir-s3-cdn-cf.behance.net/projects/404/95974e121862329.Y3JvcCw5MjIsNzIxLDAsMTM5.png"
+                      //   />
+                      // </Item>
+                    )}
+                  </>
                 </>
               )}
             </Stack>

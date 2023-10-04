@@ -34,7 +34,7 @@
 .container .card {  
   position: relative;  
   width: 320px;  
-  height: 450px;  
+  height: 400px;  
   background: #ebebeb;  
   border-radius: 20px;  
   overflow: hidden;  
@@ -76,7 +76,7 @@
 }  
 .container .card:hover .imgBx {  
   top: 0%;  
-  transform: translateY(-25%);  
+  transform: translateY(-15%);  
   /* bug */  
 }  
 .container .card .imgBx img {  
@@ -96,7 +96,7 @@
   z-index: 90;  
 }  
 .container .card:hover .contentBx {  
-  height: 210px;  
+  height: 150px;  
 }  
 .container .card .contentBx h2 {  
   position: relative;  
