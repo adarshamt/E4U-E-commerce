@@ -17,6 +17,7 @@ import Cookies from "js-cookie";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AddIcon from "@mui/icons-material/Add";
 
 const StoreProducts = () => {
   const [products, setProducts] = useState([]);
@@ -92,7 +93,7 @@ const StoreProducts = () => {
         style={{
           width: "100%",
           minHeight: "100vh",
-          backgroundColor: "#EDE4FF",
+          backgroundColor: "#F3FDE8",
         }}
         className="str_dsply_pdts"
       >
@@ -127,6 +128,8 @@ const StoreProducts = () => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
+                backgroundColor:'transparent',
+                boxShadow:"none"
               }}
             >
               <CardMedia
@@ -143,9 +146,22 @@ const StoreProducts = () => {
                 </Typography>
               </CardContent>
               <CardActions color="yellow">
-                <Button size="medium">Buy now</Button>
-                <Button onClick={() => addtoCartHandler(itm._id)} size="medium">
+                {/* <Button size="medium">Buy now</Button> */}
+                <Button
+                  style={{
+                    border: "2px solid ",
+                    width: "100%",
+                    borderRadius: "250px",
+                    display: "flex",
+                    justifyContent:'space-between',
+                    borderWidth:'.02rem',
+                    borderColor:'#B5CB99'
+                  }}
+                  onClick={() => addtoCartHandler(itm._id)}
+                  size="medium"
+                >
                   Add to cart
+                  <AddIcon />
                 </Button>
                 <ToastContainer
                   position="top-left"

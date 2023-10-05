@@ -26,8 +26,12 @@ import { useEffect } from "react";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { cart_counter } from "../store/ecommerse_slice";
+
 
 const Cart = () => {
+  const dispatch =useDispatch()
   // let products;
   const [products, setProducts] = React.useState([]);
   const [carttotal, setCartTotal] = React.useState(0);
@@ -51,7 +55,11 @@ const Cart = () => {
     console.log("cart response -----------------",response)
 
       setProducts(response.data.products);
-      console.log(" response products ------", response.data);
+      console.log(" response products ------", response.data.products.length);
+     
+      const count = response.data.products.length
+      dispatch(cart_counter({count}))
+
       setCartTotal(response.data.total);
 
       console.log(" cart total ----------------", carttotal);

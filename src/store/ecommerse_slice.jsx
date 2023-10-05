@@ -6,7 +6,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
      login : false,
      sidebar :false,
-     admin_token:false
+     admin_token:false,
+     cart_count:0,
+     wishlist_count:0
   }
 const E4U_slice =createSlice({
     name :"E4U_slice",
@@ -37,11 +39,19 @@ const E4U_slice =createSlice({
         admin_logout : (state)=>{
 
             state.admin_token =false
+        },
+        cart_counter :(state,action)=>{
+            const count = action.payload.count
+            state.cart_count =count
+        },
+        wishlist_counter :(state,action)=>{
+            const count = action.payload.count 
+            state.wishlist_count =count
         }
     
     }
     
 })
 
-export const {login,logout,sidebar_show,sidebar_hide} =E4U_slice.actions
+export const {login,logout,sidebar_show,sidebar_hide,cart_counter,wishlist_counter} =E4U_slice.actions
 export default E4U_slice.reducer

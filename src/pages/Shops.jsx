@@ -122,12 +122,12 @@ const Shops = () => {
    {data.filter((item) =>item.category=='Grocery').map((itm)=>(
     <>
     
-                 <Card key={itm.id} style={{ width: '18rem',padding:'3%',border:'1px solid #e0e0e0',backgroundColor:'transparent',
+                 <Card onClick={()=>nav(`/storeproducts/${itm._id}`)} key={itm.id} style={{ width: '18rem',padding:'3%',border:'1px solid #e0e0e0',backgroundColor:'transparent',
                                 borderRadius:'24px' }}>
                     <Card.Img variant="top" src={itm.image[0][0].url} />
                      <Card.Body>
                        <Card.Title>
-                         {itm.storName }
+                         {itm.storeName }
                          
                          
                          </Card.Title>
@@ -148,12 +148,12 @@ const Shops = () => {
    {data.filter((item) =>item.category=='Fruits').map((itm)=>(
     <>
     
-                 <Card key={itm.id} style={{ width: '18rem',padding:'3%',border:'1px solid #e0e0e0',backgroundColor:'transparent',
+                 <Card onClick={()=>nav(`/storeproducts/${itm._id}`)} key={itm.id} style={{ width: '18rem',padding:'3%',border:'1px solid #e0e0e0',backgroundColor:'transparent',
                                 borderRadius:'24px' }} >
                     <Card.Img variant="top" src={itm.image[0][0].url} />
                      <Card.Body>
                        <Card.Title>
-                         {itm.storName}
+                         {itm.storeName}
                          
                          
                          </Card.Title>
@@ -174,12 +174,12 @@ const Shops = () => {
    {data.filter((item) =>item.category=='Vegitables').map((itm)=>(
     <>
     
-                 <Card key={itm.id} style={{ width: '18rem',padding:'3%',border:'1px solid #e0e0e0',backgroundColor:'transparent',
+                 <Card onClick={()=>nav(`/storeproducts/${itm._id}`)} key={itm.id} style={{ width: '18rem',padding:'3%',border:'1px solid #e0e0e0',backgroundColor:'transparent',
                                 borderRadius:'24px' }} >
                     <Card.Img variant="top" src={itm.image[0][0].url} />
                      <Card.Body>
                        <Card.Title>
-                         {itm.storName}
+                         {itm.storeName}
                         
                          
                          
@@ -201,12 +201,12 @@ const Shops = () => {
    {data.filter((item) =>item.category=='Meat').map((itm)=>(
     <>
     
-                 <Card key={itm.id} style={{ width: '18rem',padding:'3%',border:'1px solid #e0e0e0',backgroundColor:'transparent',
+                 <Card onClick={()=>nav(`/storeproducts/${itm._id}`)} key={itm.id} style={{ width: '18rem',padding:'3%',border:'1px solid #e0e0e0',backgroundColor:'transparent',
                                 borderRadius:'24px' }} >
                     <Card.Img variant="top" src={itm.image[0][0].url} />
                      <Card.Body>
                        <Card.Title>
-                         {itm.storName}
+                         {itm.storeName}
                         
                          
                          </Card.Title>
@@ -227,12 +227,12 @@ const Shops = () => {
    {data.filter((item) =>item.category=='Fish').map((itm)=>(
     <>
     
-                 <Card key={itm.id} style={{ width: '18rem',padding:'3%',border:'1px solid #e0e0e0',backgroundColor:'transparent',
+                 <Card onClick={()=>nav(`/storeproducts/${itm._id}`)} key={itm.id} style={{ width: '18rem',padding:'3%',border:'1px solid #e0e0e0',backgroundColor:'transparent',
                                 borderRadius:'24px' }} >
                     <Card.Img variant="top" src={itm.image[0][0].url} />
                      <Card.Body>
                        <Card.Title>
-                         {itm.storName}
+                         {itm.storeName}
                         
                          
                          </Card.Title>
@@ -253,19 +253,19 @@ const Shops = () => {
    {data.filter((item) =>item.category=='Bakery').map((itm)=>(
     <>
     
-                 <Card key={itm.id} style={{ width: '18rem',padding:'3%',border:'1px solid #e0e0e0',backgroundColor:'transparent',
+                 <Card onClick={()=>nav(`/storeproducts/${itm._id}`)} key={itm.id} style={{ width: '18rem',padding:'3%',border:'1px solid #e0e0e0',backgroundColor:'transparent',
                                 borderRadius:'24px' }} >
                     <Card.Img variant="top" src={itm.image[0][0].url} />
                      <Card.Body>
                        <Card.Title>
-                         {itm.storName}
+                         {itm.storeName}
                         
                          
                          </Card.Title>
                          <Card.Text>
              
                          </Card.Text>
-                           <button onClick={()=>nav(`/storeproducts/${itm._id}`)} >Shop now</button>
+                           <Button color="success" variant="contained" onClick={()=>nav(`/storeproducts/${itm._id}`)} >Shop now</Button>
                        </Card.Body>
                    </Card>
              </>

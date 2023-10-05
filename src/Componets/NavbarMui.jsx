@@ -24,12 +24,15 @@ import Tooltip from '@mui/material/Tooltip';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Cookie from 'js-cookie'
-import {sidebar_show} from '../store/ecommerse_slice.jsx'
+import {cart_counter, sidebar_show} from '../store/ecommerse_slice.jsx'
 import Sidebar from './Sidebar.jsx';
 import { FcApproval } from 'react-icons/fc';
 import { Token } from '@mui/icons-material';
 import { Button } from 'react-bootstrap';
 import { useState } from 'react';
+import Cookies from 'js-cookie';
+
+import axios from '../Services/AxiosInstance.jsx'
 
  
 
@@ -222,6 +225,39 @@ export default function Navbarmui() {
     setSearchText(event.target.value); // Update the searchText state when input changes
   };
 
+  const user_id = Cookies.get("userId");
+
+   
+  const cartCounter = async ()=>{
+    try {
+      const response = await axios.get(
+        "http://localhost:4743/user/cart/products",
+        {
+          params: {
+            id: user_id,
+          },
+        }
+      );
+
+      console.log(" navabr *********************** ----------------------",response.data)
+
+      const count = response.data.products.length
+
+      dispatch(cart_counter({count}))
+
+      
+
+
+  }
+  catch (err) {
+  console.log("Get cart items error", err);
+}
+}
+
+React.useEffect(()=>{
+  cartCounter()
+},[])
+
   return (<>
     { (data.sidebar == true)?<Sidebar/>:null}   
     <Box sx={{ flexGrow: 1, backgroundColor:'red'}}>
@@ -270,11 +306,13 @@ export default function Navbarmui() {
             </Tooltip>
             <Tooltip title='Wish list' >
             <IconButton onClick={()=>nav('/wishlist')} size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={0} color="error">
+              <Badge badgeContent={5} color="error">
                 <FavoriteIcon  />
               </Badge>
             </IconButton>
             </Tooltip>
+
+          
 
             <Tooltip title="Cart">
             <IconButton
@@ -283,7 +321,7 @@ export default function Navbarmui() {
               aria-label="show 0 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={0} color="error">
+              <Badge badgeContent={data.cart_count} color="error">
                 {/* <NotificationsIcon /> */}
             <ShoppingCartIcon/>
               </Badge>
@@ -330,6 +368,7 @@ export default function Navbarmui() {
           <Typography onClick={()=>nav('/products')} variant="h6" color="inherit" component="div">
            Products
           </Typography>
+          
           <Typography onClick={()=>nav('/stores')} style={{marginLeft:'5%'}} variant="h6" color="inherit" component="div">
            Store
           </Typography>
