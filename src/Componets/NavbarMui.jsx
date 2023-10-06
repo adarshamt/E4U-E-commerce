@@ -27,12 +27,13 @@ import Cookie from 'js-cookie'
 import {cart_counter, sidebar_show} from '../store/ecommerse_slice.jsx'
 import Sidebar from './Sidebar.jsx';
 import { FcApproval } from 'react-icons/fc';
-import { Token } from '@mui/icons-material';
+import { Style, Token } from '@mui/icons-material';
 import { Button } from 'react-bootstrap';
 import { useState } from 'react';
 import Cookies from 'js-cookie';
 
 import axios from '../Services/AxiosInstance.jsx'
+import '../Styles/Navbar.css'
 
  
 
@@ -77,9 +78,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 
+<style></style>
+
 
 // **************** Start *******************
-export default function Navbarmui() {
+export default function Navbarmui(  {buttonClicked} ) {
   const data= useSelector(state=>state.E4U_slice)
   console.log(" redux data :",data)
 
@@ -89,6 +92,12 @@ export default function Navbarmui() {
 
   const checkToken = Cookie.get("token")
   console.log("check token",checkToken)
+
+const [couer, setCouer] = useState(false)
+   console.log( "navbar couter*********************",buttonClicked)
+
+
+
 
   const sidebarHandler = ()=>{
 
@@ -258,6 +267,8 @@ React.useEffect(()=>{
   cartCounter()
 },[])
 
+
+
   return (<>
     { (data.sidebar == true)?<Sidebar/>:null}   
     <Box sx={{ flexGrow: 1, backgroundColor:'red'}}>
@@ -306,7 +317,7 @@ React.useEffect(()=>{
             </Tooltip>
             <Tooltip title='Wish list' >
             <IconButton onClick={()=>nav('/wishlist')} size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={5} color="error">
+              <Badge badgeContent={data.wishlist_count} color="error">
                 <FavoriteIcon  />
               </Badge>
             </IconButton>
@@ -365,11 +376,11 @@ React.useEffect(()=>{
           {/* <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton> */}
-          <Typography onClick={()=>nav('/products')} variant="h6" color="inherit" component="div">
+          <Typography className='product_button' onClick={()=>nav('/products')} variant="h6" color="inherit" component="div">
            Products
           </Typography>
           
-          <Typography onClick={()=>nav('/stores')} style={{marginLeft:'5%'}} variant="h6" color="inherit" component="div">
+          <Typography className='product_button' onClick={()=>nav('/stores')} style={{marginLeft:'5%'}} variant="h6" color="inherit" component="div">
            Store
           </Typography>
         </Toolbar>

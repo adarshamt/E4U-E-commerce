@@ -96,6 +96,8 @@
   z-index: 90;  
 }  
 .container .card:hover .contentBx {  
+  cursor: pointer;  
+
   height: 150px;  
 }  
 .container .card .contentBx h2 {  
@@ -190,3 +192,8 @@
   width: auto;
   height: auto;
 } */
+
+.card:hover {
+
+  cursor: pointer;
+}

@@ -46,7 +46,14 @@ const E4U_slice =createSlice({
         },
         wishlist_counter :(state,action)=>{
             const count = action.payload.count 
-            state.wishlist_count =count
+            if(count != undefined){
+
+                state.wishlist_count =count
+            }
+            else{
+
+                state.wishlist_count =0
+            }
         }
     
     }

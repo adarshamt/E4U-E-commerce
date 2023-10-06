@@ -13,6 +13,8 @@ import Products from "./Products";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { wishlist_counter } from "../store/ecommerse_slice";
 
 // import ClearIcon from "@mui/icons-material/Clear";
 
@@ -29,6 +31,8 @@ export default function Wishlist() {
 
   const [product, setProduct] = useState([]);
 
+  const dispatch = useDispatch()
+
   console.log(" +++++++++++++++++++++ user id +++++++++++++", user_id);
   const fechDataHandler = async () => {
     try {
@@ -38,10 +42,13 @@ export default function Wishlist() {
 
       console.log(
         "---------response products ------------",
-        response.data.products
+        response.data.products.length
       );
+      const count =response.data.products.length
 
       setProduct(response.data.products);
+      dispatch(wishlist_counter({count}))
+
     } catch (error) {
       console.log("error", error);
     }

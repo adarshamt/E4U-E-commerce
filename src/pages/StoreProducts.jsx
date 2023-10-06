@@ -18,13 +18,19 @@ import Cookies from "js-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddIcon from "@mui/icons-material/Add";
+import { useDispatch } from "react-redux";
+import { cart_counter } from "../store/ecommerse_slice";
 
 const StoreProducts = () => {
   const [products, setProducts] = useState([]);
   const [storename, setStorename] = useState("");
+  const dispatch = useDispatch()
 
   const { id } = useParams(); // store id ***************
   const nav = useNavigate();
+
+  const user_id = Cookies.get("userId");
+
   const body = {
     id,
   };
@@ -50,7 +56,6 @@ const StoreProducts = () => {
   }, []);
 
   const addtoCartHandler = async (id) => {
-    const user_id = Cookies.get("userId");
 
     if (!user_id) {
       window.alert(" Please log in to add to cart");
@@ -79,12 +84,35 @@ const StoreProducts = () => {
       console.log(status_message, "*****************************");
 
       notify(status_message);
-
+    getCartItems()
       // window.alert(status_message)
     } catch (error) {
       console.log(" addto cart axios error", error);
     }
   };
+
+  const getCartItems = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:4743/user/cart/products",
+        {
+          params: {
+            id: user_id,
+          },
+        }
+      );
+
+      console.log(" products length ******************* ------", response.data.products.length);
+
+      const count = response.data.products.length;
+      
+      dispatch(cart_counter({ count }));
+    } catch (err) {
+      console.log("Get cart items error", err);
+    }
+  };
+  
+
 
   return (
     <>

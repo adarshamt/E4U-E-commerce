@@ -52,12 +52,14 @@ const Cart = () => {
           },
         }
       );
-    console.log("cart response -----------------",response)
+    
 
       setProducts(response.data.products);
-      console.log(" response products ------", response.data.products.length);
+      console.log(" products length ******************* ------", response.data);
      
       const count = response.data.products.length
+      console.log("////////////////////////// count :",count)
+
       dispatch(cart_counter({count}))
 
       setCartTotal(response.data.total);

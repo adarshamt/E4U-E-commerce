@@ -15,6 +15,8 @@ import Cookies from "js-cookie";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { wishlist_counter } from "../store/ecommerse_slice";
 
 const Products = () => {
   const [data, setData] = useState([]);
@@ -24,6 +26,8 @@ const Products = () => {
 
   const nav = useNavigate();
   const user_id = Cookies.get("userId");
+  
+  const dispatch =useDispatch() 
    
   
 
@@ -50,9 +54,12 @@ const Products = () => {
         params: { user_id },
       });
       console.log(
-        "*************** wishlist response*************",
-        response.data.ids
+        "*************** wishlist response products ----------------------------*************",
+        response.data.products.length
       );
+      const count = response.data.products.length
+      dispatch(wishlist_counter({count}))
+      
       setWishlist(response.data.ids); // Store the user's wishlist data in state
     } catch (error) {
       console.log("wishlist error", error);
@@ -70,7 +77,7 @@ const Products = () => {
   const notify = (msg) => toast(msg);
 
   const addtowishlist = async (id) => {
-    console.log("************* add to wishlist handler*********");
+    
     try {
       
       const product_id = id;
@@ -118,10 +125,29 @@ const Products = () => {
     }
   };
 
+
+  const fechDataHandler = async () => {
+    try {
+      const response = await axios.get("http://localhost:4743/user/wishlist", {
+        params: { user_id },
+      });
+
+      console.log(
+        "---------response products ------------",
+        response.data.products.length
+      );
+      const count =response.data.products.length
+
+
+      dispatch(wishlist_counter({count}))
+
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   const breadcrumbs = [
-    // <Link underline="hover" key="1" color="inherit" href="/" onClick={handleClick}>
-    //   Home
-    // </Link>,
+    
     <Link
       underline="hover"
       key="2"
@@ -156,6 +182,7 @@ const Products = () => {
       <div className="supr_main_div_pdt">
         {data.map((itm) => (
           <>
+          <Link>
             <div key={itm._id} className="Pdt_main_div">
               <div  className="container">
                 <div className="card">
@@ -232,6 +259,7 @@ const Products = () => {
                 </div>
               </div>
             </div>
+            </Link>
           </>
         ))}
       </div>

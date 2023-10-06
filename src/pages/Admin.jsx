@@ -563,13 +563,13 @@ function Adminpanel() {
             backgroundColor: "#D0E7D2",
             display: "flex",
             alignItems: "start",
-
+              
             justifyContent: "center",
             padding: "5%",
             position: "static",
           }}
         >
-          <TableContainer component={Paper}>
+          <TableContainer  component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
@@ -581,7 +581,12 @@ function Adminpanel() {
                   <StyledTableCell align="center">Action</StyledTableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
+              </Table>
+              </TableContainer>
+              <TableContainer>
+              
+                <Table sx={{ minWidth: 700 }} aria-label="customized table">
+              <TableBody    >
                 {products.map((row) => (
                   <StyledTableRow key={row.name}>
                     <StyledTableCell align="center" sx={{ width: "12rem" }}>

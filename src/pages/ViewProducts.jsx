@@ -16,7 +16,8 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 import { ToastContainer, toast } from "react-toastify";
 import Cookies from "js-cookie";
-
+import { cart_counter } from "../store/ecommerse_slice";
+import { useDispatch } from "react-redux";
 
 const ViewProducts = () => {
   const { id } = useParams();
@@ -26,44 +27,29 @@ const ViewProducts = () => {
   const [data, setData] = useState([]);
   const [image, setImage] = useState("");
   const [pname, setPname] = useState();
-  
+  const [storename, setstorename] = useState()
 
-  // const getProducts = async () => {
-  //   console.log("+++++++++++++++++++++++++");
-  //   try {
-  //     const response = await axios.get(
-  //       `http://localhost:4743/product/view/${id}`
-  //     );
+  const user_id = Cookies.get("userId");
 
-  //     // console.log(" products res url :",response.data.data.images[0].url)
-  //     console.log(response.data.data, "response");
-  //     setData(response.data.data);
+  const dispatch = useDispatch();
 
-  //     // console.log(" data use state :",response.data.data)
-  //     setImage(response.data.image.url);
-  //     // console.log("image : ",image)
-  //     let productname = response.data.data.productName;
-  //     // console.log("product name :",productname)
-  //     setPname(productname);
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  // };
+  const [buttonClicked, setButtonClicked] = useState(false);
+
   useEffect(() => {
-  console.log(id,"+++++++++++++++++++++++++");
+    
 
     const getProducts = async () => {
       try {
         const response = await axios.get(
           `http://localhost:4743/product/view/${id}`
         );
-  
+
         // console.log(" products res url :",response.data.data.images[0].url)
-        console.log(response.data.data, "response");
+        console.log(response.data.data.store_id.storeName, "response ---------------------------------");
         setData(response.data.data);
-  
-        console.log(" data use state :",response.data.data.images[0].url)
-        
+         setstorename(response.data.data.store_id.storeName)
+        console.log(" data use state :", response.data.data.images[0].url);
+
         setImage(response.data.data.images[0].url);
 
         // console.log("image : ",image)
@@ -78,29 +64,9 @@ const ViewProducts = () => {
     getProducts();
   }, []);
 
-  // const user_id = Cookies.get("userId")
-
-  //  const addtoCartHandler = async ()=>{
-
-  //     try{
-
-  //       const response = await axios.post('http://localhost:4743/')
-
-  //       console.log(response," : response of add to cart------------------")
-  //     }
-  //     catch(err){
-         
-  //       console.log(" add to cart error :", err)
-
-  //     }
-
-
-  //  }
-
   const addtoCartHandler = async (id) => {
-    
     const user_id = Cookies.get("userId");
-    console.log(" cookie id ----------------------", user_id)
+    console.log(" cookie id ----------------------", user_id);
 
     if (!user_id) {
       window.alert(" Please log in to add to cart");
@@ -129,6 +95,11 @@ const ViewProducts = () => {
       console.log(status_message, "*****************************");
 
       notify(status_message);
+
+      setButtonClicked(true);
+ 
+      getCartItems()
+
 
       // window.alert(status_message)
     } catch (error) {
@@ -164,12 +135,34 @@ const ViewProducts = () => {
     </Typography>,
   ];
 
-  console.log(data, "===========");
+  const getCartItems = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:4743/user/cart/products",
+        {
+          params: {
+            id: user_id,
+          },
+        }
+      );
+
+      console.log(" products length ******************* ------", response.data.products.length);
+
+      const count = response.data.products.length;
+      
+      dispatch(cart_counter({ count }));
+    } catch (err) {
+      console.log("Get cart items error", err);
+    }
+  };
+
+
+
   return (
     <>
       <Navbar />
 
-      <div style={{ margin: '2% 0 0 2%' }} className="BreadCrumbs">
+      <div style={{ margin: "2% 0 0 2%" }} className="BreadCrumbs">
         <Stack spacing={2}>
           <Breadcrumbs
             separator={<NavigateNextIcon fontSize="small" />}
@@ -195,9 +188,11 @@ const ViewProducts = () => {
             justifyContent: "center",
             width: "80%",
             height: "80%",
-            alignItems:'start',
+            alignItems: "start",
             position: "relative",
             overflow: { xs: "auto", sm: "initial" },
+            backgroundColor:'yellow',
+            
           }}
         >
           <Box
@@ -262,11 +257,10 @@ const ViewProducts = () => {
           /> 
           )})}</>} */}
               <img
-                style={{ padding: "5%",width:'25rem',height:'25rem' }}
-                
+                style={{ padding: "5%", width: "25rem", height: "25rem" }}
                 src={image}
                 // srcSet={data.images[0].url}
-              
+
                 loading="lazy"
                 alt=" no image found"
               />
@@ -303,7 +297,7 @@ const ViewProducts = () => {
                   <Typography level="body-xs" fontWeight="lg">
                     Shop
                   </Typography>
-                  <Typography fontWeight="lg">{data.id}</Typography>
+                  <Typography fontWeight="lg">{storename}</Typography>
                 </div>
                 <div>
                   <Typography level="body-xs" fontWeight="lg">
@@ -315,14 +309,18 @@ const ViewProducts = () => {
               <Box
                 sx={{ display: "flex", gap: 1.5, "& > button": { flex: 1 } }}
               >
-                <Button onClick={()=>addtoCartHandler(data._id)} variant="outlined" color="neutral">
+                <Button
+                  onClick={() => addtoCartHandler(data._id)}
+                  variant="outlined"
+                  color="neutral"
+                >
                   Add to cart
                 </Button>
                 {/* <Button variant="solid" color="primary">
                   Buy now
                 </Button> */}
 
-                 <ToastContainer
+                <ToastContainer
                   position="top-left"
                   autoClose={1000}
                   hideProgressBar={false}
