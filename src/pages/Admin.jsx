@@ -569,23 +569,22 @@ function Adminpanel() {
             position: "static",
           }}
         >
-          <TableContainer  component={Paper}>
+          <TableContainer  component={Paper} sx={{width:'100%'}}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
-                <TableRow>
-                  <StyledTableCell align="center">product</StyledTableCell>
-                  <StyledTableCell align="center">Category</StyledTableCell>
-                  <StyledTableCell align="center">Image</StyledTableCell>
-                  <StyledTableCell align="center">Price ₹</StyledTableCell>
-                  <StyledTableCell align="center">Store</StyledTableCell>
-                  <StyledTableCell align="center">Action</StyledTableCell>
+                <TableRow >
+                  <StyledTableCell  align="center" sx={{ position: "sticky", top: 0, zIndex: 1 }} >product</StyledTableCell>
+                  <StyledTableCell  align="center" sx={{ position: "sticky", top: 0, zIndex: 1 }} >Category</StyledTableCell>
+                  <StyledTableCell  align="center" sx={{ position: "sticky", top: 0, zIndex: 1 }}>Image</StyledTableCell>
+                  <StyledTableCell  align="center" sx={{ position: "sticky", top: 0, zIndex: 1 }} >Price ₹</StyledTableCell>
+                  <StyledTableCell  align="center" sx={{ position: "sticky", top: 0, zIndex: 1 }}>Store</StyledTableCell>
+                  <StyledTableCell  align="center" sx={{ position: "sticky", top: 0, zIndex: 1 }}>Action</StyledTableCell>
                 </TableRow>
               </TableHead>
-              </Table>
-              </TableContainer>
-              <TableContainer>
+              {/* </Table>
+             
               
-                <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                <Table sx={{ minWidth: 700 }} aria-label="customized table"> */}
               <TableBody    >
                 {products.map((row) => (
                   <StyledTableRow key={row.name}>
