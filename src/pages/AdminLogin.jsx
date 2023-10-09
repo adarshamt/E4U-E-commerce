@@ -50,8 +50,7 @@ function AdminLogin() {
   // Function to handle form submission
   const handleSubmit = async(e) => {
     e.preventDefault(); // Prevent the default form submission behavior
-    console.log('Username:', username);
-    console.log('Password:', password);
+   
 
     const body = {
       username,password
@@ -66,7 +65,7 @@ function AdminLogin() {
         
         if (response.status == 200){
           
-          console.log("admin login  if ----------------- token -------------------",)
+          
 
           cookie.set("admin_id", admin_token);
               

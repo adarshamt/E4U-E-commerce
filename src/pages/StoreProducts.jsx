@@ -24,7 +24,7 @@ import { cart_counter } from "../store/ecommerse_slice";
 const StoreProducts = () => {
   const [products, setProducts] = useState([]);
   const [storename, setStorename] = useState("");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const { id } = useParams(); // store id ***************
   const nav = useNavigate();
@@ -34,7 +34,6 @@ const StoreProducts = () => {
   const body = {
     id,
   };
-  console.log(" store id:", body);
 
   const getproducts = async () => {
     try {
@@ -44,7 +43,6 @@ const StoreProducts = () => {
         },
       });
 
-      console.log(" response :", response.data.store.storName);
       setProducts(response.data.data);
       setStorename(response.data.store.storeName);
     } catch (err) {
@@ -56,7 +54,6 @@ const StoreProducts = () => {
   }, []);
 
   const addtoCartHandler = async (id) => {
-
     if (!user_id) {
       window.alert(" Please log in to add to cart");
       nav("/login");
@@ -75,17 +72,10 @@ const StoreProducts = () => {
         body
       );
 
-      console.log(
-        "************* add to cart response**** ",
-        response.data.status
-      );
-
       const status_message = response.data.message;
-      console.log(status_message, "*****************************");
 
       notify(status_message);
-    getCartItems()
-      // window.alert(status_message)
+      getCartItems();
     } catch (error) {
       console.log(" addto cart axios error", error);
     }
@@ -102,17 +92,13 @@ const StoreProducts = () => {
         }
       );
 
-      console.log(" products length ******************* ------", response.data.products.length);
-
       const count = response.data.products.length;
-      
+
       dispatch(cart_counter({ count }));
     } catch (err) {
       console.log("Get cart items error", err);
     }
   };
-  
-
 
   return (
     <>
@@ -156,8 +142,8 @@ const StoreProducts = () => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                backgroundColor:'transparent',
-                boxShadow:"none"
+                backgroundColor: "transparent",
+                boxShadow: "none",
               }}
             >
               <CardMedia
@@ -181,9 +167,9 @@ const StoreProducts = () => {
                     width: "100%",
                     borderRadius: "250px",
                     display: "flex",
-                    justifyContent:'space-between',
-                    borderWidth:'.02rem',
-                    borderColor:'#B5CB99'
+                    justifyContent: "space-between",
+                    borderWidth: ".02rem",
+                    borderColor: "#B5CB99",
                   }}
                   onClick={() => addtoCartHandler(itm._id)}
                   size="medium"

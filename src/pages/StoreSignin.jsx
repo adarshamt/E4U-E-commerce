@@ -18,12 +18,12 @@ const StoreSignin = () => {
     e.preventDefault()
 
     const email = ipref.current.email.value
-    // console.log(" email :",email)
+    
     const password = ipref.current.password.value
 
     const body = { email,password}
 
-    // console.log(" body data :",body)
+   
 
 
     const response = await axios.post('http://localhost:4743/store/login',body)
@@ -31,9 +31,7 @@ const StoreSignin = () => {
     
     
     const token = response.data.token
-    console.log(" token :",token)
-    console.log("response*************************",response.data)
-    // cookie.set("userId", userId);
+   
 
 
     if(token){

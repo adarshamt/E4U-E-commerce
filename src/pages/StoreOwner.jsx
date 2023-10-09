@@ -20,9 +20,9 @@ import { useEffect } from "react";
 const StoreOwner = () => {
   const { id } = useParams();
   const store_id = Cookies.get("str_id");
-  console.log("----------------------store id-----------",store_id)
+ 
 
-  console.log(" owner store id :", id);
+ 
   const [validated, setValidated] = useState(false);
 
   const [formdata, setFormData] = useState({
@@ -34,7 +34,7 @@ const StoreOwner = () => {
     images: [],
   });
   const HandleInputChange = (event) => {
-    console.log("handle input change function");
+   
 
     const { name, value } = event.target;
 
@@ -43,7 +43,7 @@ const StoreOwner = () => {
       [name]: value,
     });
 
-    console.log("formdata ", formdata);
+   
   };
 
   const handleSubmitB = (event) => {
@@ -81,7 +81,7 @@ const StoreOwner = () => {
         }
       }
 
-      console.log("form data to send", formDataToSend);
+      
 
       const response = await axios.post("/store/addproduct", formDataToSend, {
         headers: {
@@ -90,10 +90,10 @@ const StoreOwner = () => {
         },
       });
 
-      console.log("Registration successful:", response.data.message);
+      
     } catch (error) {
       console.error("Registration error:", error);
-      console.log("Response:", error.response);
+      
     }
   };
   const [storename, setStorename] = useState("");
@@ -107,10 +107,10 @@ const StoreOwner = () => {
         },
       });
 
-      console.log(" response ++++++++++++++++++++++++++:", response.data.store.storeName);
+      
       
       setStorename( response.data.store.storeName);
-      console.log("storename ///////////////////////",storename)
+      
     } catch (err) {
       console.log("error :", err);
     }

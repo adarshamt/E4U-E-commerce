@@ -26,10 +26,8 @@ const Products = () => {
 
   const nav = useNavigate();
   const user_id = Cookies.get("userId");
-  
-  const dispatch =useDispatch() 
-   
-  
+
+  const dispatch = useDispatch();
 
   const getProducts = async () => {
     try {
@@ -42,24 +40,20 @@ const Products = () => {
   };
   useEffect(() => {
     getProducts();
-    if(user_id){
-    getWishlist();
+    if (user_id) {
+      getWishlist();
     }
   }, [user_id]);
- 
+
   const getWishlist = async () => {
     try {
-    
       const response = await axios.get(`http://localhost:4743/user/wishlist`, {
         params: { user_id },
       });
-      console.log(
-        "*************** wishlist response products ----------------------------*************",
-        response.data.products.length
-      );
-      const count = response.data.products.length
-      dispatch(wishlist_counter({count}))
-      
+
+      const count = response.data.products.length;
+      dispatch(wishlist_counter({ count }));
+
       setWishlist(response.data.ids); // Store the user's wishlist data in state
     } catch (error) {
       console.log("wishlist error", error);
@@ -77,9 +71,7 @@ const Products = () => {
   const notify = (msg) => toast(msg);
 
   const addtowishlist = async (id) => {
-    
     try {
-      
       const product_id = id;
       const body = {
         user_id,
@@ -92,10 +84,6 @@ const Products = () => {
       );
       notify(response.data.message);
       getWishlist();
-      console.log(
-        " add to wishlist response------------",
-        response.data.message
-      );
     } catch (error) {
       console.log(" add to wishlist error", error);
     }
@@ -103,8 +91,6 @@ const Products = () => {
 
   const removeFromWishlist = async (id) => {
     try {
-
-      
       const body = {
         user_id,
         product_id: id,
@@ -115,9 +101,7 @@ const Products = () => {
         body
       );
 
-      console.log(" response------------------", response.data.message);
       notify(response.data.message);
-
 
       getWishlist();
     } catch (error) {
@@ -125,29 +109,26 @@ const Products = () => {
     }
   };
 
+  // const fechDataHandler = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:4743/user/wishlist", {
+  //       params: { user_id },
+  //     });
 
-  const fechDataHandler = async () => {
-    try {
-      const response = await axios.get("http://localhost:4743/user/wishlist", {
-        params: { user_id },
-      });
+  //     console.log(
+  //       "---------response products ------------",
+  //       response.data.products.length
+  //     );
+  //     const count =response.data.products.length
 
-      console.log(
-        "---------response products ------------",
-        response.data.products.length
-      );
-      const count =response.data.products.length
+  //     dispatch(wishlist_counter({count}))
 
-
-      dispatch(wishlist_counter({count}))
-
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+  //   } catch (error) {
+  //     console.log("error", error);
+  //   }
+  // };
 
   const breadcrumbs = [
-    
     <Link
       underline="hover"
       key="2"
@@ -161,9 +142,6 @@ const Products = () => {
       Products
     </Typography>,
   ];
-
-
- 
 
   return (
     <>
@@ -182,83 +160,86 @@ const Products = () => {
       <div className="supr_main_div_pdt">
         {data.map((itm) => (
           <>
-          <Link>
-            <div key={itm._id} className="Pdt_main_div">
-              <div  className="container">
-                <div className="card">
-                  <div
-                    style={{
-                      width: "2rem",
-                      zIndex: "10000",
-                      height: "3rem",
-                      position: "absolute",
-                      top: "5%",
-                      left: "5%",
+            <Link>
+              <div key={itm._id} className="Pdt_main_div">
+                <div className="container">
+                  <div className="card">
+                    <div
+                      style={{
+                        width: "2rem",
+                        zIndex: "10000",
+                        height: "3rem",
+                        position: "absolute",
+                        top: "5%",
+                        left: "5%",
 
-                      color: "red",
-                    }}
-                  >
-                    {isProductInWishlist(itm._id) ? (
-                      <FavoriteIcon
-                        style={{
-                          position: "absolute",
-                          top: "5%",
-                          left: "5%",
-                          fontSize: "30px",
-                          colo33r: "red",
-                        }}
-                      onClick={() => removeFromWishlist(itm._id)}
-
+                        color: "red",
+                      }}
+                    >
+                      {isProductInWishlist(itm._id) ? (
+                        <FavoriteIcon
+                          style={{
+                            position: "absolute",
+                            top: "5%",
+                            left: "5%",
+                            fontSize: "30px",
+                            colo33r: "red",
+                          }}
+                          onClick={() => removeFromWishlist(itm._id)}
                         />
-                        ) : (
-                      <AiOutlineHeart
-                        style={{
-                          position: "absolute",
-                          top: "5%",
-                          left: "5%",
-                          fontSize: "30px",
-                          color: "red",
-                        }}
-                      onClick={() => addtowishlist(itm._id)}
+                      ) : (
+                        <AiOutlineHeart
+                          style={{
+                            position: "absolute",
+                            top: "5%",
+                            left: "5%",
+                            fontSize: "30px",
+                            color: "red",
+                          }}
+                          onClick={() => addtowishlist(itm._id)}
+                        />
+                      )}
+                      <ToastContainer
+                        position="top-left"
+                        autoClose={1000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
                       />
-                    )}
-                    <ToastContainer
-                      position="top-left"
-                      autoClose={1000}
-                      hideProgressBar={false}
-                      newestOnTop={false}
-                      closeOnClick
-                      rtl={false}
-                      pauseOnFocusLoss
-                      draggable
-                      pauseOnHover
-                      theme="light"
-                    />
-                  </div>
-                  <div
-                    onClick={() => nav(`/view/products/${itm._id}`)}
-                    className="imgBx"
-                  >
-                    <img src={itm.images[0]?.url} alt="orange" />
-                  </div>
-                  <div className="contentBx">
-                  {itm.productName.length > 10
-                 ?<h3>{ itm.productName.substring(0, 18) }</h3>
-                  : <h3>{ itm.productName} </h3>}
-                    {/* <div className="size">  
+                    </div>
+                    <div
+                      onClick={() => nav(`/view/products/${itm._id}`)}
+                      className="imgBx"
+                    >
+                      <img src={itm.images[0]?.url} alt="orange" />
+                    </div>
+                    <div className="contentBx">
+                      {itm.productName.length > 10 ? (
+                        <h3>{itm.productName.substring(0, 18)}</h3>
+                      ) : (
+                        <h3>{itm.productName} </h3>
+                      )}
+                      {/* <div className="size">  
            <h3>1 kg: 100</h3>  
            <span>7</span>  
            <span>8</span>  
            <span>9</span>  
            <span>10</span>  
           </div>   */}
-                    <h4 style={{ color: "#002bff73" }}>Price : ₹{itm.price}</h4>
+                      <h4 style={{ color: "#002bff73" }}>
+                        Price : ₹{itm.price}
+                      </h4>
 
-                    {/* <a href="#">Buy Now</a> */}
+                      {/* <a href="#">Buy Now</a> */}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
             </Link>
           </>
         ))}

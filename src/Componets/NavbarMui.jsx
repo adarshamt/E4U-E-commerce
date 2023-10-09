@@ -82,7 +82,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 // **************** Start *******************
-export default function Navbarmui(  {buttonClicked} ) {
+export default function Navbarmui(  {} ) {
   const data= useSelector(state=>state.E4U_slice)
   console.log(" redux data :",data)
 
@@ -93,8 +93,8 @@ export default function Navbarmui(  {buttonClicked} ) {
   const checkToken = Cookie.get("token")
   console.log("check token",checkToken)
 
-const [couer, setCouer] = useState(false)
-   console.log( "navbar couter*********************",buttonClicked)
+
+   
 
 
 
@@ -226,7 +226,7 @@ const [couer, setCouer] = useState(false)
     if (event.key === 'Enter') {
       // Your function to execute when Enter key is pressed
 
-      console.log("+++++++++++++++",event)
+      
       nav(`/search/${searchText} `)
     }
   };
@@ -248,7 +248,7 @@ const [couer, setCouer] = useState(false)
         }
       );
 
-      console.log(" navabr *********************** ----------------------",response.data)
+      
 
       const count = response.data.products.length
 

@@ -1,93 +1,87 @@
+.form-div {
+  display: flex;
 
-
-.form-div{
-
-    display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2%;
   
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2%;
-
-}
-.registration_form{
-
-    width: 400px;
-    height: 600px;
-    background-color: rgba(219, 197, 197, 0.1);
    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    
- 
-}
-input{
-    width: 70%;
-    height: 30px;
-    outline: none;
-    font-size: 16px;
-    text-align: center;
-    border-radius: 5px;
-    border: 0px;
-    margin: .5em;
+  
+  
+  background-color: rgba(196, 33, 33, 0.3);
 
 }
-.main_div{
-    display: flex;
-    align-items: center;
+.registration_form {
+  width: 60%;
+  height: 80%;
+  
+  /* background-color: rgba(219, 197, 197, 0.1); */
 
-    flex-direction: row;
-
-    width: 100%;
-    height: 100%;
-
-
-    background-color: rgb(163, 163, 46);
-    
-    background-image: url('https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80');
-    background-position:center;
-
-    background-size: cover;
+  display: flex;
+  
+  
+  align-items: center;
 }
- 
-.btn{
+input {
+  width: 70%;
+  height: 30px;
+  outline: none;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 5px;
+  border: 0px;
+  margin: 0.5em;
+}
+.main_div {
+  display: flex;
+  align-items: center;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 400px;
-    
-    margin: 20px;
- 
-   
+  flex-direction: row;
+ padding: 0 5% 0 5%;
+  width: 100%;
+  height: 100vh;
+
+  /* background-color: rgb(163, 163, 46); */
+
+  /* background-image: url("https://img.freepik.com/free-vector/social-media-marketing-mobile-phone-concept_23-2148431745.jpg?w=740&t=st=1696861163~exp=1696861763~hmac=f33e410b2a31126e0beee3080d5351018775ec204469c56e79b46f226661b7de"); */
+  background-position: center;
+background-repeat: no-repeat;
+  /* background-size: cover; */
 }
 
-.signup{
-    margin: 30px;
-    height: 35px;
-    border: none;
-    border-radius: 18px;
-    width: 90px;
-    box-shadow: 0 5px 30px rgba(22, 22, 21, 0.89);
+.btns_signup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 400px; */
 
-    font-size: 15px;
-    font-weight: 600;
- 
-    background-color: rgb(155, 231, 41);
-    color: black;
-    
+  /* margin: 20px; */
 }
-.login{
-    margin: 30px;
-    height: 35px;
-    border: none;
-    border-radius: 18px;
-    width: 90px;
-    box-shadow: 0 5px 30px rgba(22, 22, 21, 0.89);
 
-    font-size: 15px;
-    font-weight: 600;
-    color: aliceblue;
-    background-color: rgb(121, 121, 230);
+.signup_btn {
+  /* margin: 30px; */
+  height: 35px;
+  /* border: none; */
+  border-radius: 18px;
+  width: 90px;
+  /* box-shadow: 0 5px 30px rgba(22, 22, 21, 0.89); */
+
+  font-size: 15px;
+  font-weight: 600;
+
+  background-color: rgb(216, 219, 20);
+  color: black;
+}
+.login_btn {
+  margin: 30px;
+  height: 35px;
+  border: none;
+  border-radius: 18px;
+  width: 90px;
+  /* box-shadow: 0 5px 30px rgba(22, 22, 21, 0.89); */
+
+  font-size: 15px;
+  font-weight: 600;
+  color: aliceblue;
+  background-color: rgb(57, 57, 68);
 }

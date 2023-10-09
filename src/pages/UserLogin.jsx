@@ -15,13 +15,13 @@ const UserLogin = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
 
-  //  const store_data = useSelector(state=>state.E4U_slice)
+ 
 
   const loginHandler = async () => {
     const email = ipRef.current.email.value;
-    console.log("email", email);
+   
     const password = ipRef.current.password.value;
-    console.log(password);
+   
 
     const body = {
       email,
@@ -33,13 +33,13 @@ const UserLogin = () => {
         body
       );
 
-      console.log("login request response id :", response.data.user_id);
+     
       const data = response;
       const token = data.data.token;
       const userId = response.data.user_id;
 
       cookie.set("userId", userId);
-      console.log(data.data.token);
+     
       if (token) {
         cookie.set("token", token);
 
@@ -47,7 +47,7 @@ const UserLogin = () => {
 
         nav("/");
 
-        console.log("login after message", UserLogin);
+       
       }
     } catch (error) {
       window.alert("wrong credentials");

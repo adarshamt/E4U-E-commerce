@@ -19,7 +19,7 @@ const Search = () => {
   const { id } = useParams();
 
   const nav = useNavigate();
-  console.log(" ---------------------", id);
+ 
   const [data, setData] = useState([]);
 
   const getProducts = async () => {
@@ -34,13 +34,13 @@ const Search = () => {
   useEffect(() => {
     getProducts();
   }, []);
-  console.log("+++++++++++++++++++++++ data :", data);
+  
 
   const productFilter = data.filter((product) => {
     return product.productName.toLowerCase().includes(id.toLowerCase());
   });
 
-  console.log("product filter ****************", productFilter);
+  
 
   return (
     <>

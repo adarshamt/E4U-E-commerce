@@ -1,132 +1,103 @@
+import { useRef } from "react";
+import "../Styles/Signup.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Navbars from "../Componets/NavbarMui";
+import Map from "../Componets/MapBox";
 
+const Signup = () => {
+  const ipref = useRef();
 
+  const nav = useNavigate();
+  const registerHandler = async () => {
+    const Name = ipref.current.name.value;
 
-import { useRef } from 'react'
-import '../Styles/Signup.css'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-import  Navbars  from '../Componets/Navbar'
+    const Email = ipref.current.email.value;
 
+    const Phone = ipref.current.phone_number.value;
+    const Password = ipref.current.password.value;
 
+    const passItems = {
+      name: Name,
+      email: Email,
+      phone: Phone,
+      password: Password,
+    };
 
- const Signup = () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:4743/user/registraion",
+        passItems
+      );
 
-  const ipref= useRef()
-   
-  const nav = useNavigate()
-  const registerHandler = async() =>{
+      nav("/login");
+    } catch (error) {
+      "error", error;
+    }
+  };
 
-    
-    
-        const Name = ipref.current.name.value
-       console.log("name :", Name)
-        const Email= ipref.current.email.value
-        console.log(Email)
-         
-
-        const Phone = ipref.current.phone_number.value
-        const Password = ipref.current.password.value
-       
-    //  const Email = ipref.current.email.value
-    //  const Username= ipref.current.userName.value
-    //  const PhoneNumber = ipref.current.phoneNumber.value
-    //  const Password = ipref.current.password.value
-    //  const Address = ipref.current.address.value
-      
-     const passItems = {
-            name : Name ,
-           email:Email,
-        //   username:Username,
-           phone :Phone,
-          password: Password,
-        //   address : Address
-         }
-
-        console.log(passItems)
-        try {
-              const response= await axios.post("http://localhost:4743/user/registraion",passItems)
-               
-              console.log("response",response)
-              const data = response
-      
-              console.log(
-                "response",data
-              )
-
-              nav('/login')
-        }
-        catch(error){
-          console.log("error",error)
-        }
-      }
-
- 
-  
   return (
-
     <>
-      <Navbars/>
-    <div className='main_div'>
+      <Navbars />
+      <div className="main_div">
+        <div className="form-div">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+            ref={ipref}
+            className="registration_form"
+          >
+            <label>Name </label>
 
-      <div className='form-div'>
-
-     
-
-    <form onSubmit={(e)=>{e.preventDefault()}}  ref={ipref} className='registration_form'>
-
-         <label>Name </label>
-
-            <input name='name'   type='text' placeholder='name'/>
-
+            <input name="name" type="text" placeholder="name" />
 
             <label>Email </label>
 
-           <input  name='email'  type='Email' placeholder='Email'/>
+            <input name="email" type="Email" placeholder="Email" />
 
-           <label>Phone Number </label>
+            <label>Phone Number </label>
 
-          <input name='phone_number'  type='number' placeholder='Phone Number'/>
+            <input
+              name="phone_number"
+              type="number"
+              placeholder="Phone Number"
+            />
 
+            <label>Password </label>
 
-         <label>Password </label>
+            <input name="password" type="text" placeholder="Password" />
 
-       <input name='password'   type='text' placeholder='Password'/>
+            <label>Upload your photo </label>
 
-        
-         
-         <label>Upload your photo </label>
+            <input type="file" name="file" placeholder="chood]se your image" />
 
-         <input type='file' name='file' placeholder='chood]se your image' /> 
+            <label>Address </label>
+            <textarea name="address" id="" cols="30" rows="4"></textarea>
+            <label>Select your location </label>
+            <div
+              className="map_div"
+              style={{
+              
+                width: "200px",
+                margin: "5%",
+                height: "200px",
+              }}
+            >
+              <Map />
+            </div>
 
-         <label>Address </label>
-         <textarea name="address" id="" cols="30" rows="4"></textarea>
+            <div className="btns_signup">
+              <button onClick={registerHandler} className="signup_btn">
+                Sign up
+              </button>
 
-    
-         <div className='btn'>
-
-<button onClick={registerHandler} className='signup'>Sign up</button>
-
-<button  className='login'>Log in</button>
-
-
-</div>
-
-    
-     </form>
-
-
-  
-   
-
-
-    </div>
-
-   
-
-
-
-</div>
-</>
-  )
-}
-export default Signup
+              <button className="login_btn">Log in</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
+  );
+};
+export default Signup;

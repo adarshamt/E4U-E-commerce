@@ -34,7 +34,7 @@ const Shops = () => {
       console.log("error",error);
     }
 
-    console.log("************************ data store",data)
+    
   }
   useEffect(()=>{
 
@@ -43,7 +43,7 @@ const Shops = () => {
     getStores()
   },[])
 
-  console.log("store response data",data)
+ 
 
   function handleClick(event) {
     event.preventDefault();
@@ -69,10 +69,7 @@ const Shops = () => {
     </Typography>,
   ];
   
-   {data.filter((item) =>item.category=='Grocery').map((itm)=>(
-
-    console.log(" grocet id :",itm._id)
-  ) )}
+  
 
   
   

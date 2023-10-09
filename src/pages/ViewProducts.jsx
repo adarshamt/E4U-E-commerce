@@ -21,40 +21,31 @@ import { useDispatch } from "react-redux";
 
 const ViewProducts = () => {
   const { id } = useParams();
-  console.log(" id :", id);
 
   const nav = useNavigate();
   const [data, setData] = useState([]);
   const [image, setImage] = useState("");
   const [pname, setPname] = useState();
-  const [storename, setstorename] = useState()
+  const [storename, setstorename] = useState();
 
   const user_id = Cookies.get("userId");
 
   const dispatch = useDispatch();
 
-  const [buttonClicked, setButtonClicked] = useState(false);
-
   useEffect(() => {
-    
-
     const getProducts = async () => {
       try {
         const response = await axios.get(
           `http://localhost:4743/product/view/${id}`
         );
 
-        // console.log(" products res url :",response.data.data.images[0].url)
-        console.log(response.data.data.store_id.storeName, "response ---------------------------------");
         setData(response.data.data);
-         setstorename(response.data.data.store_id.storeName)
-        console.log(" data use state :", response.data.data.images[0].url);
+        setstorename(response.data.data.store_id.storeName);
 
         setImage(response.data.data.images[0].url);
 
-        // console.log("image : ",image)
         let productname = response.data.data.productName;
-        // console.log("product name :",productname)
+
         setPname(productname);
       } catch (error) {
         console.log("error", error);
@@ -66,7 +57,6 @@ const ViewProducts = () => {
 
   const addtoCartHandler = async (id) => {
     const user_id = Cookies.get("userId");
-    console.log(" cookie id ----------------------", user_id);
 
     if (!user_id) {
       window.alert(" Please log in to add to cart");
@@ -86,22 +76,11 @@ const ViewProducts = () => {
         body
       );
 
-      console.log(
-        "************* add to cart response**** ",
-        response.data.status
-      );
-
       const status_message = response.data.message;
-      console.log(status_message, "*****************************");
 
       notify(status_message);
 
-      setButtonClicked(true);
- 
-      getCartItems()
-
-
-      // window.alert(status_message)
+      getCartItems();
     } catch (error) {
       console.log(" addto cart axios error", error);
     }
@@ -146,17 +125,13 @@ const ViewProducts = () => {
         }
       );
 
-      console.log(" products length ******************* ------", response.data.products.length);
-
       const count = response.data.products.length;
-      
+
       dispatch(cart_counter({ count }));
     } catch (err) {
       console.log("Get cart items error", err);
     }
   };
-
-
 
   return (
     <>
@@ -191,8 +166,7 @@ const ViewProducts = () => {
             alignItems: "start",
             position: "relative",
             overflow: { xs: "auto", sm: "initial" },
-            backgroundColor:'yellow',
-            
+            backgroundColor: "yellow",
           }}
         >
           <Box
@@ -245,21 +219,11 @@ const ViewProducts = () => {
             }}
           >
             <AspectRatio flex ratio="1" maxHeight={182} sx={{ minWidth: 400 }}>
-              {/* {data.length > 0 && <>{data?.images.map((image,index)=>{
-            console.log(image.url)
-            return(
-            <img style={{padding:'2%'}}
-            src={image?.url}
-            key={image?.url}
-            srcSet={image?.url}
-            loading="lazy"
-            alt=" no image found"
-          /> 
-          )})}</>} */}
+          
               <img
                 style={{ padding: "5%", width: "25rem", height: "25rem" }}
                 src={image}
-                // srcSet={data.images[0].url}
+               
 
                 loading="lazy"
                 alt=" no image found"
@@ -316,9 +280,7 @@ const ViewProducts = () => {
                 >
                   Add to cart
                 </Button>
-                {/* <Button variant="solid" color="primary">
-                  Buy now
-                </Button> */}
+              
 
                 <ToastContainer
                   position="top-left"

@@ -29,19 +29,18 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { cart_counter } from "../store/ecommerse_slice";
 
-
 const Cart = () => {
-  const dispatch =useDispatch()
+  const dispatch = useDispatch();
   // let products;
   const [products, setProducts] = React.useState([]);
   const [carttotal, setCartTotal] = React.useState(0);
 
   const nav = useNavigate();
-  
+
   const user_id = Cookies.get("userId");
-  
+
   const deliveryCharge = (15 / 100) * carttotal;
-  
+
   const getCartItems = async () => {
     try {
       const response = await axios.get(
@@ -52,26 +51,20 @@ const Cart = () => {
           },
         }
       );
-    
 
       setProducts(response.data.products);
-      console.log(" products length ******************* ------", response.data);
-     
-      const count = response.data.products.length
-      console.log("////////////////////////// count :",count)
 
-      dispatch(cart_counter({count}))
+      const count = response.data.products.length;
+
+      dispatch(cart_counter({ count }));
 
       setCartTotal(response.data.total);
-
-      console.log(" cart total ----------------", carttotal);
     } catch (err) {
       console.log("Get cart items error", err);
     }
   };
 
   const deletItemHandler = async (id) => {
-    console.log("**************** product id", id);
     const user_id = Cookies.get("userId");
 
     const body = {
@@ -85,17 +78,9 @@ const Cart = () => {
         body
       );
 
-      console.log("************* remove item cart response**** ", response);
-
-      // const updatedArray = response.data.cart
       getCartItems();
-
-      // const status_message = response.data.message
-      // console.log(status_message,"*****************************")
-
-      // window.alert(status_message)
     } catch (error) {
-      console.log(" addto cart axios error", error);
+      console.log(" addto cart  error", error);
     }
   };
 
@@ -125,16 +110,13 @@ const Cart = () => {
         try {
           const verifyUrl = `http://localhost:4743/user/veryfypayment/${user_id}`;
           const { data } = await axios.post(verifyUrl, response);
-          console.log("razorpay------------------------", data);
+        
           if (data.status == "success") {
-            // Redirect to the desired URL after a successful payment
-            // window.location.href = "https://www.google.com";
+            
             nav("/");
             getCartItems();
-            // Replace with your desired URL
-          } else {
-            // Handle payment failure or other conditions here
-          }
+           
+          } 
         } catch (error) {
           console.log(error);
         }
@@ -153,14 +135,13 @@ const Cart = () => {
       const { data } = await axios.post(orderUrl, {
         amount: carttotal + deliveryCharge,
       });
-      console.log(data);
+     
       initPayment(data.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // console.log("product length -------------",products.length)
   return (
     <>
       <Navbar />

@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 // import { setCoordinates } from "../Redux Store/slices/coordinateSlice";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-export const MapBox = () => {
+const MapBox = () => {
 //   const dispatch = useDispatch();
 
   const [viewport, setViewport] = useState({
@@ -31,7 +31,7 @@ export const MapBox = () => {
   };
 
   return (
-    <div style={{ height: "100vh" }}>
+    <div style={{ height: "100%" }}>
       <ReactMapGL
         initialViewState={viewport}
         width="100vw"
@@ -54,7 +54,7 @@ export const MapBox = () => {
             onDragEnd={handleMapClick}
           >
             <div>
-              <MapPin size={22} style={{ color: "red" }} />
+              <MapPin size={22} style={{ color: "blue" }} />
             </div>
           </Marker>
         ) : null}
@@ -62,3 +62,5 @@ export const MapBox = () => {
     </div>
   );
 };
+
+export default MapBox

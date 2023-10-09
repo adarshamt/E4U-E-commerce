@@ -31,24 +31,18 @@ export default function Wishlist() {
 
   const [product, setProduct] = useState([]);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  console.log(" +++++++++++++++++++++ user id +++++++++++++", user_id);
   const fechDataHandler = async () => {
     try {
       const response = await axios.get("http://localhost:4743/user/wishlist", {
         params: { user_id },
       });
 
-      console.log(
-        "---------response products ------------",
-        response.data.products.length
-      );
-      const count =response.data.products.length
+      const count = response.data.products.length;
 
       setProduct(response.data.products);
-      dispatch(wishlist_counter({count}))
-
+      dispatch(wishlist_counter({ count }));
     } catch (error) {
       console.log("error", error);
     }
@@ -65,8 +59,6 @@ export default function Wishlist() {
         "http://localhost:4743/user/wishlistremoveitem",
         body
       );
-
-      console.log(" response------------------", response);
 
       fechDataHandler();
     } catch (error) {
@@ -92,13 +84,7 @@ export default function Wishlist() {
         body
       );
 
-      console.log(
-        "************* add to cart response**** ",
-        response.data.status
-      );
-
       const status_message = response.data.message;
-      console.log(status_message, "*****************************");
 
       notify(status_message);
     } catch (error) {

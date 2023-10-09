@@ -75,7 +75,7 @@ function Adminpanel() {
     setStoreButton(false);
     setProdcutButton(false);
 
-    // console.log("----------------- user butten in handler --------------",userbutton)
+    
   };
   const storeHandler = () => {
     setUserButton(false);
@@ -115,10 +115,10 @@ function Adminpanel() {
     try {
       const response = await axios.get("http://localhost:4743/user/allusers");
 
-      // console.log(" response ---------------- ", response)
+      
 
       const users = response.data.Users;
-      // console.log("******************** users ",users)
+      
       setuser(users);
     } catch (error) {
       console.log("error ", error);
@@ -136,7 +136,7 @@ function Adminpanel() {
         body
       );
 
-      // console.log("------------------- response data",response.data.status)
+      
 
       const status = response.data.status;
       if (status == 200) {
@@ -151,12 +151,12 @@ function Adminpanel() {
     try {
       const response = await axios.get("http://localhost:4743/stores/list");
 
-      console.log(" response ---------------- stores ", response.data);
+      
 
       const stores = response.data;
 
       setstores(stores);
-      // console.log("---------------- stores  array---------------",stores)
+      
     } catch (error) {
       console.log("error ", error);
     }
@@ -170,7 +170,7 @@ function Adminpanel() {
 
       const response = await axios.post("http://localhost:4743/stores/", body);
 
-      // console.log("------------------- response data",response.data.status)
+      
 
       const status = response.data.status;
       if (status == 200) {
@@ -184,10 +184,10 @@ function Adminpanel() {
     try {
       const response = await axios.get("http://localhost:4743/products");
 
-      // console.log(" response products ----------------", response.data.data[0].store_id.storName)
+      
 
       const products = response.data.data;
-      console.log("******************** users ", products);
+     
       setProducts(products);
     } catch (error) {
       console.log("error ", error);
@@ -197,17 +197,17 @@ function Adminpanel() {
  
   const productDEleteHandler = async (id) => {
 
-    console.log("******************** delete product handler ***************************")
+   
     try {
       const body = {
         product_id: id,
       };
 
-      console.log(" remove product id ----------------",body)
+     
 
       const response = await axios.post("http://localhost:4743/removeproduct", body);
 
-     console.log("------------------- response data",response.data.message)
+     
 
      notify(response.data.message);
       const status = response.status;
