@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 // import { setCoordinates } from "../Redux Store/slices/coordinateSlice";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-const MapBox = () => {
+export const MapBox = () => {
 //   const dispatch = useDispatch();
 
   const [viewport, setViewport] = useState({
@@ -62,5 +62,3 @@ const MapBox = () => {
     </div>
   );
 };
-
-export default MapBox

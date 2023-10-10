@@ -8,6 +8,8 @@ import { useDispatch } from "react-redux";
 import { login } from "../store/ecommerse_slice";
 
 import cookie from "js-cookie";
+import Button from '@mui/material/Button';
+
 
 const UserLogin = () => {
   const ipRef = useRef();
@@ -15,39 +17,30 @@ const UserLogin = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
 
- 
-
   const loginHandler = async () => {
     const email = ipRef.current.email.value;
-   
+
     const password = ipRef.current.password.value;
-   
 
     const body = {
       email,
       password,
     };
     try {
-      const response = await axios.post(
-        "user/login",
-        body
-      );
+      const response = await axios.post("user/login", body);
 
-     
       const data = response;
       const token = data.data.token;
       const userId = response.data.user_id;
 
       cookie.set("userId", userId);
-     
+
       if (token) {
         cookie.set("token", token);
 
         dispatch(login());
 
         nav("/");
-
-       
       }
     } catch (error) {
       window.alert("wrong credentials");
@@ -61,8 +54,8 @@ const UserLogin = () => {
 
       <div className="main_divs">
         <div>
-          <img
-            src="https://images.unsplash.com/photo-1559181567-c3190ca9959b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80"
+          <img style={{width:'23rem',height:"21rem"}}
+            src="https://www.trinitycures.com/images/websiteuse/110.png"
             alt=""
           />
         </div>
@@ -81,13 +74,16 @@ const UserLogin = () => {
             <label>Password </label>
             <input name="password" type="password" placeholder="Password" />
 
-            <button onClick={loginHandler} className="signup">
+            <Button sx={{marginTop:'2rem'}} variant="contained" onClick={loginHandler} >
               Log in
-            </button>
-
-            <p onClick={() => nav("/signup")}>
+            </Button>
+             
+            <p style={{marginTop:'4rem'}} onClick={() => nav("/signup")}>
               {" "}
-              create an Account <button>Register</button>
+              Create an account{" "}
+              <Button variant="contained" color="success">
+                Sign up
+              </Button>
             </p>
           </form>
         </div>

@@ -30,7 +30,7 @@
     left: 52%;
     min-width: 350px;
     text-align: center;
-    background-color:#F2EAD3;
+    background-color:#D0BFFF;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -56,7 +56,7 @@ h2 span{
   
 button[type="submit"] {
     padding: 10px 20px;
-    background-color: var(--clr-primary);
+    background-color: #FFF8C9;
     color: rgb(116, 104, 104);
     border: none;
     border-radius: 10px;
@@ -71,7 +71,7 @@ button[type="submit"]:hover {
 }
 .str_login_btn{
     padding: 10px 20px;
-    background-color: var(--clr-primary);
+    background-color: #96B6C5;
     color: rgb(240, 245, 235);
     border: none;
     border-radius: 10px;
@@ -86,4 +86,8 @@ button[type="submit"]:hover {
 
     background-color: var(--clr-secondary);
 
+}
+.btns{
+    display: flex;
+    
 }

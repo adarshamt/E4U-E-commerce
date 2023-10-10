@@ -16,7 +16,7 @@ import { Payment } from "@mui/icons-material"
 import PaymentSuccess from "./pages/PaymentSuccess"
 // import CheckoutForm from "./pages/checkoutForm"
 import Search from "./pages/Search"
-import MapBox  from "./Componets/MapBox"
+import { MapBox } from "./Componets/MapBox"
 // import AdminLogin from "./pages/AdminLogin"
 // import Checkout from "./pages/Checkout"
 
