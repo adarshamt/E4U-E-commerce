@@ -55,7 +55,7 @@ const UserLogin = () => {
       <div className="main_divs">
         <div>
           <img style={{width:'23rem',height:"21rem"}}
-            src="https://www.trinitycures.com/images/websiteuse/110.png"
+            src="https://ramezshopping.com/assets/imgs/page/login-1.png"
             alt=""
           />
         </div>

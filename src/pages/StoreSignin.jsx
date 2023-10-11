@@ -55,13 +55,19 @@ const StoreSignin = () => {
   return (<>
         <Navbars/>
     <div className='Main_div'>
-        
+
+      
+        <div className="image_div">
+            <img style={{width:'30rem'}} src="https://ramezshopping.com/assets/imgs/page/login-1.png" alt="" />
+
+        </div>
         <div  className="subscription-form">
+          <h2 >store Login  </h2>
           
-        <h2>Login  </h2>
         <form ref={ipref}>
-          <input name='email'  type="email" placeholder="email" required/>
-          <input name='password' type="password" placeholder="password" required/>
+          <input className='input' name='email'  type="email" placeholder="email" required/>
+          
+          <input className='input' name='password' type="password" placeholder="password" required/>
           
         </form>
         <div className="btns">

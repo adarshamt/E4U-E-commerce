@@ -21,12 +21,12 @@
 }
 input{
     width: 70%;
-    height: 30px;
+    height: 3rem;
     outline: none;
     font-size: 16px;
     text-align: center;
     border-radius: 5px;
-    border: 0px;
+    border: 2px solid black;
     margin: .5em;
 
 }
@@ -43,7 +43,7 @@ input{
    
 
   
-    background-color: #b2e4d9;
+    /* background-color: #b2e4d9; */
     background-position:center;
     background-size: cover;
 }

@@ -8,7 +8,8 @@ import { createSlice } from "@reduxjs/toolkit";
      sidebar :false,
      admin_token:false,
      cart_count:0,
-     wishlist_count:0
+     wishlist_count:0,
+     
   }
 const E4U_slice =createSlice({
     name :"E4U_slice",
@@ -45,6 +46,17 @@ const E4U_slice =createSlice({
             state.cart_count =count
         },
         wishlist_counter :(state,action)=>{
+            const count = action.payload.count 
+            if(count != undefined){
+
+                state.wishlist_count =count
+            }
+            else{
+
+                state.wishlist_count =0
+            }
+        },
+         location_set :(state,action)=>{
             const count = action.payload.count 
             if(count != undefined){
 

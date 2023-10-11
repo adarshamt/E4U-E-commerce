@@ -13,30 +13,34 @@
     min-height: 100vh;
     display: flex;
     font-family: 'poppins', Arial;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-evenly;
+    align-items: start;
     column-gap: 40px;
-    background-image: url('https://img.freepik.com/premium-vector/store-conducting-sale-is-waiting-customersblack-friday-big-discounts_253334-1090.jpg');
+
     background-repeat: no-repeat;
+    /* background-color: #088395; */
 
     overflow: hidden;
     margin: 2%;
-    padding: 0% 2% 0 53%;
+    /* padding: 0% 2% 0 53%; */
 
 }
 .subscription-form {
-    position: absolute;
-    top: 33%;
-    left: 52%;
+
+    
+    margin-top: 7%;
+    padding-top: 1rem;
     min-width: 350px;
     text-align: center;
-    background-color:#D0BFFF;
-    padding: 20px;
+    background-color:#cfc6e9;
+    box-shadow: 10px 10px rgb(228, 213, 213) ;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
     border: none;
     border-radius: 32px 64px;
+    height: 22rem;
 }
   
 h2 {
@@ -46,13 +50,15 @@ h2 {
 h2 span{
     color: var(--clr-primary);
 }
-.subscription-form input[type="email"] {
+.input {
     width: 90%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #cccccc;
     border-radius: 5px;
+    height: 3rem;
 }
+
   
 button[type="submit"] {
     padding: 10px 20px;
@@ -67,7 +73,8 @@ button[type="submit"] {
 }
   
 button[type="submit"]:hover {
-    background-color: var(--clr-secondary);
+    background-color: #088395;
+    color: #F0F0F0;
 }
 .str_login_btn{
     padding: 10px 20px;
@@ -89,5 +96,10 @@ button[type="submit"]:hover {
 }
 .btns{
     display: flex;
-    
+
+}
+.image_div{
+   
+
+    background-color: #e96214;
 }

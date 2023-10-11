@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import "../Styles/Signup.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -8,8 +8,9 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
+
 import PersonPinCircleIcon from '@mui/icons-material/PersonPinCircle';
+import React from "react";
 
 const style = {
   position: "absolute",
@@ -26,6 +27,7 @@ const Signup = () => {
   const ipref = useRef();
 
   const nav = useNavigate();
+  const [location, setlocation] = useState({})
   const registerHandler = async () => {
     const Name = ipref.current.name.value;
 
@@ -39,6 +41,8 @@ const Signup = () => {
       email: Email,
       phone: Phone,
       password: Password,
+      location
+      
     };
 
     try {
@@ -56,7 +60,8 @@ const Signup = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  
+console.log(" location -----------",location)
   return (
     <>
       <Navbars />
@@ -128,8 +133,8 @@ const Signup = () => {
             >
               <Box sx={style}>
 
-                <h3>modal display</h3>
-               <MapBox />
+               <MapBox setLoc={setlocation} />
+               <Button sx={{marginTop:'1rem'}} onClick={handleClose} variant="contained"> Confirm location</Button>
               </Box>
             </Modal>
           </div>

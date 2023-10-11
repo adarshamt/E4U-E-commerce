@@ -5,13 +5,13 @@ import { useDispatch } from "react-redux";
 // import { setCoordinates } from "../Redux Store/slices/coordinateSlice";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-export const MapBox = () => {
-//   const dispatch = useDispatch();
+export const MapBox = ({setLoc}) => {
+  const dispatch = useDispatch();
 
   const [viewport, setViewport] = useState({
     latitude: 11.1360,
     longitude: 75.8272,
-    zoom: 12,
+    zoom: 13,
   });
 
   const [marker, setMarker] = useState(null);
@@ -24,14 +24,15 @@ export const MapBox = () => {
       setMarker({
         latitude: lat,
         longitude: lng,
-
       });
-    //   dispatch(setCoordinates({ longitude: lng, latitude: lat }));
+      setLoc(marker)
+      console.log("log and lat ------------",lng,lat)
+      // dispatch(setCoordinates({ longitude: lng, latitude: lat }));
     }
   };
 
   return (
-    <div style={{ height: "100%" }}>
+    <div style={{ height: "560px" }}>
       <ReactMapGL
         initialViewState={viewport}
         width="100vw"
@@ -54,7 +55,7 @@ export const MapBox = () => {
             onDragEnd={handleMapClick}
           >
             <div>
-              <MapPin size={22} style={{ color: "blue" }} />
+              <MapPin size={22} style={{ color: "red" }} />
             </div>
           </Marker>
         ) : null}
