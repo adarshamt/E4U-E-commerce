@@ -1,4 +1,4 @@
-import Navbar from "../Componets/Navbar";
+import Navbar from "../Componets/NavbarMui";
 import "../Styles/StoreSignup.css";
 
 import Col from "react-bootstrap/Col";

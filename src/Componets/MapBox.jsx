@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
 import { MapPin } from "phosphor-react";
-import { useDispatch } from "react-redux";
-// import { setCoordinates } from "../Redux Store/slices/coordinateSlice";
-import "mapbox-gl/dist/mapbox-gl.css";
 
-export const MapBox = ({setLoc}) => {
-  const dispatch = useDispatch();
+
+
+import "mapbox-gl/dist/mapbox-gl.css";
+import { useDispatch } from "react-redux";
+import { location_set } from "../store/ecommerse_slice";
+
+export const MapBox = () => {
+  const dispatch = useDispatch()
+  
 
   const [viewport, setViewport] = useState({
     latitude: 11.1360,
@@ -25,9 +29,10 @@ export const MapBox = ({setLoc}) => {
         latitude: lat,
         longitude: lng,
       });
-      setLoc(marker)
-      console.log("log and lat ------------",lng,lat)
-      // dispatch(setCoordinates({ longitude: lng, latitude: lat }));
+   
+
+      
+       dispatch(location_set(lngLat));
     }
   };
 

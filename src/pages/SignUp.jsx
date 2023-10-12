@@ -9,8 +9,12 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 
-import PersonPinCircleIcon from '@mui/icons-material/PersonPinCircle';
+import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 import React from "react";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import Cookies from "js-cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { location_unset } from "../store/ecommerse_slice";
 
 const style = {
   position: "absolute",
@@ -18,16 +22,21 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
+
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
+  // marginTop:"5rem"
 };
 
 const Signup = () => {
   const ipref = useRef();
 
   const nav = useNavigate();
-  const [location, setlocation] = useState({})
+  const [location, setlocation] = useState();
+  const dispatch=useDispatch()
+  const data= useSelector(state=>state.E4U_slice)
+
   const registerHandler = async () => {
     const Name = ipref.current.name.value;
 
@@ -35,23 +44,26 @@ const Signup = () => {
 
     const Phone = ipref.current.phone_number.value;
     const Password = ipref.current.password.value;
-
+    const location = data.location
+    console.log("location------------", location);
     const passItems = {
       name: Name,
       email: Email,
       phone: Phone,
       password: Password,
-      location
-      
+      location,
     };
-
+    console.log(" pass item ------------------", passItems);
     try {
       const response = await axios.post(
         "http://localhost:4743/user/registraion",
         passItems
       );
 
-      nav("/login");
+      dispatch(location_unset())
+
+      console.log("register response--------------", response);
+      // nav("/login");
     } catch (error) {
       "error", error;
     }
@@ -60,8 +72,7 @@ const Signup = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  
-console.log(" location -----------",location)
+
   return (
     <>
       <Navbars />
@@ -77,6 +88,7 @@ console.log(" location -----------",location)
           }}
           noValidate
           autoComplete="off"
+          ref={ipref}
         >
           <div>
             <TextField
@@ -84,6 +96,7 @@ console.log(" location -----------",location)
               id="outlined-size-small"
               defaultValue=""
               size="small"
+              name="name"
             />
             <TextField
               label="last name"
@@ -98,12 +111,14 @@ console.log(" location -----------",location)
               id="outlined-size-small"
               defaultValue=""
               size="small"
+              name="email"
             />
             <TextField
               label="phone number"
               id="outlined-size-normal"
               defaultValue=""
               size="small"
+              name="phone_number"
             />
           </div>
           <div>
@@ -112,6 +127,7 @@ console.log(" location -----------",location)
               id="outlined-size-small"
               defaultValue=""
               size="small"
+              name="password"
             />
             <TextField
               label="confirm password"
@@ -121,10 +137,18 @@ console.log(" location -----------",location)
             />
           </div>
           <div>
-            <Button  variant="contained" onClick={handleOpen}>
-              <PersonPinCircleIcon/>
-              Select location
-            </Button>
+            {location ? (
+              <Button variant="outlined" onClick={handleOpen}>
+                {" "}
+                <CheckCircleIcon /> location locked
+              </Button>
+            ) : (
+              <Button variant="contained" onClick={handleOpen}>
+                <PersonPinCircleIcon />
+                Select location
+              </Button>
+            )}
+            
             <Modal
               open={open}
               onClose={handleClose}
@@ -132,9 +156,16 @@ console.log(" location -----------",location)
               aria-describedby="modal-modal-description"
             >
               <Box sx={style}>
+                <MapBox setLoc={setlocation} />
 
-               <MapBox setLoc={setlocation} />
-               <Button sx={{marginTop:'1rem'}} onClick={handleClose} variant="contained"> Confirm location</Button>
+                <Button
+                  sx={{ marginTop: "1rem" }}
+                  onClick={handleClose}
+                  variant="contained"
+                >
+                  {" "}
+                  Confirm location
+                </Button>
               </Box>
             </Modal>
           </div>
@@ -143,6 +174,7 @@ console.log(" location -----------",location)
               variant="contained"
               sx={{ backgroundColor: "green" }}
               disableElevation
+              onClick={registerHandler}
             >
               Sign up
             </Button>
