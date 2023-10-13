@@ -11,6 +11,18 @@ import { useNavigate } from "react-router-dom";
 // import axios from 'axios'
 import { useRef, useState } from "react";
 import axios from "../Services/AxiosInstance";
+import Box from "@mui/material/Box";
+import "mapbox-gl/dist/mapbox-gl.css";
+import ReactMapGL, { Marker } from "react-map-gl";
+import { MapPin } from "phosphor-react";
+
+
+import "../Styles/Signup.css";
+
+
+
+
+
 
 export const StoreLogin = () => {
   const ipref = useRef();
@@ -29,6 +41,7 @@ export const StoreLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    location = marker
 
     try {
       const form = ipref.current;
@@ -41,6 +54,7 @@ export const StoreLogin = () => {
         address: form.address.value,
         category: form.category.value,
         images: [],
+        location
       };
 
       const formdatatosend = new FormData();
@@ -58,8 +72,29 @@ export const StoreLogin = () => {
           "Content-Type": "multipart/form-data",
         },
       });
+     
     } catch (error) {
       console.error("Registration error:", error);
+    }
+  };
+
+  const [viewport, setViewport] = useState({
+    latitude: 11.136,
+    longitude: 75.8272,
+    zoom: 13,
+  });
+
+  const [marker, setMarker] = useState(null);
+
+  const handleMapClick = (event) => {
+    const { lngLat } = event;
+
+    if (lngLat) {
+      const { lng, lat } = lngLat;
+      setMarker({
+        latitude: lat,
+        longitude: lng,
+      });
     }
   };
 
@@ -77,7 +112,7 @@ export const StoreLogin = () => {
         </div>
 
         <div className="form_div_str">
-          <form ref={ipref} className="signup_form_str">
+          <form  className="signup_form_str">
             <input name="storename" type="text" placeholder="Store Name" />
 
             <Form.Group as={Col} md="" controlId="validationCustomUsername">
@@ -144,6 +179,38 @@ export const StoreLogin = () => {
               cols="30"
               rows="4"
             ></textarea>
+            <Box>
+              <h6>Select location</h6>
+              <div style={{ height: "200px" }}>
+                <ReactMapGL
+                  initialViewState={viewport}
+                  width="10rem"
+                  height="10rem"
+                  transitionDuration="200"
+                  mapboxAccessToken="pk.eyJ1IjoicmFodWxyYWRoYWtyaXNobmFuIiwiYSI6ImNsbTRwOXpqaTQ4aGIzZHRoa3g3bW1md2UifQ.0Zau3s28QwARyY1b9t73Ow"
+                  mapStyle="mapbox://styles/rahulradhakrishnan/clm4jf19100uu01peeobb3f1y"
+                  onViewportChange={(newViewport) => {
+                    setViewport(newViewport);
+                  }}
+                  onClick={handleMapClick}
+                >
+                  {marker ? (
+                    <Marker
+                      latitude={marker.latitude}
+                      longitude={marker.longitude}
+                      offsetLeft={-20}
+                      offsetTop={-10}
+                      draggable={true}
+                      onDragEnd={handleMapClick}
+                    >
+                      <div>
+                        <MapPin size={22} style={{ color: "red" }} />
+                      </div>
+                    </Marker>
+                  ) : null}
+                </ReactMapGL>
+              </div>
+            </Box>
 
             <div className="btn_div">
               <button onClick={handleSubmit} className="signup">

@@ -29,12 +29,11 @@ export const MapBox = () => {
         latitude: lat,
         longitude: lng,
       });
-   
-
-      
-       dispatch(location_set(lngLat));
+    
+      dispatch(location_set(marker));
     }
   };
+  console.log("map box marker location -------------",marker)
 
   return (
     <div style={{ height: "560px" }}>

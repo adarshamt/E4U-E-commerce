@@ -1,3 +1,4 @@
+
 import { createSlice } from "@reduxjs/toolkit";
 
 const initial_state = {
@@ -6,7 +7,7 @@ const initial_state = {
   admin_token: false,
   cart_count: 0,
   wishlist_count: 0,
-  location: {},
+  
 };
 const E4U_slice = createSlice({
   name: "E4U_slice",
@@ -47,13 +48,7 @@ const E4U_slice = createSlice({
         state.wishlist_count = 0;
       }
     },
-    location_set: (state, action) => {
-      state.location = action.payload.lngLat;
-      console.log("redux location payload :",action.payload.lngLat)
-    },
-    location_unset:(state)=>{
-        state.location={}
-    }
+  
   },
 });
 

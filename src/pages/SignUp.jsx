@@ -1,41 +1,41 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../Styles/Signup.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navbars from "../Componets/NavbarMui";
-import { MapBox } from "../Componets/MapBox";
+
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
 
-import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
-import React from "react";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import Cookies from "js-cookie";
+
+
+
+
 import { useDispatch, useSelector } from "react-redux";
-import { location_unset } from "../store/ecommerse_slice";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
 
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  p: 4,
-  // marginTop:"5rem"
-};
+
+import ReactMapGL, { Marker } from "react-map-gl";
+import { MapPin } from "phosphor-react";
+
+
+
+
+
 
 const Signup = () => {
   const ipref = useRef();
 
   const nav = useNavigate();
-  const [location, setlocation] = useState();
+  // const [location, setlocation] = useState();
   const dispatch=useDispatch()
-  const data= useSelector(state=>state.E4U_slice)
+  const data= useSelector(state=>state.E4U_slice.location)
+
+      useEffect(()=>{
+
+      console.log("location------------+++++++++++++++++", data);
+    },[data])
 
   const registerHandler = async () => {
     const Name = ipref.current.name.value;
@@ -44,8 +44,8 @@ const Signup = () => {
 
     const Phone = ipref.current.phone_number.value;
     const Password = ipref.current.password.value;
-    const location = data.location
-    console.log("location------------", location);
+    const location = marker
+
     const passItems = {
       name: Name,
       email: Email,
@@ -60,19 +60,36 @@ const Signup = () => {
         passItems
       );
 
-      dispatch(location_unset())
+     
 
       console.log("register response--------------", response);
-      // nav("/login");
+      nav("/login");
     } catch (error) {
       "error", error;
     }
   };
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [viewport, setViewport] = useState({
+    latitude: 11.1360,
+    longitude: 75.8272,
+    zoom: 13,
+  });
 
+  const [marker, setMarker] = useState(null);
+
+  const handleMapClick = (event) => {
+    const { lngLat } = event;
+
+    if (lngLat) {
+      const { lng, lat } = lngLat;
+      setMarker({
+        latitude: lat,
+        longitude: lng,
+      });
+    
+      
+    }
+  };
   return (
     <>
       <Navbars />
@@ -137,7 +154,7 @@ const Signup = () => {
             />
           </div>
           <div>
-            {location ? (
+            {/* {location ? (
               <Button variant="outlined" onClick={handleOpen}>
                 {" "}
                 <CheckCircleIcon /> location locked
@@ -148,26 +165,44 @@ const Signup = () => {
                 Select location
               </Button>
             )}
-            
-            <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={style}>
-                <MapBox setLoc={setlocation} />
+             */}
+       
+              <Box  >
+                <h6>Select location</h6>
+              <div style={{ height: "200px" }}>
+      <ReactMapGL
+        initialViewState={viewport}
+        width="10rem"
+        height="10rem"
+        transitionDuration="200"
+        mapboxAccessToken="pk.eyJ1IjoicmFodWxyYWRoYWtyaXNobmFuIiwiYSI6ImNsbTRwOXpqaTQ4aGIzZHRoa3g3bW1md2UifQ.0Zau3s28QwARyY1b9t73Ow"
+        mapStyle="mapbox://styles/rahulradhakrishnan/clm4jf19100uu01peeobb3f1y"
+        onViewportChange={(newViewport) => {
+          setViewport(newViewport);
+        }}
+        onClick={handleMapClick}
+      >
+        {marker ? (
+          <Marker
+            latitude={marker.latitude}
+            longitude={marker.longitude}
+            offsetLeft={-20}
+            offsetTop={-10}
+            draggable={true}
+            onDragEnd={handleMapClick}
+          >
+            <div>
+              <MapPin size={22} style={{ color: "red" }} />
+            </div>
+          </Marker>
+        ) : null}
+      </ReactMapGL>
+    </div>
+                
 
-                <Button
-                  sx={{ marginTop: "1rem" }}
-                  onClick={handleClose}
-                  variant="contained"
-                >
-                  {" "}
-                  Confirm location
-                </Button>
+            
               </Box>
-            </Modal>
+        
           </div>
           <div className="btns">
             <Button
