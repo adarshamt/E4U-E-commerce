@@ -28,14 +28,9 @@ const Signup = () => {
   const ipref = useRef();
 
   const nav = useNavigate();
-  // const [location, setlocation] = useState();
-  const dispatch=useDispatch()
-  const data= useSelector(state=>state.E4U_slice.location)
 
-      useEffect(()=>{
 
-      console.log("location------------+++++++++++++++++", data);
-    },[data])
+
 
   const registerHandler = async () => {
     const Name = ipref.current.name.value;

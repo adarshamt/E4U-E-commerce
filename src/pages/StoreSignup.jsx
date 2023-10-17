@@ -24,7 +24,7 @@ import "../Styles/Signup.css";
 
 
 
-export const StoreLogin = () => {
+export const StoreSinup = () => {
   const ipref = useRef();
 
   const link = useNavigate();
@@ -38,46 +38,6 @@ export const StoreLogin = () => {
       images: files,
     });
   };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    location = marker
-
-    try {
-      const form = ipref.current;
-      const storeData = {
-        storename: form.storename.value,
-        email: form.email.value,
-        username: form.Username.value,
-        password: form.password.value,
-        phone: form.phone.value,
-        address: form.address.value,
-        category: form.category.value,
-        images: [],
-        location
-      };
-
-      const formdatatosend = new FormData();
-      for (const key in storeData) {
-        if (key === "images") {
-          formdatatosend.append("images", image.images[0]);
-        } else {
-          formdatatosend.append(key, storeData[key]);
-        }
-      }
-
-      const response = await axios.post("/store/registraion", formdatatosend, {
-        headers: {
-          // *********** TO corect the req.files undifined error *******************
-          "Content-Type": "multipart/form-data",
-        },
-      });
-     
-    } catch (error) {
-      console.error("Registration error:", error);
-    }
-  };
-
   const [viewport, setViewport] = useState({
     latitude: 11.136,
     longitude: 75.8272,
@@ -98,6 +58,49 @@ export const StoreLogin = () => {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+   const location = marker
+
+    try {
+      const form = ipref.current;
+      const storeData = {
+        storename: form.storename.value,
+        email: form.email.value,
+        username: form.Username.value,
+        password: form.password.value,
+        phone: form.phone.value,
+        address: form.address.value,
+        category: form.category.value,
+        images: [],
+        location
+      };
+      
+      const formdatatosend = new FormData();
+      for (const key in storeData) {
+        if (key === "images") {
+          formdatatosend.append("images", image.images[0]);
+        } else {
+          formdatatosend.append(key, storeData[key]);
+        }
+      }
+      console.log(" form data to send----------",formdatatosend)
+
+
+      const response = await axios.post("/store/registraion", formdatatosend, {
+        headers: {
+          // *********** TO corect the req.files undifined error *******************
+          "Content-Type": "multipart/form-data",
+        },
+      });
+     
+    } catch (error) {
+      console.error("Registration error:", error);
+    }
+  };
+
+  
+
   return (
     <>
       <div className="str_navbar">
@@ -112,7 +115,7 @@ export const StoreLogin = () => {
         </div>
 
         <div className="form_div_str">
-          <form  className="signup_form_str">
+          <form ref={ipref} className="signup_form_str">
             <input name="storename" type="text" placeholder="Store Name" />
 
             <Form.Group as={Col} md="" controlId="validationCustomUsername">
@@ -161,7 +164,7 @@ export const StoreLogin = () => {
 
             <input name="password" type="text" placeholder="Password" />
 
-            <input name="location" type="text" placeholder="location" />
+            {/* <input name="location" type="text" placeholder="location" /> */}
 
             <label> Upload Store image </label>
             <input
@@ -212,6 +215,7 @@ export const StoreLogin = () => {
               </div>
             </Box>
 
+          </form>
             <div className="btn_div">
               <button onClick={handleSubmit} className="signup">
                 Sign up
@@ -220,10 +224,9 @@ export const StoreLogin = () => {
                 Log in
               </button>
             </div>
-          </form>
         </div>
       </div>
     </>
   );
 };
-export default StoreLogin;
+export default StoreSinup;

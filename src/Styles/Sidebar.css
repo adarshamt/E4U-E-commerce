@@ -1,9 +1,19 @@
+
+.side_nav{
+  padding: 1rem;
+  height: 4rem;
+  background-color: #419197;
+  cursor: pointer;
+}
+.side_nav :hover{
+  font-weight: 700;
+}
 .sidebar {
   position: fixed;
   z-index: 1000;
-    width: 250px;
-    background-color: #0e81ecf6;
-    padding: 20px;
+    width: 15rem;
+    background-color: #EBE4D1;
+    /* padding: 20px; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
    
     height: 100%;
@@ -34,7 +44,8 @@
   }
   
   .sidebar li:hover {
-    color: #007bff;
+    color: #040c03;
+    font-weight: 600;
   }
   
 
@@ -50,4 +61,16 @@
     width: 100%;
     position: absolute;
     z-index: 50009;
+  }
+
+  .side_content{
+    margin:1rem;
+    
+    height: 70%;
+    
+  }
+  .side_content li {
+    height: 4rem;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc; /* Add a bottom border to each list item */
   }

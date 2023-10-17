@@ -32,8 +32,13 @@ const UserLogin = () => {
       const data = response;
       const token = data.data.token;
       const userId = response.data.user_id;
+ 
+    console.log(" login response ---------------------",data.data.User.name)
+    cookie.set("userName",data.data.User.name)
+
 
       cookie.set("userId", userId);
+      // cookie.set("userName", data.User.name);
 
       if (token) {
         cookie.set("token", token);

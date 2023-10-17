@@ -166,7 +166,7 @@ const ViewProducts = () => {
             alignItems: "start",
             position: "relative",
             overflow: { xs: "auto", sm: "initial" },
-            backgroundColor: "yellow",
+          
           }}
         >
           <Box

@@ -32,7 +32,7 @@ import { cart_counter } from "../store/ecommerse_slice";
 const Cart = () => {
   const dispatch = useDispatch();
   // let products;
-  const [products, setProducts] = React.useState([]);
+  const [items, setItems] = React.useState([]);
   const [carttotal, setCartTotal] = React.useState(0);
 
   const nav = useNavigate();
@@ -52,8 +52,9 @@ const Cart = () => {
         }
       );
 
-      setProducts(response.data.products);
-
+      
+      setItems(response.data.products);
+      
       const count = response.data.products.length;
 
       dispatch(cart_counter({ count }));
@@ -64,6 +65,7 @@ const Cart = () => {
     }
   };
 
+      console.log(" cart list response --------------------",items)
   const deletItemHandler = async (id) => {
     const user_id = Cookies.get("userId");
 
@@ -150,11 +152,12 @@ const Cart = () => {
         <div className="cart_subdiv">
           <Box className=" map component" sx={{ width: "50%", padding: "2%" }}>
             <Stack spacing={6}>
-              {products && (
+              {items && (
                 <>
                   <>
-                    {products.length > 0 ? (
-                      products.map((itm, index) => (
+                  {console.log(" map item-------------",items)}
+                    {items.length > 0 ? (
+                      items.map((itm, index) => (
                         <Item
                           key={index}
                           style={{

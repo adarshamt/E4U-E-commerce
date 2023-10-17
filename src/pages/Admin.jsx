@@ -219,6 +219,9 @@ function Adminpanel() {
       console.log(" error ", error);
     }
   };
+ 
+   
+
   useEffect(() => {
     fetchProduct();
     fetchUser();

@@ -73,7 +73,7 @@ const StoreSignin = () => {
         <div className="btns">
           <button onClick={Submithandler} type="submit">login</button>
 
-          <p >Register  </p>  <Button onClick={link('/storesignup')} variant="contained" color="success">
+          <p >Register  </p>  <Button onClick={()=>link('/storesignup')} variant="contained" color="success">
           Sign up
       </Button> 
 
