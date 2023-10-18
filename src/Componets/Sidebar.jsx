@@ -36,7 +36,10 @@ const Sidebar = () => {
     Cookies.remove("userName");
 
     console.log("store data", data);
+    dispatch(sidebar_hide())
     dispatch(logout());
+    
+    
   };
 
 
@@ -50,7 +53,7 @@ const Sidebar = () => {
          
           style={{ display: "flex", justifyContent: "flex-start" }}
         >
-          <ArrowBackIosIcon  onClick={() => dispatch(sidebar_hide())} />   <h5 style={{color:'#fff'}} >hello {user.substring(0, 5)}&nbsp;!</h5>
+          <ArrowBackIosIcon  onClick={() => dispatch(sidebar_hide())} />   <h5 style={{color:'#fff'}} > {token &&  user.substring(0, 5)}&nbsp;!</h5>
         </div>
         <div className="side_content">
           <div style={{ display: "flex", justifyContent: "space-between", borderBottom: '1px solid #ccc'}}>

@@ -55,7 +55,12 @@ const Cart = () => {
       
       setItems(response.data.products);
       
-      const count = response.data.products.length;
+      console.log(" cart products array +++++++ -----------------------------",response.data.products)
+      let count = response.data.products.length;
+      console.log(" cart count -----------------------------",count)
+      if( count ==undefined){
+        count =0
+      }
 
       dispatch(cart_counter({ count }));
 

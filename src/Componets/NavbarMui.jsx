@@ -24,7 +24,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Cookie from 'js-cookie'
-import {cart_counter, sidebar_show} from '../store/ecommerse_slice.jsx'
+import {cart_counter, sidebar_show, wishlist_counter} from '../store/ecommerse_slice.jsx'
 import Sidebar from './Sidebar.jsx';
 import { FcApproval } from 'react-icons/fc';
 import { Style, Token } from '@mui/icons-material';
@@ -262,9 +262,24 @@ export default function Navbarmui(  {} ) {
   console.log("Get cart items error", err);
 }
 }
+const fechDataHandler = async () => {
+  try {
+    const response = await axios.get("http://localhost:4743/user/wishlist", {
+      params: { user_id },
+    });
+
+    const count = response.data.products.length;
+
+    
+    dispatch(wishlist_counter({ count }));
+  } catch (error) {
+    console.log("error", error);
+  }
+};
 
 React.useEffect(()=>{
   cartCounter()
+  fechDataHandler()
 },[])
 
 
