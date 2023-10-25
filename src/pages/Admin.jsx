@@ -168,7 +168,7 @@ function Adminpanel() {
         store_id: id,
       };
 
-      const response = await axios.post("http://localhost:4743/stores/", body);
+      const response = await axios.post("http://localhost:4743/stores/deletestore", body);
 
       
 

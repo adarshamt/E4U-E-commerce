@@ -210,6 +210,8 @@ const Products = () => {
                         draggable
                         pauseOnHover
                         theme="light"
+                      
+                      
                       />
                     </div>
                     <div
