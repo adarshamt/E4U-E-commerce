@@ -82,7 +82,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 // **************** Start *******************
-export default function Navbarmui(  {} ) {
+export default function Navbarmui(   ) {
   const data= useSelector(state=>state.E4U_slice)
   console.log(" redux data :",data)
 

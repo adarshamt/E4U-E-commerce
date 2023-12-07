@@ -31,9 +31,12 @@ const Products = () => {
 
   const getProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:4743/products");
+      const response = await axios.get("https://e4u-server.onrender.com/products");
 
+
+      
       setData(response.data.data);
+      console.log("------------------",data)
     } catch (error) {
       console.log("error", error);
     }
@@ -44,10 +47,15 @@ const Products = () => {
       getWishlist();
     }
   }, [user_id]);
+  
+  useEffect(() => {
+console.log("data*******************",data)
+  }, [data]);
+
 
   const getWishlist = async () => {
     try {
-      const response = await axios.get(`http://localhost:4743/user/wishlist`, {
+      const response = await axios.get(`https://e4u-server.onrender.com/wishlist`, {
         params: { user_id },
       });
 
@@ -79,7 +87,7 @@ const Products = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:4743/user/addtowishlist",
+        "https://e4u-server.onrender.com/user/addtowishlist",
         body
       );
       notify(response.data.message);
@@ -97,7 +105,7 @@ const Products = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:4743/user/wishlistremoveitem",
+        "https://e4u-server.onrender.com/user/wishlistremoveitem",
         body
       );
 
@@ -221,11 +229,11 @@ const Products = () => {
                       <img src={itm.images[0]?.url} alt="orange" />
                     </div>
                     <div className="contentBx">
-                      {itm.productName.length > 10 ? (
+                      {/* {itm.productName.length > 10 ? (
                         <h3>{itm.productName.substring(0, 18)}</h3>
-                      ) : (
+                      ) : ( */}
                         <h3>{itm.productName} </h3>
-                      )}
+                      {/* )} */}
                       {/* <div className="size">  
            <h3>1 kg: 100</h3>  
            <span>7</span>  
