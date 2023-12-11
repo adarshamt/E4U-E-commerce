@@ -31,7 +31,7 @@ const Products = () => {
 
   const getProducts = async () => {
     try {
-      const response = await axios.get("https://e4u-server.onrender.com/products");
+      const response = await axios.get("http://localhost:4743/products");
 
 
       
@@ -55,7 +55,7 @@ console.log("data*******************",data)
 
   const getWishlist = async () => {
     try {
-      const response = await axios.get(`https://e4u-server.onrender.com/wishlist`, {
+      const response = await axios.get(`http://localhost:4743/wishlist`, {
         params: { user_id },
       });
 
@@ -87,7 +87,7 @@ console.log("data*******************",data)
       };
 
       const response = await axios.post(
-        "https://e4u-server.onrender.com/user/addtowishlist",
+        "http://localhost:4743/user/addtowishlist",
         body
       );
       notify(response.data.message);
@@ -105,7 +105,7 @@ console.log("data*******************",data)
       };
 
       const response = await axios.post(
-        "https://e4u-server.onrender.com/user/wishlistremoveitem",
+        "http://localhost:4743/user/wishlistremoveitem",
         body
       );
 

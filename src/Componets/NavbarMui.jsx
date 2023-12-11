@@ -12,8 +12,8 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+
+
 import MoreIcon from '@mui/icons-material/MoreVert';
 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -27,7 +27,7 @@ import Cookie from 'js-cookie'
 import {cart_counter, sidebar_show, wishlist_counter} from '../store/ecommerse_slice.jsx'
 import Sidebar from './Sidebar.jsx';
 import { FcApproval } from 'react-icons/fc';
-import { Style, Token } from '@mui/icons-material';
+
 import { Button } from 'react-bootstrap';
 import { useState } from 'react';
 import Cookies from 'js-cookie';
@@ -127,6 +127,18 @@ export default function Navbarmui(   ) {
    
   };
 
+  const CartHanlder = ()=>{
+
+    if(!checkToken){
+      window.alert(" Please login to see your cart")
+    return  nav('/login')
+    }
+    
+    nav('/cart')
+
+
+  } 
+
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -175,52 +187,64 @@ export default function Navbarmui(   ) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={0} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
+      <MenuItem onClick={()=>nav('/storelogin')} >
+      <IconButton  size="large" aria-label="show 4 new mails" color="inherit">
+              <Badge badgeContent={0} color="error">
+                <StoreIcon />
+              </Badge>
+            </IconButton>
+        <p>Store Login</p>
       </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={0} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
+      <MenuItem onClick={()=>nav('/wishlist')}>
+      <Tooltip title='  Wish list' >
+            <IconButton  size="large" aria-label="show 4 new mails" color="inherit">
+              <Badge badgeContent={data.wishlist_count} color="error">
+                <FavoriteIcon  />
+              </Badge>
+            </IconButton>
+            </Tooltip>
+        <p>Wishlist</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
+
+
+      <MenuItem  onClick={CartHanlder}>
+      
+      <Tooltip title="Cart">
+            <IconButton
+             
+              size="large"
+              aria-label="show 0 new notifications"
+              color="inherit"
+            >
+              <Badge badgeContent={data.cart_count} color="error">
+                
+            <ShoppingCartIcon/>
+              </Badge>
+            </IconButton>
+           </Tooltip>
+        <p>Cart</p>
+      </MenuItem>
+      <MenuItem   onClick={handleProfileMenuOpen} >
+      <Tooltip title=" user">
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+            
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+            </Tooltip>
+      
+        <p>User Login</p>
       </MenuItem>
     </Menu>
   );
 
-  const CartHanlder = ()=>{
 
-    if(!checkToken){
-      window.alert(" Please login to see your cart")
-    return  nav('/login')
-    }
-    
-    nav('/cart')
-
-
-  } 
   const [searchText, setSearchText] = useState('')
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
@@ -330,6 +354,8 @@ React.useEffect(()=>{
               </Badge>
             </IconButton>
             </Tooltip>
+
+            
             <Tooltip title='Wish list' >
             <IconButton onClick={()=>nav('/wishlist')} size="large" aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={data.wishlist_count} color="error">
@@ -353,7 +379,8 @@ React.useEffect(()=>{
               </Badge>
             </IconButton>
            </Tooltip>
-           <Tooltip title=" user"></Tooltip>
+
+           <Tooltip title=" user">
             <IconButton
               size="large"
               edge="end"
@@ -365,6 +392,7 @@ React.useEffect(()=>{
             >
               <AccountCircle />
             </IconButton>
+            </Tooltip>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
