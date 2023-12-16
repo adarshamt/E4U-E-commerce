@@ -21,7 +21,7 @@ const Shops = () => {
 
   const getStores = async () => {
     try {
-      const response = await axios.get("http://localhost:4743/stores/list");
+      const response = await axios.get("https://e4u-server.onrender.com/stores/list");
 
       setData(response.data);
     } catch (error) {

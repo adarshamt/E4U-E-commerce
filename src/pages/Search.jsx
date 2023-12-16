@@ -24,7 +24,7 @@ const Search = () => {
 
   const getProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:4743/products");
+      const response = await axios.get("https://e4u-server.onrender.com/products");
 
       setData(response.data.data);
     } catch (error) {

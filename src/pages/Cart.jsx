@@ -44,7 +44,7 @@ const Cart = () => {
   const getCartItems = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4743/user/cart/products",
+        "https://e4u-server.onrender.com/user/cart/products",
         {
           params: {
             id: user_id,
@@ -80,8 +80,8 @@ const Cart = () => {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:4743/user/removefromcart",
+       await axios.post(
+        "https://e4u-server.onrender.com/user/removefromcart",
         body
       );
 
@@ -115,7 +115,7 @@ const Cart = () => {
       order_id: data.id,
       handler: async (response) => {
         try {
-          const verifyUrl = `http://localhost:4743/user/veryfypayment/${user_id}`;
+          const verifyUrl = `https://e4u-server.onrender.com/user/veryfypayment/${user_id}`;
           const { data } = await axios.post(verifyUrl, response);
         
           if (data.status == "success") {
@@ -138,7 +138,7 @@ const Cart = () => {
 
   const handlePayment = async () => {
     try {
-      const orderUrl = "http://localhost:4743/user/payment";
+      const orderUrl = "https://e4u-server.onrender.com/user/payment";
       const { data } = await axios.post(orderUrl, {
         amount: carttotal + deliveryCharge,
       });
@@ -151,8 +151,11 @@ const Cart = () => {
 
   return (
     <>
-      <Navbar />
-      <div style={{ margin: "3% 0 0 5%" }} className="cart_maindiv">
+    <div style={{position:'fixed',top:'0',zIndex:'1',width:'100%'}} className="navbar_container">
+
+      <Navbar  />
+    </div>
+      <div style={{ margin: "12% 0 0 5%", }} className="cart_maindiv">
         <h2 style={{ marginLeft: "6%" }}> My Cart</h2>
         <div className="cart_subdiv">
           <Box className=" map component" sx={{ width: "50%", padding: "2%" }}>

@@ -31,7 +31,7 @@ const Products = () => {
 
   const getProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:4743/products");
+      const response = await axios.get("https://e4u-server.onrender.com/products");
 
 
       
@@ -87,7 +87,7 @@ console.log("data*******************",data)
       };
 
       const response = await axios.post(
-        "http://localhost:4743/user/addtowishlist",
+        "https://e4u-server.onrender.com/user/addtowishlist",
         body
       );
       notify(response.data.message);
@@ -105,7 +105,7 @@ console.log("data*******************",data)
       };
 
       const response = await axios.post(
-        "http://localhost:4743/user/wishlistremoveitem",
+        "https://e4u-server.onrender.com/user/wishlistremoveitem",
         body
       );
 

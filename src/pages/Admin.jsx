@@ -113,7 +113,7 @@ function Adminpanel() {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get("http://localhost:4743/user/allusers");
+      const response = await axios.get("https://e4u-server.onrender.com/user/allusers");
 
       
 
@@ -132,7 +132,7 @@ function Adminpanel() {
       };
 
       const response = await axios.post(
-        "http://localhost:4743/user/delteleuser",
+        "https://e4u-server.onrender.com/user/delteleuser",
         body
       );
 
@@ -149,7 +149,7 @@ function Adminpanel() {
 
   const fetchStore = async () => {
     try {
-      const response = await axios.get("http://localhost:4743/stores/list");
+      const response = await axios.get("https://e4u-server.onrender.com/stores/list");
 
       
 
@@ -168,7 +168,7 @@ function Adminpanel() {
         store_id: id,
       };
 
-      const response = await axios.post("http://localhost:4743/stores/deletestore", body);
+      const response = await axios.post("https://e4u-server.onrender.com/stores/deletestore", body);
 
       
 
@@ -182,7 +182,7 @@ function Adminpanel() {
   };
   const fetchProduct = async () => {
     try {
-      const response = await axios.get("http://localhost:4743/products");
+      const response = await axios.get("https://e4u-server.onrender.com/products");
 
       
 
@@ -205,7 +205,7 @@ function Adminpanel() {
 
      
 
-      const response = await axios.post("http://localhost:4743/removeproduct", body);
+      const response = await axios.post("https://e4u-server.onrender.com/removeproduct", body);
 
      
 
