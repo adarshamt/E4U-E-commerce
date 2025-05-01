@@ -60,7 +60,7 @@ const UserLogin = () => {
       <div className="main_divs">
         <div>
           <img style={{width:'23rem',height:"21rem"}}
-            src="https://ramezshopping.com/assets/imgs/page/login-1.png"
+            src="https://res.cloudinary.com/dcy1nhstg/image/upload/v1746123428/login-1_mxdpiw.png"
             alt=""
           />
         </div>
