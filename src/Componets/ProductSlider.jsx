@@ -40,7 +40,7 @@ const responsive = {
     <div><img src="https://www.jiomart.com//images/product/original/491696497/del-monte-tomato-ketchup-1-1-kg-product-images-o491696497-p590126648-0-202304271751.jpg?im=Resize=(150,150)" alt="" /></div>
     <div><img src="https://www.jiomart.com//images/product/original/491696497/del-monte-tomato-ketchup-1-1-kg-product-images-o491696497-p590126648-0-202304271751.jpg?im=Resize=(150,150)" alt="" /></div>
     <div><img src="https://www.jiomart.com//images/product/original/491696497/del-monte-tomato-ketchup-1-1-kg-product-images-o491696497-p590126648-0-202304271751.jpg?im=Resize=(150,150)" alt="" /></div>
-  </Carousel>;
+  </Carousel>
   </>
  )
 }
